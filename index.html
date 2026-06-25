@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starkmetall OS | Enterprise Dashboard v5</title>
+    <title>Starkmetall OS | Enterprise Dashboard v5.1</title>
     
     <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,7 +28,7 @@
                 <i class="fa-solid fa-terminal"></i>
             </div>
             <div class="space-y-1">
-                <h2 class="text-2xl font-extrabold tracking-tight text-white">Starkmetall <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">OS V5.0</span></h2>
+                <h2 class="text-2xl font-extrabold tracking-tight text-white">Starkmetall <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">OS V5.1</span></h2>
                 <p class="text-xs text-gray-400">Geben Sie Ihren Command-Schlüssel ein.</p>
             </div>
             <input type="password" id="adminPassword" placeholder="••••••••" class="w-full bg-gray-950/80 border border-gray-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-cyan-500 transition font-mono tracking-widest text-center">
@@ -88,41 +88,45 @@
                 </div>
             </div>
 
-            <!-- ROW 2: CONTROL PANELS -->
+            <!-- CONTROL PANELS -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                 
-                <!-- TAGESKURSE (3 COLS) -->
+                <!-- TAGESKURSE MIT NEUER MISCHSCHROTT-SPALTE (4 COLS) -->
                 <section class="lg:col-span-4 neon-card p-5 rounded-2xl space-y-4">
                     <h3 class="text-sm font-bold tracking-wider uppercase text-cyan-400 flex items-center space-x-2"><i class="fa-solid fa-bolt"></i> <span>Tageskurse (€ / kg)</span></h3>
                     <div class="space-y-3">
                         <div>
                             <label class="text-[10px] font-bold text-gray-400 block mb-1">VHM Bohrer / Fräser</label>
-                            <input type="number" step="0.01" id="price1" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm font-mono text-white focus:outline-none">
+                            <input type="number" step="0.01" id="price1" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm font-mono text-white focus:outline-none focus:border-cyan-500">
                         </div>
                         <div>
                             <label class="text-[10px] font-bold text-gray-400 block mb-1">VHM Wendeschneidplatten</label>
-                            <input type="number" step="0.01" id="price2" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm font-mono text-white focus:outline-none">
+                            <input type="number" step="0.01" id="price2" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm font-mono text-white focus:outline-none focus:border-cyan-500">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold text-gray-400 block mb-1">VHM gemischter Schrott 🔥</label>
+                            <input type="number" step="0.01" id="price3" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm font-mono text-white focus:outline-none focus:border-cyan-500">
                         </div>
                     </div>
                     <button onclick="savePrices()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 rounded-xl text-xs uppercase tracking-wider transition">Kurse Live Schalten</button>
                 </section>
 
-                <!-- LIVE MITARBEITER CONTROL & PERFORMANCE LOCK (4 COLS) -->
+                <!-- LIVE MITARBEITER CONTROL & LÖSCHOPTION (4 COLS) -->
                 <section class="lg:col-span-4 neon-card p-5 rounded-2xl space-y-4">
                     <h3 class="text-sm font-bold tracking-wider uppercase text-purple-400 flex items-center space-x-2"><i class="fa-solid fa-headset"></i> <span>Agenten & Live-Performance</span></h3>
                     <div class="space-y-2">
-                        <input type="text" id="newAgentName" placeholder="Name des Agenten" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none">
+                        <input type="text" id="newAgentName" placeholder="Name des Agenten" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
                         <div class="flex gap-2">
-                            <input type="email" id="newAgentEmail" placeholder="agent@starkmetall.de" class="flex-1 bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none">
+                            <input type="email" id="newAgentEmail" placeholder="agent@starkmetall.de" class="flex-1 bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
                             <button onclick="addAgent()" class="bg-purple-600 hover:bg-purple-500 text-white px-4 rounded-xl text-xs font-bold transition">Anlegen</button>
                         </div>
                     </div>
-                    <div id="agentList" class="space-y-2 max-h-[180px] overflow-y-auto pr-1">
-                        <!-- Befüllung per JS inklusive Live-Leistungsdaten -->
+                    <div id="agentList" class="space-y-2 max-h-[250px] overflow-y-auto pr-1">
+                        <!-- Befüllung per JS -->
                     </div>
                 </section>
 
-                <!-- PARTNER & ID ENGINE (5 COLS) -->
+                <!-- PARTNER & ID ENGINE (4 COLS) -->
                 <section class="lg:col-span-4 neon-card p-5 rounded-2xl space-y-4">
                     <h3 class="text-sm font-bold tracking-wider uppercase text-amber-400 flex items-center space-x-2"><i class="fa-solid fa-users-gear"></i> <span>B2B Kunden-Zuweisung</span></h3>
                     <div class="space-y-2">
@@ -132,7 +136,7 @@
                             <button onclick="addPartner()" class="bg-amber-600 hover:bg-amber-500 text-white px-4 rounded-xl text-xs font-bold transition whitespace-nowrap">Kunde aktivieren</button>
                         </div>
                     </div>
-                    <div id="partnerList" class="space-y-2 max-h-[140px] overflow-y-auto pr-1"></div>
+                    <div id="partnerList" class="space-y-2 max-h-[180px] overflow-y-auto pr-1"></div>
                 </section>
 
             </div>
@@ -169,8 +173,7 @@
     </div>
 
     <script>
-        const defPrices = { vhm_bohrer: 58.50, vhm_wsp: 54.00 };
-        // Agenten-Datenbank jetzt mit E-Mail-Adresse
+        const defPrices = { vhm_bohrer: 58.50, vhm_wsp: 54.00, vhm_misch: 48.00 };
         const defAgents = [
             { name: "Ahmet Yilmaz", email: "ahmet@starkmetall.de" },
             { name: "Sarah Müller", email: "sarah@starkmetall.de" }
@@ -180,8 +183,8 @@
             { name: "Starkmetall Partner", agent: "Sarah Müller", email: "info@starkmetall.de" }
         ];
         const defDeliveries = [
-            { id: 1, date: "26.06.2026", partner: "CNC-Technik Müller", agent: "Ahmet Yilmaz", type: "VHM Bohrer & Fräser", weight: 450, tracking: "DHL: CY123456789DE", status: "In Zustellung", value: 26325 },
-            { id: 2, date: "25.06.2026", partner: "Starkmetall Partner", agent: "Sarah Müller", type: "VHM Wendeschneidplatten", weight: 820, tracking: "UPS: 1Z999AA10123", status: "Ware erhalten", value: 44280 }
+            { id: 1, date: "26.06.2026", partner: "CNC-Technik Müller", agent: "Ahmet Yilmaz", type: "VHM Bohrer & Fräser", weight: 450, tracking: "DHL: CY123456789DE", status: "In Zustellung" },
+            { id: 2, date: "25.06.2026", partner: "Starkmetall Partner", agent: "Sarah Müller", type: "VHM gemischter Schrott", weight: 820, tracking: "UPS: 1Z999AA10123", status: "Ware erhalten" }
         ];
 
         function checkPassword() {
@@ -219,7 +222,23 @@
             calculateStats();
         }
 
-        // RECHNET DIE PERFORMANCE JEDES AGENTEN LIVE AUS DER LINK-TABELLE AUS
+        function renderPrices() {
+            const p = JSON.parse(localStorage.getItem("prices")) || defPrices;
+            document.getElementById("price1").value = p.vhm_bohrer.toFixed(2);
+            document.getElementById("price2").value = p.vhm_wsp.toFixed(2);
+            document.getElementById("price3").value = (p.vhm_misch || 48.00).toFixed(2);
+        }
+
+        function savePrices() {
+            const p = { 
+                vhm_bohrer: parseFloat(document.getElementById("price1").value) || 0, 
+                vhm_wsp: parseFloat(document.getElementById("price2").value) || 0,
+                vhm_misch: parseFloat(document.getElementById("price3").value) || 0
+            };
+            localStorage.setItem("prices", JSON.stringify(p));
+            alert("🚀 Systemkurse (inkl. Mischschrott) live geschaltet!");
+        }
+
         function renderAgentsAndPerformance() {
             const agents = JSON.parse(localStorage.getItem("agents_v5")) || [];
             const deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
@@ -230,24 +249,25 @@
             select.innerHTML = '<option value="">Zentrale / Kein Betreuer</option>';
 
             agents.forEach((agent, i) => {
-                // Filtere alle Kilos, die dieser Agent reingeholt hat
                 let agentWeight = deliveries
                     .filter(d => d.agent === agent.name)
                     .reduce((sum, d) => sum + parseFloat(d.weight || 0), 0);
 
-                // Generiere Einladungs-Link für die Agenten-Maske (Mit ID und Zugangsdaten)
                 const subject = encodeURIComponent("Ihre Zugangsdaten zur Starkmetall Agenten-Maske");
-                const body = encodeURIComponent(`Hallo ${agent.name},\n\nHier sind Ihre persönlichen Zugangsdaten für das Starkmetall Call-Center-System:\n\nSystem-Link: https://bensen123.github.io/Starkmetall-demo/agent.html\nIhre Agenten-ID: ${agent.name}\n\nTragen Sie Ihre Neukunden über diese Maske ein, um Ihre Provisionen automatisch zu sichern.\n\nGute Jagd!\nStarkmetall Executive`);
+                const body = encodeURIComponent(`Hallo ${agent.name},\n\nHier sind Ihre Zugangsdaten:\n\nSystem-Link: https://bensen123.github.io/Starkmetall-demo/agent.html\nAgenten-ID: ${agent.name}\n\nGute Jagd!`);
                 const mailto = `mailto:${agent.email}?subject=${subject}&body=${body}`;
 
                 list.innerHTML += `
-                    <div class="bg-gray-950/60 border border-gray-800 p-2.5 rounded-xl space-y-2">
+                    <div class="bg-gray-950/60 border border-gray-800 p-3 rounded-xl space-y-2 flex flex-col justify-between">
                         <div class="flex justify-between items-center">
                             <span class="text-xs font-bold text-purple-300"><i class="fa-solid fa-user-tie mr-1.5 text-purple-400"></i>${agent.name}</span>
-                            <button onclick="deleteAgent(${i})" class="text-gray-600 hover:text-red-400 transition"><i class="fa-solid fa-xmark text-xs"></i></button>
+                            <!-- ROTER MÜLLEIMER ZUM SPERREN / LÖSCHEN -->
+                            <button onclick="deleteAgent(${i})" class="text-red-500/70 hover:text-red-400 p-1 transition" title="Agent löschen">
+                                <i class="fa-solid fa-trash-can text-sm"></i>
+                            </button>
                         </div>
                         <div class="flex justify-between items-center bg-gray-900/50 p-1.5 rounded-lg text-[10px]">
-                            <span class="text-gray-400">Diesen Monat: <strong class="text-cyan-400 font-mono">${agentWeight} kg</strong></span>
+                            <span class="text-gray-400">Umsatz: <strong class="text-cyan-400 font-mono">${agentWeight} kg</strong></span>
                             <a href="${mailto}" class="bg-purple-500/10 border border-purple-500/30 text-purple-300 hover:bg-purple-500 hover:text-white px-2 py-0.5 rounded text-[9px] font-bold transition">
                                 <i class="fa-solid fa-key mr-1"></i> Key senden
                             </a>
@@ -255,38 +275,6 @@
                     </div>`;
                 select.innerHTML += `<option value="${agent.name}">${agent.name}</option>`;
             });
-        }
-
-        function calculateStats() {
-            const deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
-            const agents = JSON.parse(localStorage.getItem("agents_v5")) || [];
-            let totalWeight = deliveries.reduce((acc, curr) => acc + parseFloat(curr.weight || 0), 0);
-            
-            document.getElementById("statWeight").innerText = totalWeight.toLocaleString('de-DE') + " kg";
-            document.getElementById("statCount").innerText = deliveries.length;
-            document.getElementById("statPartners").innerText = (JSON.parse(localStorage.getItem("partners")) || []).length;
-
-            // Finde den besten Agenten heraus
-            let bestAgent = "-";
-            let maxWeight = 0;
-            agents.forEach(a => {
-                let w = deliveries.filter(d => d.agent === a.name).reduce((sum, d) => sum + parseFloat(d.weight || 0), 0);
-                if (w > maxWeight) { maxWeight = w; bestAgent = `${a.name} (${w} kg)`; }
-            });
-            document.getElementById("topAgentStat").innerText = bestAgent;
-        }
-
-        function renderPrices() {
-            const p = JSON.parse(localStorage.getItem("prices"));
-            document.getElementById("price1").value = p.vhm_bohrer.toFixed(2);
-            document.getElementById("price2").value = p.vhm_wsp.toFixed(2);
-        }
-
-        function savePrices() {
-            const p = { vhm_bohrer: parseFloat(document.getElementById("price1").value) || 0, vhm_wsp: parseFloat(document.getElementById("price2").value) || 0 };
-            localStorage.setItem("prices", JSON.stringify(p));
-            localStorage.setItem("starkmetall_live_prices", JSON.stringify(p));
-            alert("🚀 Systemkurse weltweit im Orbit aktualisiert!");
         }
 
         function addAgent() {
@@ -302,14 +290,34 @@
         }
 
         function deleteAgent(i) {
-            let a = JSON.parse(localStorage.getItem("agents_v5"));
-            a.splice(i, 1);
-            localStorage.setItem("agents_v5", JSON.stringify(a));
-            renderAll();
+            if(confirm("Möchten Sie diesen Agenten wirklich aus dem System löschen?")) {
+                let a = JSON.parse(localStorage.getItem("agents_v5"));
+                a.splice(i, 1);
+                localStorage.setItem("agents_v5", JSON.stringify(a));
+                renderAll();
+            }
+        }
+
+        function calculateStats() {
+            const deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
+            const agents = JSON.parse(localStorage.getItem("agents_v5")) || [];
+            let totalWeight = deliveries.reduce((acc, curr) => acc + parseFloat(curr.weight || 0), 0);
+            
+            document.getElementById("statWeight").innerText = totalWeight.toLocaleString('de-DE') + " kg";
+            document.getElementById("statCount").innerText = deliveries.length;
+            document.getElementById("statPartners").innerText = (JSON.parse(localStorage.getItem("partners")) || []).length;
+
+            let bestAgent = "-";
+            let maxWeight = 0;
+            agents.forEach(a => {
+                let w = deliveries.filter(d => d.agent === a.name).reduce((sum, d) => sum + parseFloat(d.weight || 0), 0);
+                if (w > maxWeight) { maxWeight = w; bestAgent = `${a.name} (${w} kg)`; }
+            });
+            document.getElementById("topAgentStat").innerText = bestAgent;
         }
 
         function renderPartners() {
-            const p = JSON.parse(localStorage.getItem("partners"));
+            const p = JSON.parse(localStorage.getItem("partners")) || [];
             const list = document.getElementById("partnerList");
             list.innerHTML = "";
             p.forEach((partner, i) => {
@@ -322,14 +330,13 @@
                         <button onclick="deletePartner(${i})" class="text-gray-600 hover:text-red-400"><i class="fa-solid fa-trash"></i></button>
                     </div>`;
             });
-            localStorage.setItem("starkmetall_allowed_partners", JSON.stringify(p.map(x => x.name)));
         }
 
         function addPartner() {
             const name = document.getElementById("newPartnerName").value.trim();
             const agent = document.getElementById("partnerAgentSelect").value;
             if(!name) return;
-            let p = JSON.parse(localStorage.getItem("partners"));
+            let p = JSON.parse(localStorage.getItem("partners")) || [];
             p.push({ name: name, agent: agent, email: "info@firma-kunde.de" });
             localStorage.setItem("partners", JSON.stringify(p));
             document.getElementById("newPartnerName").value = "";
@@ -365,7 +372,7 @@
                                 ${selectOptions}
                             </select>
                         </td>
-                        <td class="text-right pr-2 font-mono text-emerald-400 font-bold">${(del.weight * 55).toLocaleString('de-DE')} €</td>
+                        <td class="text-right pr-2 font-mono text-emerald-400 font-bold">${(del.weight * 52).toLocaleString('de-DE')} €</td>
                     </tr>`;
             });
         }
@@ -381,12 +388,13 @@
             const partners = JSON.parse(localStorage.getItem("partners")) || [];
             if(partners.length === 0) return alert("Lege zuerst einen Kunden an!");
             const p = partners[Math.floor(Math.random() * partners.length)];
+            const types = ["VHM Bohrer & Fräser", "VHM Wendeschneidplatten", "VHM gemischter Schrott"];
             const newDel = {
                 id: Date.now(),
                 date: new Date().toLocaleDateString('de-DE'),
                 partner: p.name,
                 agent: p.agent,
-                type: "VHM Bohrer & Fräser",
+                type: types[Math.floor(Math.random() * types.length)],
                 weight: Math.floor(20 + Math.random() * 300),
                 tracking: "DHL-" + Math.floor(100000 + Math.random() * 900000),
                 status: "In Zustellung"
