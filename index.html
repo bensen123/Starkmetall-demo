@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starkmetall | Spezialisierter Ankauf von VHM-Werkzeugschrott</title>
+    <title>Starkmetall 24 | Spezialisierter Ankauf von VHM-Werkzeugschrott</title>
+    <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -15,11 +16,13 @@
 </head>
 <body class="font-sans antialiased min-h-screen hero-gradient">
 
+    <!-- Navigation / Header -->
     <header class="border-b border-slate-200/80 bg-white/70 sticky top-0 z-50 backdrop-blur-md px-6 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo / Name -->
             <div class="flex items-center space-x-3">
                 <div class="bg-gradient-to-r from-sky-600 to-cyan-500 text-white px-3 py-2 rounded-xl font-black tracking-wider text-base shadow-sm">
-                    STARKMETALL
+                    STARKMETALL 24
                 </div>
                 <div class="hidden md:block text-left border-l border-slate-200 pl-3">
                     <p class="text-xs font-bold text-slate-700 tracking-wide uppercase">e.K. Werkzeugschrott</p>
@@ -27,6 +30,7 @@
                 </div>
             </div>
             
+            <!-- CTA Button zum Kundenportal -->
             <nav class="flex items-center space-x-6">
                 <a href="#anfrage" class="text-sm font-medium text-slate-600 hover:text-sky-600 transition hidden sm:inline">Unverbindliche Anfrage</a>
                 <a href="portal.html" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-4 py-2.5 rounded-xl text-xs tracking-wide transition shadow-sm flex items-center space-x-1.5">
@@ -37,7 +41,9 @@
         </div>
     </header>
 
-    <section class="relative py-20 lg:py-28 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <!-- Hero Section -->
+    <section class="relative py-16 lg:py-24 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Linker Textbereich -->
         <div class="space-y-6 lg:col-span-7">
             <div class="inline-flex items-center space-x-2 bg-sky-50 border border-sky-100 px-3 py-1.5 rounded-full text-xs text-sky-700 font-bold">
                 <i class="fa-solid fa-award text-cyan-500"></i>
@@ -48,7 +54,7 @@
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-cyan-500">VHM-Werkzeugschrott</span>
             </h1>
             <p class="text-slate-600 text-base sm:text-lg max-w-xl leading-relaxed">
-                Reine Spezialisierung bringt maximale Erlöse. Starkmetall e.K. konzentriert sich seit über zwei Jahrzehnten ausschließlich auf den Ankauf von hochwertigem Hartmetall-Werkzeugschrott. Wir verzichten auf allgemeinen Altmetallhandel und bieten Ihnen stattdessen punktgenaue Bestpreise für Ihre Fräser, Bohrer und Wendeschneidplatten.
+                Reine Spezialisierung bringt maximale Erlöse. Starkmetall 24 konzentriert sich seit über zwei Jahrzehnten ausschließlich auf den Ankauf von hochwertigem Hartmetall-Werkzeugschrott. Wir bieten Ihnen punktgenaue Bestpreise und eine blitzschnelle Abwicklung für Ihre Fräser, Bohrer und Wendeschneidplatten.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 pt-2">
                 <a href="#anfrage" class="bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 text-white font-bold py-4 px-6 rounded-xl text-sm text-center transition shadow-md shadow-sky-600/10">
@@ -60,7 +66,8 @@
             </div>
         </div>
         
-        <div class="lg:col-span-5">
+        <!-- Rechter Fokus-Kasten (Unsere Fokussierung + Live-Preise) -->
+        <div class="lg:col-span-5 space-y-6">
             <div class="glass-card p-8 rounded-3xl brand-shadow relative overflow-hidden">
                 <div class="absolute -top-10 -right-10 w-40 h-40 bg-cyan-200/20 rounded-full blur-3xl"></div>
                 <h3 class="text-xs font-bold uppercase tracking-wider text-sky-600 mb-4 flex items-center space-x-2">
@@ -69,6 +76,7 @@
                 </h3>
                 
                 <div class="space-y-3">
+                    <!-- Akzeptiert 1 -->
                     <div class="p-3.5 bg-emerald-50/60 rounded-xl border border-emerald-100 flex items-start space-x-3">
                         <i class="fa-solid fa-circle-check text-emerald-500 text-lg mt-0.5"></i>
                         <div>
@@ -76,6 +84,7 @@
                             <p class="text-xs text-slate-500">Gebrauchte Vollhartmetall-Werkzeuge aus der Zerspanung.</p>
                         </div>
                     </div>
+                    <!-- Akzeptiert 2 -->
                     <div class="p-3.5 bg-emerald-50/60 rounded-xl border border-emerald-100 flex items-start space-x-3">
                         <i class="fa-solid fa-circle-check text-emerald-500 text-lg mt-0.5"></i>
                         <div>
@@ -83,19 +92,54 @@
                             <p class="text-xs text-slate-500">Sämtliche Widia-Platten, beschichtet oder unbeschichtet.</p>
                         </div>
                     </div>
-                    
-                    <div class="p-3.5 bg-red-50/40 rounded-xl border border-red-100 flex items-start space-x-3 opacity-75">
-                        <i class="fa-solid fa-circle-xmark text-red-400 text-lg mt-0.5"></i>
+                    <!-- Akzeptiert 3 -->
+                    <div class="p-3.5 bg-emerald-50/60 rounded-xl border border-emerald-100 flex items-start space-x-3">
+                        <i class="fa-solid fa-circle-check text-emerald-500 text-lg mt-0.5"></i>
                         <div>
-                            <h4 class="font-bold text-slate-700 text-sm">Kein allgemeines Altmetall</h4>
-                            <p class="text-xs text-slate-500">Wir nehmen kein Eisen, Kupfer, Aluminium oder Mischschrott an.</p>
+                            <h4 class="font-bold text-slate-800 text-sm">VHM-Mischschrott</h4>
+                            <p class="text-xs text-slate-500">Sortenreine Mischungen aus verschiedenen Hartmetall-Werkzeugen.</p>
                         </div>
                     </div>
                 </div>
+
+                <!-- Live-Preise Box (Direkt im Kasten integriert für maximale Wirkung) -->
+                <div class="mt-6 p-5 bg-slate-900 text-white rounded-2xl border border-slate-800 shadow-inner">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="text-[11px] font-bold uppercase tracking-wider text-cyan-400 flex items-center space-x-1.5">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span>Aktuelle VHM-Richtwerte</span>
+                        </h4>
+                        <span class="text-[9px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full font-medium tracking-wide">Tageskurs</span>
+                    </div>
+                    
+                    <!-- Hier kannst du die Preise später einfach im GitHub-Editor überschreiben -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+                            <span class="text-xs text-slate-400">VHM Bohrer & Fräser</span>
+                            <span class="text-xs font-bold text-white">58,50 € / kg</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+                            <span class="text-xs text-slate-400">VHM Wendeschneidplatten</span>
+                            <span class="text-xs font-bold text-white">54,00 € / kg</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-0.5">
+                            <span class="text-xs text-slate-400">VHM-Mischschrott</span>
+                            <span class="text-xs font-bold text-white">51,20 € / kg</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 pt-2.5 border-t border-slate-800 text-center">
+                        <p class="text-[10px] text-slate-400 leading-relaxed">
+                            💡 <strong class="text-cyan-400">Portal-Vorteil:</strong> Registrierte Partner erhalten über unser Kunden-Portal automatisch <strong class="text-white">attraktive Sonderkonditionen</strong> auf jede angemeldete Lieferung!
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
+    <!-- Transparenz & Ablauf Section -->
     <section class="bg-white border-y border-slate-200/60 py-16 px-6">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="space-y-2">
@@ -116,6 +160,7 @@
         </div>
     </section>
 
+    <!-- Anfrage-Formular Section -->
     <section id="anfrage" class="py-20 px-6 max-w-3xl mx-auto">
         <div class="bg-white border border-slate-200 p-8 sm:p-10 rounded-3xl brand-shadow space-y-6">
             <div class="text-center space-y-2">
@@ -123,8 +168,10 @@
                 <p class="text-sm text-slate-500 max-w-md mx-auto">Tragen Sie hier Ihre ungefähren Mengen ein. Unsere Experten bewerten Ihre Ware umgehend und senden Ihnen ein exklusives Angebot.</p>
             </div>
 
+            <!-- FORMULAR: Sendet direkt an deine E-Mail-Adresse via FormSubmit -->
             <form action="https://formsubmit.co/DEINE_EMAIL@WUNSCHADRESSE.de" method="POST" class="space-y-4 pt-2">
                 
+                <!-- Versteckte Steuerungsfelder -->
                 <input type="hidden" name="_subject" value="Neue VHM-Anfrage über Starkmetall24.de">
                 <input type="hidden" name="_next" value="https://bensen123.github.io/Starkmetall-demo/">
 
@@ -165,9 +212,10 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="border-t border-slate-200 bg-white py-10 px-6 text-center text-xs text-slate-500 space-y-3">
-        <p class="font-semibold text-slate-700">Starkmetall e.K. &bull; Am Oberfeld 1 &bull; 89407 Dillingen a.d. Donau</p>
-        <p>&copy; 2026 Starkmetall. Alle Rechte vorbehalten. Spezialisierter Fachbetrieb für Zerspanungswerkzeug-Recycling.</p>
+        <p class="font-semibold text-slate-700">Starkmetall 24 &bull; Am Oberfeld 1 &bull; 89407 Dillingen a.d. Donau</p>
+        <p>&copy; 2026 Starkmetall 24. Alle Rechte vorbehalten. Spezialisierter Fachbetrieb für Zerspanungswerkzeug-Recycling.</p>
         <div class="space-x-4 pt-1">
             <a href="#" class="hover:text-sky-600 transition underline">Impressum</a>
             <a href="#" class="hover:text-sky-600 transition underline">Datenschutz</a>
