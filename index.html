@@ -5,20 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kunden-Portal | Starkmetall 24</title>
     
-    <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         body { background-color: #f8fafc; color: #0f172a; }
         .portal-gradient { background: radial-gradient(circle at 10% 20%, #f0f9ff 0%, #f8fafc 40%); }
-        .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(16px); border: 1px solid rgba(226, 232, 240, 0.9); }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px); border: 1px solid rgba(226, 232, 240, 0.9); }
         .brand-shadow { box-shadow: 0 20px 40px -15px rgba(14, 165, 233, 0.12); }
     </style>
 </head>
 <body class="font-sans antialiased min-h-screen portal-gradient">
 
-    <!-- Header / Nav (Exakt gleicher Look für blindes Vertrauen) -->
     <header class="border-b border-slate-200/80 bg-white/80 sticky top-0 z-50 backdrop-blur-md px-4 sm:px-6 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-3">
@@ -40,24 +38,21 @@
         </div>
     </header>
 
-    <!-- Hauptbereich -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         
-        <!-- Begrüßung & Motivations-Teaser (Die Verlockung für Großmengen) -->
-        <div class="bg-slate-900 text-white p-6 sm:p-8 rounded-3xl mb-8 border border-slate-800 shadow-xl relative overflow-hidden">
-            <div class="absolute -right-10 -top-10 w-40 h-40 bg-sky-500/10 rounded-full blur-2xl"></div>
-            <div class="relative z-10 max-w-2xl space-y-2">
-                <span class="text-[10px] uppercase font-bold tracking-widest text-cyan-400">Exklusive B2B-Konditionen aktiv</span>
+        <div class="bg-emerald-950 text-white p-6 sm:p-8 rounded-3xl mb-8 border border-emerald-900 shadow-xl relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl"></div>
+            <div class="relative z-10 max-w-3xl space-y-2">
+                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-400 bg-emerald-900/50 px-2 py-0.5 rounded-md">Exklusive Partner-Preise aktiv</span>
                 <h1 class="text-xl sm:text-3xl font-black tracking-tight">Willkommen zurück in Ihrem Starkmetall-Cockpit!</h1>
-                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                    Hier können Sie Lieferungen in Sekunden anmelden. Durch Ihren Partner-Status erhalten Sie bei Mengen ab 50 kg automatisch den **Premium-Zuschlag** direkt auf Ihre Gutschrift gerechnet.
+                <p class="text-emerald-200/80 text-xs sm:text-sm leading-relaxed">
+                    Hier melden Sie Ihre Lieferungen in wenigen Sekunden direkt an. Durch Ihren verifizierten Partner-Status erhalten Sie auf **jedes Kilogramm automatisch 2,00 € mehr** im Vergleich zum regulären Tageskurs!
                 </p>
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            <!-- LINKE SEITE: Das Formular zum Liefern & Fotos hochladen (Sprit & Antrieb) -->
             <section class="lg:col-span-7 glass-card p-6 sm:p-8 rounded-3xl brand-shadow space-y-6">
                 <div class="flex items-center space-x-3 border-b border-slate-100 pb-4">
                     <div class="p-2 bg-sky-50 text-sky-600 rounded-xl">
@@ -65,43 +60,74 @@
                     </div>
                     <div>
                         <h2 class="font-black text-slate-900 text-base sm:text-lg">Neue Lieferung avisieren (ankündigen)</h2>
-                        <p class="text-xs text-slate-500">Ware eintragen, Fotos machen, Paket abschicken.</p>
+                        <p class="text-xs text-slate-500">Ware eintragen, Tracking angeben, Fotos machen und abschicken.</p>
                     </div>
                 </div>
 
-                <!-- FormSubmit Schnittstelle an deine Mailadresse -->
-                <form id="deliveryForm" action="https://formsubmit.co/DEINE_EMAIL@WUNSCHADRESSE.de" method="POST" enctype="multipart/form-data" class="space-y-4">
-                    <input type="hidden" name="_subject" value="Avisierung: Neue Partner-Lieferung von Starkmetall24">
+                <form id="deliveryForm" action="https://formsubmit.co/DEINE_EMAIL@WUNSCHADRESSE.de" method="POST" enctype="multipart/form-data" class="space-y-5">
+                    <input type="hidden" name="_subject" value="Avisierung: Neue Partner-Lieferung (+2€ Kurs) erhalten">
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Ihre Firma / Kundennummer</label>
-                            <input type="text" name="Partner_Firma" required placeholder="z.B. Schmidt CNC-Technik" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Firma / Kundennummer</label>
+                            <input type="text" name="Partner_Firma" required placeholder="z.B. CNC-Technik Müller" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Geschätztes Gewicht (in kg)</label>
-                            <input type="text" id="formWeight" name="Gewicht_kg" required placeholder="z.B. 35 kg" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
+                            <input type="text" id="formWeight" name="Gewicht_kg" required placeholder="z.B. 45 kg" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Materialsorte</label>
+                            <select id="formType" name="Material_Typ" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
+                                <option value="VHM Bohrer & Fräser">VHM Bohrer & Fräser</option>
+                                <option value="VHM Wendeschneidplatten">VHM Wendeschneidplatten</option>
+                                <option value="VHM Mischschrott">VHM Mischschrott</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Paketdienst / Logistik</label>
+                            <select name="Versand_Dienst" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
+                                <option value="DHL">DHL</option>
+                                <option value="DHL Express">DHL Express</option>
+                                <option value="DPD">DPD</option>
+                                <option value="GLS">GLS</option>
+                                <option value="UPS">UPS</option>
+                                <option value="Hermes">Hermes</option>
+                                <option value="Eigenanlieferung / Spedition">Eigenanlieferung / Spedition</option>
+                            </select>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Was schicken Sie uns? (Materialsorte)</label>
-                        <select id="formType" name="Material_Typ" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
-                            <option value="VHM Bohrer & Fräser">VHM Bohrer & Fräser (Premium-Kurs)</option>
-                            <option value="VHM Wendeschneidplatten">VHM Wendeschneidplatten</option>
-                            <option value="VHM Mischschrott">VHM Mischschrott</option>
-                        </select>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Sendungsverfolgungsnummer (Tracking-ID) <span class="text-slate-400 font-normal">(Optional)</span></label>
+                        <input type="text" name="Tracking_Nummer" placeholder="z.B. CY123456789DE" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
                     </div>
 
-                    <!-- FOTO UPLOAD: Handy-Kamera öffnet sich auf Smartphones automatisch -->
                     <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Material-Foto zur Vorabprüfung (Optional)</label>
-                        <div class="relative flex items-center justify-center w-full border-2 border-dashed border-slate-200 rounded-xl p-4 bg-slate-50 hover:bg-slate-100/50 transition cursor-pointer">
-                            <input type="file" name="Material_Foto" accept="image/*" capture="environment" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-                            <div class="text-center space-y-1 pointer-events-none">
-                                <i class="fa-solid fa-camera text-slate-400 text-lg"></i>
-                                <p class="text-xs font-semibold text-slate-600">Foto aufnehmen oder auswählen</p>
-                                <p class="text-[10px] text-slate-400">Direkt mit dem Smartphone knipsen</p>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2">Material-Fotos zur Vorabprüfung <span class="text-slate-400 font-normal">(Bis zu 4 Bilder möglich)</span></label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <div class="relative flex flex-col items-center justify-center border border-dashed border-slate-300 rounded-xl p-3 bg-slate-50 hover:bg-slate-100 transition cursor-pointer text-center h-24">
+                                <input type="file" name="Material_Foto_1" accept="image/*" capture="environment" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                                <i class="fa-solid fa-camera text-slate-400 text-sm mb-1"></i>
+                                <span class="text-[10px] font-bold text-slate-500">Bild 1</span>
+                            </div>
+                            <div class="relative flex flex-col items-center justify-center border border-dashed border-slate-300 rounded-xl p-3 bg-slate-50 hover:bg-slate-100 transition cursor-pointer text-center h-24">
+                                <input type="file" name="Material_Foto_2" accept="image/*" capture="environment" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                                <i class="fa-solid fa-camera text-slate-400 text-sm mb-1"></i>
+                                <span class="text-[10px] font-bold text-slate-500">Bild 2</span>
+                            </div>
+                            <div class="relative flex flex-col items-center justify-center border border-dashed border-slate-300 rounded-xl p-3 bg-slate-50 hover:bg-slate-100 transition cursor-pointer text-center h-24">
+                                <input type="file" name="Material_Foto_3" accept="image/*" capture="environment" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                                <i class="fa-solid fa-camera text-slate-400 text-sm mb-1"></i>
+                                <span class="text-[10px] font-bold text-slate-500">Bild 3</span>
+                            </div>
+                            <div class="relative flex flex-col items-center justify-center border border-dashed border-slate-300 rounded-xl p-3 bg-slate-50 hover:bg-slate-100 transition cursor-pointer text-center h-24">
+                                <input type="file" name="Material_Foto_4" accept="image/*" capture="environment" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                                <i class="fa-solid fa-camera text-slate-400 text-sm mb-1"></i>
+                                <span class="text-[10px] font-bold text-slate-500">Bild 4</span>
                             </div>
                         </div>
                     </div>
@@ -109,16 +135,48 @@
                     <div class="pt-2">
                         <button type="submit" class="w-full bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 text-white font-bold py-4 rounded-xl text-sm sm:text-base transition tracking-wide shadow-md shadow-sky-600/10 flex items-center justify-center space-x-2">
                             <i class="fa-solid fa-paper-plane"></i>
-                            <span>Lieferung abschicken & reservieren</span>
+                            <span>Lieferung abschicken & Bestpreis sichern</span>
                         </button>
                     </div>
                 </form>
             </section>
 
-            <!-- RECHTE SEITE: Die Historie (Das Gehirn, das sich alles live merkt) -->
             <section class="lg:col-span-5 space-y-6">
                 
-                <!-- Box: Letzte Sendungen -->
+                <div class="bg-slate-900 text-white p-5 rounded-3xl border border-slate-800 shadow-xl">
+                    <div class="flex items-center justify-between mb-3.5">
+                        <h3 class="text-[11px] font-bold uppercase tracking-wider text-cyan-400 flex items-center space-x-1.5">
+                            <i class="fa-solid fa-calculator"></i>
+                            <span>Ihre freigeschalteten Partner-Kurse</span>
+                        </h3>
+                        <span class="text-[9px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full font-black tracking-wide">+2,00 € Premium</span>
+                    </div>
+                    
+                    <div class="space-y-2.5 text-xs sm:text-sm">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-slate-400 text-xs">VHM Bohrer & Fräser</span>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-slate-500 line-through text-xs">58,50 €</span>
+                                <span class="font-black text-emerald-400 tracking-wide">60,50 € / kg</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-slate-400 text-xs">VHM Wendeschneidplatten</span>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-slate-500 line-through text-xs">54,00 €</span>
+                                <span class="font-black text-emerald-400 tracking-wide">56,00 € / kg</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center pb-0.5">
+                            <span class="text-slate-400 text-xs">VHM-Mischschrott</span>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-slate-500 line-through text-xs">51,20 €</span>
+                                <span class="font-black text-emerald-400 tracking-wide">53,20 € / kg</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="glass-card p-6 rounded-3xl brand-shadow space-y-4">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                         <h3 class="font-bold text-slate-900 text-sm sm:text-base flex items-center space-x-2">
@@ -128,21 +186,11 @@
                         <button onclick="clearHistory()" class="text-[10px] text-slate-400 hover:text-red-500 font-medium transition">Leeren</button>
                     </div>
 
-                    <!-- Dieser Bereich wird dynamisch vom JavaScript "Gehirn" befüllt -->
-                    <div id="historyContainer" class="space-y-3 max-h-[380px] overflow-y-auto pr-1">
-                        <!-- Standard-Platzhalter, wenn noch nichts abgeschickt wurde -->
+                    <div id="historyContainer" class="space-y-3 max-h-[300px] overflow-y-auto pr-1">
                         <div id="noDataPlaceholder" class="text-center py-8 text-slate-400 space-y-2">
                             <i class="fa-solid fa-box-open text-2xl text-slate-200"></i>
                             <p class="text-xs">Noch keine Lieferungen angemeldet.</p>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Info-Box für maximales Vertrauen -->
-                <div class="p-4 bg-amber-50 border border-amber-100 rounded-2xl flex items-start space-x-3">
-                    <i class="fa-solid fa-circle-info text-amber-500 mt-0.5 text-sm"></i>
-                    <div class="text-xs text-amber-800 leading-relaxed">
-                        <strong>Nächster Schritt nach dem Absenden:</strong> Verpacken Sie die Ware sicher in einem Karton. Legen Sie einen Zettel mit Ihrem Firmennamen hinein. Sobald das Paket bei uns in Dillingen eintrifft, erfolgt die Live-Wägung im Portal!
                     </div>
                 </div>
             </section>
@@ -150,18 +198,14 @@
         </div>
     </main>
 
-    <!-- JavaScript Gehirn: Speichert Daten lokal und erzeugt den perfekten Live-Effekt -->
     <script>
-        // Beim Laden der Seite direkt alte Sendungen aus dem Speicher laden
         document.addEventListener("DOMContentLoaded", loadHistory);
 
-        // Das Formular abfangen, um den Eintrag live in die Liste zu schreiben
         document.getElementById("deliveryForm").addEventListener("submit", function(e) {
             const weight = document.getElementById("formWeight").value;
             const type = document.getElementById("formType").value;
             const date = new Date().toLocaleDateString('de-DE');
 
-            // Neues Lieferungs-Objekt bauen
             const newDelivery = {
                 date: date,
                 weight: weight,
@@ -169,11 +213,8 @@
                 status: "In Zustellung"
             };
 
-            // Aus dem Speicher holen oder neues Array anlegen
             let currentDeliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
-            currentDeliveries.unshift(newDelivery); // Ganz oben hinzufügen
-
-            // Im Browser-Gehirn abspeichern
+            currentDeliveries.unshift(newDelivery);
             localStorage.setItem("starkmetall_deliveries", JSON.stringify(currentDeliveries));
         });
 
@@ -184,14 +225,14 @@
 
             if (deliveries.length > 0) {
                 placeholder.classList.add("hidden");
-                container.innerHTML = ""; // Container leeren
+                container.innerHTML = "";
 
                 deliveries.forEach(item => {
                     const html = `
                         <div class="p-3 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-between">
                             <div class="space-y-0.5">
                                 <span class="text-[10px] font-bold text-slate-400">${item.date}</span>
-                                <h4 class="font-bold text-slate-800 text-xs sm:text-sm">${item.type}</h4>
+                                <h4 class="font-bold text-slate-800 text-xs">${item.type}</h4>
                                 <p class="text-xs text-slate-500">Gewicht: <strong>${item.weight}</strong></p>
                             </div>
                             <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-full flex items-center space-x-1">
@@ -206,7 +247,7 @@
         }
 
         function clearHistory() {
-            if (confirm("Möchten Sie Ihre lokale Ansicht der Sendungshistorie wirklich leeren?")) {
+            if (confirm("Möchten Sie Ihre Sendungshistorie wirklich leeren?")) {
                 localStorage.removeItem("starkmetall_deliveries");
                 location.reload();
             }
