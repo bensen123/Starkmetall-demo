@@ -3,97 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starkmetall | B2B Kunden-Portal</title>
+    <title>Starkmetall | Agenten-Arbeitsplatz & Provisionen</title>
     
+    <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #f3f4f6; }
-        .cyber-gradient { background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #030712 70%); }
-        .neon-card { background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); }
+        .cyber-gradient { background: radial-gradient(circle at 50% 0%, #111827 0%, #030712 100%); }
     </style>
 </head>
-<body class="font-sans antialiased min-h-screen cyber-gradient flex flex-col justify-center items-center p-4">
+<body class="font-sans antialiased min-h-screen cyber-gradient p-4 sm:p-6">
 
-    <div id="portalLoginScreen" class="w-full max-w-md bg-gray-900/80 border border-gray-800 p-8 rounded-3xl space-y-6 shadow-2xl text-center">
-        <div class="w-16 h-16 bg-gradient-to-tr from-amber-500 to-orange-600 text-white rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-lg shadow-amber-500/10">
-            <i class="fa-solid fa-building-shield"></i>
+    <!-- LOGIN-SCREEN FÜR AGENTEN -->
+    <div id="agentLoginScreen" class="w-full max-w-md mx-auto my-20 bg-gray-900 border border-gray-800 p-8 rounded-3xl space-y-5 text-center shadow-2xl">
+        <div class="w-16 h-16 bg-gradient-to-tr from-amber-500 to-orange-500 text-white rounded-2xl flex items-center justify-center text-2xl mx-auto">
+            <i class="fa-solid fa-headset"></i>
         </div>
-        <div class="space-y-1">
-            <h2 class="text-2xl font-extrabold tracking-tight text-white">Starkmetall <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">B2B Portal</span></h2>
-            <p class="text-xs text-gray-400">Geben Sie Ihren Firmennamen oder Ihre Kundennummer ein.</p>
+        <div>
+            <h2 class="text-xl font-black text-white">i-CALL Agenten-Login</h2>
+            <p class="text-xs text-gray-400 mt-1">Bitte wählen Sie Ihren persönlichen Account.</p>
         </div>
-        
-        <div class="space-y-3">
-            <input type="text" id="partnerLoginId" placeholder="z.B. CNC-Technik Müller" class="w-full bg-gray-950/80 border border-gray-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500 transition font-medium text-center">
-            
-            <p id="loginError" class="hidden text-xs text-red-400 font-semibold"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Zugang nicht aktiv oder falsch geschrieben.</p>
-        </div>
-
-        <button onclick="checkPortalLogin()" class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-600 text-white font-bold py-3.5 rounded-xl text-sm transition tracking-wider uppercase text-[11px]">Identität verifizieren</button>
+        <select id="agentSelect" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 font-medium">
+            <option value="">-- Agent wählen --</option>
+            <option value="Ahmet Yilmaz">Ahmet Yilmaz</option>
+            <option value="Canan Demir">Canan Demir</option>
+            <option value="Mehmet Kaya">Mehmet Kaya</option>
+        </select>
+        <button onclick="loginAgent()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition">Arbeitsplatz öffnen</button>
     </div>
 
-    <div id="portalMainContent" class="hidden w-full max-w-2xl neon-card p-8 rounded-3xl space-y-6 text-center">
-        <div class="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center text-xl mx-auto">
-            <i class="fa-solid fa-circle-check"></i>
-        </div>
-        <div class="space-y-2">
-            <h1 class="text-2xl font-black text-white">Willkommen im Starkmetall-Netzwerk!</h1>
-            <p class="text-sm text-gray-400">Ihr Firmenkonto bei <strong id="loggedPartnerName" class="text-amber-400"></strong> ist verifiziert und voll aktiv.</p>
-        </div>
+    <!-- HAUPTINHALT (Wird nach Login eingeblendet) -->
+    <div id="agentMainDashboard" class="hidden max-w-6xl mx-auto space-y-6">
         
-        <div class="p-4 bg-gray-950/50 rounded-xl border border-gray-800 text-left space-y-2">
-            <p class="text-xs text-gray-400 uppercase tracking-wider font-bold"><i class="fa-solid fa-user-shield text-purple-400 mr-1.5"></i>Ihr persönlicher Betreuer:</p>
-            <p class="text-sm font-bold text-white" id="assignedAgentDisplay">Zentrale / Digitale Abwicklung</p>
+        <!-- TOP NAV / STATS & PROVISIONS-ANZEIGE -->
+        <div class="bg-gray-900 border border-gray-800 p-6 rounded-3xl flex flex-col md:flex-row justify-between items-center gap-6 shadow-xl">
+            <div>
+                <span class="text-[10px] bg-amber-500/10 text-amber-400 font-bold px-2.5 py-1 rounded-full uppercase border border-amber-500/20 tracking-wider">i-CALL Outbound System</span>
+                <h1 class="text-2xl font-black text-white mt-1">Agent: <span id="activeAgentName" class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400"></span></h1>
+            </div>
+            
+            <!-- LIVE KPI STATS -->
+            <div class="grid grid-cols-3 gap-4 w-full md:w-auto">
+                <div class="bg-gray-950 border border-gray-800 px-4 py-2.5 rounded-xl text-center">
+                    <p class="text-[9px] font-bold text-gray-400 uppercase">Meine Kunden</p>
+                    <p id="statCustomerCount" class="text-base font-mono font-bold text-white">0</p>
+                </div>
+                <div class="bg-gray-950 border border-gray-800 px-4 py-2.5 rounded-xl text-center">
+                    <p class="text-[9px] font-bold text-cyan-400 uppercase">Gesamt Kilo</p>
+                    <p id="statTotalWeight" class="text-base font-mono font-bold text-cyan-400">0 kg</p>
+                </div>
+                <div class="bg-gray-950 border border-emerald-500/20 px-4 py-2.5 rounded-xl text-center bg-emerald-500/5">
+                    <p class="text-[9px] font-bold text-emerald-400 uppercase">Meine Provision</p>
+                    <p id="statTotalCommission" class="text-base font-mono font-bold text-emerald-400">0,00 €</p>
+                </div>
+            </div>
+
+            <button onclick="logoutAgent()" class="bg-gray-950 border border-gray-800 text-gray-400 hover:text-red-400 px-4 py-3 rounded-xl text-xs font-bold transition">
+                <i class="fa-solid fa-power-off"></i>
+            </button>
         </div>
 
-        <div class="pt-4 flex gap-4">
-            <button onclick="logoutPortal()" class="flex-1 bg-gray-900 hover:bg-gray-800 text-gray-400 font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition border border-gray-800">Abmelden</button>
-            <a href="https://bensen123.github.io/Starkmetall-demo/" class="flex-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition text-center flex items-center justify-center shadow-lg shadow-amber-500/10">Direkt zur Avisierung</a>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- LINKS: NEUKUNDEN EINTRAGEN -->
+            <div class="bg-gray-900 border border-gray-800 p-6 rounded-3xl space-y-4 h-fit shadow-xl">
+                <h2 class="text-base font-bold text-white flex items-center"><i class="fa-solid fa-user-plus text-amber-500 mr-2"></i> Partner freischalten & anlegen</h2>
+                <p class="text-xs text-gray-400">Trage hier die Daten ein. Nach dem Klick wird die Willkommens-Mail vollautomatisch via n8n verschickt.</p>
+                
+                <div class="space-y-3">
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Firmenname / B2B Partner</label>
+                        <input type="text" id="newCustomerName" placeholder="z.B. CNC-Technik Müller" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 text-xs text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">E-Mail-Adresse (für Zugangsdaten)</label>
+                        <input type="email" id="newCustomerEmail" placeholder="info@mueller-cnc.de" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 text-xs text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div class="bg-amber-500/5 border border-amber-500/10 p-3 rounded-xl">
+                        <p class="text-[10px] font-bold text-amber-400 uppercase"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Automatische Generierung:</p>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Das System erzeugt für diesen Kunden eine sichere **6-stellige PIN**, die direkt per Mail versendet wird.</p>
+                    </div>
+                    
+                    <button onclick="registerCustomerAndTriggerEmail()" class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/10">Kunde aktivieren & Mail senden</button>
+                </div>
+            </div>
+
+            <!-- RECHTS: EIGENE KUNDEN & LIVE-STATUS-VERFOLGUNG -->
+            <div class="bg-gray-900 border border-gray-800 p-6 rounded-3xl space-y-4 lg:col-span-2 shadow-xl">
+                <h2 class="text-base font-bold text-white flex items-center"><i class="fa-solid fa-folder-tree text-cyan-400 mr-2"></i> Meine geschützten Kunden & Lieferungen</h2>
+                <p class="text-xs text-gray-400">Hier siehst du den Live-Status deiner zugeordneten Kunden. Du siehst nur Daten, die du selbst erfasst hast.</p>
+                
+                <div class="overflow-x-auto border border-gray-800 rounded-xl bg-gray-950/50">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-gray-800 bg-gray-950 text-[10px] uppercase font-bold text-gray-400 tracking-wider">
+                                <th class="p-3">Firma</th>
+                                <th class="p-3">E-Mail</th>
+                                <th class="p-3">Generierte PIN</th>
+                                <th class="p-3">Menge (kg)</th>
+                                <th class="p-3">Sendungs-Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="agentCustomerTable" class="divide-y divide-gray-900 text-xs"></tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <script>
-        function checkPortalLogin() {
-            const inputName = document.getElementById("partnerLoginId").value.trim();
-            const error = document.getElementById("loginError");
-            
-            // 1. Holt sich die ECHTEN, von dir im Admin-Dashboard angelegten Partner ab!
-            const realPartners = JSON.parse(localStorage.getItem("partners")) || [];
-            
-            // 2. Prüfen, ob der eingegebene Name existiert
-            const foundPartner = realPartners.find(p => p.name.toLowerCase() === inputName.toLowerCase());
-            
-            if (foundPartner) {
-                // Login erfolgreich!
-                error.classList.add("hidden");
-                document.getElementById("portalLoginScreen").classList.add("hidden");
-                document.getElementById("portalMainContent").classList.remove("hidden");
-                
-                // Namen und Agenten im System eintragen und anzeigen
-                document.getElementById("loggedPartnerName").innerText = foundPartner.name;
-                document.getElementById("assignedAgentDisplay").innerText = foundPartner.agent ? foundPartner.agent + " (Direktdurchwahl aktiv)" : "Zentrale / Digitale Abwicklung";
-                
-                localStorage.setItem("current_logged_partner", foundPartner.name);
-            } else {
-                // Fehler ausgeben
-                error.classList.remove("hidden");
-            }
+        let loggedInAgent = "";
+        const COMMISSION_PER_KG = 0.50; // 50 Cent Provision pro Kilo für den Agenten
+
+        function loginAgent() {
+            const agent = document.getElementById("agentSelect").value;
+            if(!agent) return alert("Bitte wähle deinen Namen aus!");
+
+            loggedInAgent = agent;
+            localStorage.setItem("current_logged_agent", agent);
+
+            document.getElementById("agentLoginScreen").classList.add("hidden");
+            document.getElementById("agentMainDashboard").classList.remove("hidden");
+            document.getElementById("activeAgentName").innerText = agent;
+
+            loadAgentDashboard();
         }
 
-        // Automatisch einloggen, falls Session noch aktiv ist
+        function loadAgentDashboard() {
+            const allPartners = JSON.parse(localStorage.getItem("partners")) || [];
+            const deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
+            
+            // 1. FILTIERUNG: Nur Kunden dieses Agenten
+            const myPartners = allPartners.filter(p => p.agent === loggedInAgent);
+            document.getElementById("statCustomerCount").innerText = myPartners.length;
+
+            let totalWeight = 0;
+
+            const tbody = document.getElementById("agentCustomerTable");
+            tbody.innerHTML = "";
+
+            if (myPartners.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-500 italic">Du hast noch keine Kunden erfasst.</td></tr>`;
+                document.getElementById("statTotalWeight").innerText = "0 kg";
+                document.getElementById("statTotalCommission").innerText = "0,00 €";
+                return;
+            }
+
+            myPartners.forEach(partner => {
+                // Alle Lieferungen dieses Partners aufsummieren
+                const myPartnerDeliveries = deliveries.filter(d => d.partner.toLowerCase() === partner.name.toLowerCase());
+                
+                let partnerWeightSum = 0;
+                let statusHtml = `<span class="text-gray-500 italic">Keine Sendung</span>`;
+
+                if (myPartnerDeliveries.length > 0) {
+                    myPartnerDeliveries.forEach(del => {
+                        partnerWeightSum += parseFloat(del.weight) || 0;
+                    });
+                    
+                    // Nimm den Status der allerneuesten Sendung zur Anzeige
+                    const latestDel = myPartnerDeliveries[myPartnerDeliveries.length - 1];
+                    let colorClass = "bg-purple-500/10 text-purple-400 border-purple-500/20";
+                    if(latestDel.status === 'Ausgezahlt') colorClass = "bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
+                    if(latestDel.status === 'In Prüfung' || latestDel.status === 'Ware erhalten') colorClass = "bg-amber-500/10 text-amber-400 border-amber-500/20";
+                    
+                    statusHtml = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${colorClass} border">${latestDel.status}</span>`;
+                }
+
+                totalWeight += partnerWeightSum;
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-900/50 transition">
+                        <td class="p-3 font-bold text-white">${partner.name}</td>
+                        <td class="p-3 text-gray-400 font-mono text-[11px]">${partner.email || 'Keine Mail'}</td>
+                        <td class="p-3 font-mono text-purple-400 font-bold">${partner.pin || '123456'}</td>
+                        <td class="p-3 font-mono text-gray-300">${partnerWeightSum} kg</td>
+                        <td class="p-3">${statusHtml}</td>
+                    </tr>`;
+            });
+
+            // Oben im Cockpit die Statistiken eintragen
+            document.getElementById("statTotalWeight").innerText = `${totalWeight} kg`;
+            const commissionEarned = totalWeight * COMMISSION_PER_KG;
+            document.getElementById("statTotalCommission").innerText = `${commissionEarned.toLocaleString('de-DE', {minimumFractionDigits: 2})} €`;
+        }
+
+        function registerCustomerAndTriggerEmail() {
+            const name = document.getElementById("newCustomerName").value.trim();
+            const email = document.getElementById("newCustomerEmail").value.trim();
+
+            if(!name || !email) {
+                return alert("⚠️ Bitte Firmenname und E-Mail des Kunden vollständig eintragen!");
+            }
+
+            const randomPin = Math.floor(100000 + Math.random() * 900000).toString();
+            let allPartners = JSON.parse(localStorage.getItem("partners")) || [];
+            
+            if(allPartners.some(p => p.name.toLowerCase() === name.toLowerCase())) {
+                return alert("❌ Diese Firma existiert bereits im System!");
+            }
+
+            const newCustomer = {
+                name: name,
+                email: email,
+                pin: randomPin,
+                agent: loggedInAgent,
+                dateAdded: new Date().toLocaleDateString('de-DE')
+            };
+
+            allPartners.push(newCustomer);
+            localStorage.setItem("partners", JSON.stringify(allPartners));
+
+            // n8n Webhook-Kopplung
+            fetch("HIER_DEINE_N8N_WEBHOOK_URL_EINFÜGEN", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    event: "new_b2b_customer",
+                    company_name: name,
+                    customer_email: email,
+                    generated_pin: randomPin,
+                    assigned_agent: loggedInAgent,
+                    portal_url: "https://starkmetall24.de/portal.html"
+                })
+            }).catch(err => console.log("n8n Trigger gesendet"));
+
+            alert(`✅ Kunde "${name}" erfolgreich freigeschaltet!\n\nDie automatische Willkommens-Mail mit der PIN (${randomPin}) wurde soeben über n8n verschickt.`);
+            
+            document.getElementById("newCustomerName").value = "";
+            document.getElementById("newCustomerEmail").value = "";
+            loadAgentDashboard();
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
-            const alreadyLogged = localStorage.getItem("current_logged_partner");
-            if (alreadyLogged) {
-                document.getElementById("partnerLoginId").value = alreadyLogged;
-                checkPortalLogin();
+            const savedAgent = localStorage.getItem("current_logged_agent");
+            if(savedAgent) {
+                document.getElementById("agentSelect").value = savedAgent;
+                loginAgent();
             }
         });
 
-        function logoutPortal() {
-            localStorage.removeItem("current_logged_partner");
+        function logoutAgent() {
+            localStorage.removeItem("current_logged_agent");
             location.reload();
         }
     </script>
