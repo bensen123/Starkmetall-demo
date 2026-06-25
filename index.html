@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starkmetall OS | Enterprise Dashboard</title>
+    <title>Starkmetall OS | Enterprise Dashboard v5</title>
     
+    <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -13,152 +14,136 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #f3f4f6; }
         .cyber-gradient { background: radial-gradient(circle at 0% 0%, #1e1b4b 0%, #030712 50%), radial-gradient(circle at 100% 100%, #06283d 0%, #030712 50%); }
         .neon-card { background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); }
-        .neon-border-cyan:focus { border-color: #06b6d4; box-shadow: 0 0 15px rgba(6, 182, 212, 0.15); }
-        .neon-border-purple:focus { border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.15); }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); rounded: 10px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
     </style>
 </head>
 <body class="font-sans antialiased min-h-screen cyber-gradient flex flex-col">
 
+    <!-- LOGIN-SCHRANKE -->
     <div id="loginScreen" class="fixed inset-0 bg-gray-950/95 backdrop-blur-2xl z-[100] flex items-center justify-center p-4">
-        <div class="bg-gray-900/80 border border-gray-800 p-8 rounded-3xl w-full max-w-md space-y-6 shadow-2xl text-center relative overflow-hidden">
-            <div class="absolute -right-10 -top-10 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl"></div>
+        <div class="bg-gray-900/80 border border-gray-800 p-8 rounded-3xl w-full max-w-md space-y-6 shadow-2xl text-center">
             <div class="w-16 h-16 bg-gradient-to-tr from-cyan-500 to-purple-500 text-white rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-lg shadow-cyan-500/10">
                 <i class="fa-solid fa-terminal"></i>
             </div>
             <div class="space-y-1">
-                <h2 class="text-2xl font-extrabold tracking-tight text-white">Starkmetall <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">OS V4.0</span></h2>
+                <h2 class="text-2xl font-extrabold tracking-tight text-white">Starkmetall <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">OS V5.0</span></h2>
                 <p class="text-xs text-gray-400">Geben Sie Ihren Command-Schlüssel ein.</p>
             </div>
-            <div class="space-y-2 text-left">
-                <input type="password" id="adminPassword" placeholder="••••••••" class="w-full bg-gray-950/80 border border-gray-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-cyan-500 transition font-mono tracking-widest text-center">
-                <p id="loginError" class="text-xs text-red-400 hidden font-semibold text-center"><i class="fa-solid fa-circle-exclamation mr-1"></i> Schlüssel ungültig!</p>
-            </div>
-            <button onclick="checkPassword()" class="w-full bg-gradient-to-r from-cyan-500 via-sky-500 to-purple-600 hover:opacity-90 text-white font-bold py-3.5 rounded-xl text-sm transition tracking-wider uppercase text-[11px]">
-                System hochfahren
-            </button>
+            <input type="password" id="adminPassword" placeholder="••••••••" class="w-full bg-gray-950/80 border border-gray-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-cyan-500 transition font-mono tracking-widest text-center">
+            <button onclick="checkPassword()" class="w-full bg-gradient-to-r from-cyan-500 via-sky-500 to-purple-600 text-white font-bold py-3.5 rounded-xl text-sm transition tracking-wider uppercase text-[11px]">System hochfahren</button>
         </div>
     </div>
 
+    <!-- MAIN OS CONTROLLER -->
     <div id="adminContent" class="hidden flex-1 flex flex-col">
         
+        <!-- TOP BAR -->
         <header class="border-b border-gray-800/60 bg-gray-950/40 backdrop-blur-md px-6 py-4 sticky top-0 z-50">
             <div class="max-w-[1600px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
                 <div class="flex items-center space-x-3">
-                    <span class="bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-black px-3 py-1.5 rounded-lg text-xs tracking-wider">STARKMETALL EXECUTIVE</span>
-                    <div class="h-4 w-[1px] bg-gray-800 hidden sm:block"></div>
-                    <p class="text-xs font-semibold text-gray-400 hidden sm:block"><i class="fa-solid fa-circle text-emerald-500 text-[8px] animate-pulse mr-1.5"></i>HQ-Terminal Aachen/Aksaray</p>
+                    <span class="bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-black px-3 py-1.5 rounded-lg text-xs tracking-wider">STARKMETALL EXECUTIVE HQ</span>
+                    <p class="text-xs font-semibold text-gray-400 hidden sm:block"><i class="fa-solid fa-circle text-emerald-500 text-[8px] animate-pulse mr-1.5"></i>Live-Kopplung Aktiv</p>
                 </div>
                 <div class="flex items-center space-x-4">
                     <div id="clock" class="text-xs font-mono text-gray-400 bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-lg"></div>
-                    <button onclick="logout()" class="text-xs font-bold text-gray-400 hover:text-red-400 transition bg-gray-900/80 px-3 py-1.5 rounded-lg border border-gray-800">
-                        <i class="fa-solid fa-power-off"></i>
-                    </button>
+                    <button onclick="logout()" class="text-xs font-bold text-gray-400 hover:text-red-400 transition bg-gray-900/80 px-3 py-1.5 rounded-lg border border-gray-800"><i class="fa-solid fa-power-off"></i></button>
                 </div>
             </div>
         </header>
 
+        <!-- MAIN MONITOR BOARD -->
         <main class="max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-8 flex-1 w-full space-y-8">
             
+            <!-- STATS KACHELN -->
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="neon-card p-4 rounded-2xl flex items-center justify-between">
                     <div>
-                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Avisiertes Gesamtgewicht</p>
+                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Gesamtgewicht VHM</p>
                         <h3 id="statWeight" class="text-xl sm:text-2xl font-black text-white font-mono mt-1">0 kg</h3>
                     </div>
                     <div class="text-cyan-400 bg-cyan-500/10 p-3 rounded-xl"><i class="fa-solid fa-weight-hanging text-lg"></i></div>
                 </div>
                 <div class="neon-card p-4 rounded-2xl flex items-center justify-between">
                     <div>
-                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Aktive Lieferungen</p>
+                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Laufende Deals</p>
                         <h3 id="statCount" class="text-xl sm:text-2xl font-black text-white font-mono mt-1">0</h3>
                     </div>
                     <div class="text-purple-400 bg-purple-500/10 p-3 rounded-xl"><i class="fa-solid fa-truck-fast text-lg"></i></div>
                 </div>
                 <div class="neon-card p-4 rounded-2xl flex items-center justify-between">
                     <div>
-                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Freigeschaltete Partner</p>
+                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Erfasste Partner</p>
                         <h3 id="statPartners" class="text-xl sm:text-2xl font-black text-white font-mono mt-1">0</h3>
                     </div>
                     <div class="text-amber-400 bg-amber-500/10 p-3 rounded-xl"><i class="fa-solid fa-address-book text-lg"></i></div>
                 </div>
                 <div class="neon-card p-4 rounded-2xl flex items-center justify-between">
                     <div>
-                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Call-Center Agenten</p>
-                        <h3 id="statAgents" class="text-xl sm:text-2xl font-black text-white font-mono mt-1">0</h3>
+                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Umsatzstärkster Agent</p>
+                        <h3 id="topAgentStat" class="text-sm font-bold text-emerald-400 mt-2 truncate">-</h3>
                     </div>
-                    <div class="text-emerald-400 bg-emerald-500/10 p-3 rounded-xl"><i class="fa-solid fa-headset text-lg"></i></div>
+                    <div class="text-emerald-400 bg-emerald-500/10 p-3 rounded-xl"><i class="fa-solid fa-trophy text-lg"></i></div>
                 </div>
             </div>
 
+            <!-- ROW 2: CONTROL PANELS -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                 
-                <section class="lg:col-span-4 neon-card p-5 sm:p-6 rounded-2xl space-y-4">
-                    <h3 class="text-sm font-bold tracking-wider uppercase text-cyan-400 flex items-center space-x-2">
-                        <i class="fa-solid fa-bolt"></i> <span>Tageskurse (€ / kg)</span>
-                    </h3>
+                <!-- TAGESKURSE (3 COLS) -->
+                <section class="lg:col-span-4 neon-card p-5 rounded-2xl space-y-4">
+                    <h3 class="text-sm font-bold tracking-wider uppercase text-cyan-400 flex items-center space-x-2"><i class="fa-solid fa-bolt"></i> <span>Tageskurse (€ / kg)</span></h3>
                     <div class="space-y-3">
                         <div>
                             <label class="text-[10px] font-bold text-gray-400 block mb-1">VHM Bohrer / Fräser</label>
-                            <input type="number" step="0.01" id="price1" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm font-mono text-white focus:outline-none neon-border-cyan">
+                            <input type="number" step="0.01" id="price1" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm font-mono text-white focus:outline-none">
                         </div>
                         <div>
                             <label class="text-[10px] font-bold text-gray-400 block mb-1">VHM Wendeschneidplatten</label>
-                            <input type="number" step="0.01" id="price2" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm font-mono text-white focus:outline-none neon-border-cyan">
-                        </div>
-                        <div>
-                            <label class="text-[10px] font-bold text-gray-400 block mb-1">VHM Mischschrott</label>
-                            <input type="number" step="0.01" id="price3" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm font-mono text-white focus:outline-none neon-border-cyan">
+                            <input type="number" step="0.01" id="price2" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm font-mono text-white focus:outline-none">
                         </div>
                     </div>
-                    <button onclick="savePrices()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider transition">
-                        Preise synchronisieren
-                    </button>
+                    <button onclick="savePrices()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 rounded-xl text-xs uppercase tracking-wider transition">Kurse Live Schalten</button>
                 </section>
 
-                <section class="lg:col-span-4 neon-card p-5 sm:p-6 rounded-2xl space-y-4">
-                    <h3 class="text-sm font-bold tracking-wider uppercase text-purple-400 flex items-center space-x-2">
-                        <i class="fa-solid fa-headset"></i> <span>Mitarbeiter & Agenten</span>
-                    </h3>
-                    <div class="flex gap-2">
-                        <input type="text" id="newAgentName" placeholder="Name des Agenten" class="flex-1 bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none neon-border-purple">
-                        <button onclick="addAgent()" class="bg-purple-600 hover:bg-purple-500 text-white px-4 rounded-xl text-xs font-bold transition">Hinzufügen</button>
+                <!-- LIVE MITARBEITER CONTROL & PERFORMANCE LOCK (4 COLS) -->
+                <section class="lg:col-span-4 neon-card p-5 rounded-2xl space-y-4">
+                    <h3 class="text-sm font-bold tracking-wider uppercase text-purple-400 flex items-center space-x-2"><i class="fa-solid fa-headset"></i> <span>Agenten & Live-Performance</span></h3>
+                    <div class="space-y-2">
+                        <input type="text" id="newAgentName" placeholder="Name des Agenten" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none">
+                        <div class="flex gap-2">
+                            <input type="email" id="newAgentEmail" placeholder="agent@starkmetall.de" class="flex-1 bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none">
+                            <button onclick="addAgent()" class="bg-purple-600 hover:bg-purple-500 text-white px-4 rounded-xl text-xs font-bold transition">Anlegen</button>
+                        </div>
                     </div>
-                    <div id="agentList" class="space-y-2 max-h-[160px] overflow-y-auto pr-1"></div>
+                    <div id="agentList" class="space-y-2 max-h-[180px] overflow-y-auto pr-1">
+                        <!-- Befüllung per JS inklusive Live-Leistungsdaten -->
+                    </div>
                 </section>
 
-                <section class="lg:col-span-4 neon-card p-5 sm:p-6 rounded-2xl space-y-4">
-                    <h3 class="text-sm font-bold tracking-wider uppercase text-amber-400 flex items-center space-x-2">
-                        <i class="fa-solid fa-users-gear"></i> <span>Kunden-Accounts & Betreuer</span>
-                    </h3>
+                <!-- PARTNER & ID ENGINE (5 COLS) -->
+                <section class="lg:col-span-4 neon-card p-5 rounded-2xl space-y-4">
+                    <h3 class="text-sm font-bold tracking-wider uppercase text-amber-400 flex items-center space-x-2"><i class="fa-solid fa-users-gear"></i> <span>B2B Kunden-Zuweisung</span></h3>
                     <div class="space-y-2">
                         <input type="text" id="newPartnerName" placeholder="Firma / Kundennummer" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none">
                         <div class="flex gap-2">
-                            <select id="partnerAgentSelect" class="flex-1 bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm text-gray-300 focus:outline-none">
-                                <option value="">Kein Betreuer</option>
-                            </select>
-                            <button onclick="addPartner()" class="bg-amber-600 hover:bg-amber-500 text-white px-4 rounded-xl text-xs font-bold transition whitespace-nowrap">Account anlegen</button>
+                            <select id="partnerAgentSelect" class="flex-1 bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm text-gray-300 focus:outline-none"></select>
+                            <button onclick="addPartner()" class="bg-amber-600 hover:bg-amber-500 text-white px-4 rounded-xl text-xs font-bold transition whitespace-nowrap">Kunde aktivieren</button>
                         </div>
                     </div>
-                    <div id="partnerList" class="space-y-2 max-h-[120px] overflow-y-auto pr-1"></div>
+                    <div id="partnerList" class="space-y-2 max-h-[140px] overflow-y-auto pr-1"></div>
                 </section>
 
             </div>
 
-            <section class="neon-card p-5 sm:p-6 rounded-2xl space-y-4">
+            <!-- TABELLE: LOGISTIK-LIVE-SPIEGEL -->
+            <section class="neon-card p-5 rounded-2xl space-y-4">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-gray-800 pb-4">
                     <div>
-                        <h3 class="text-base font-extrabold text-white flex items-center space-x-2">
-                            <i class="fa-solid fa-boxes-stacked text-cyan-400"></i>
-                            <span>Live-Avisierungen & Sendungstracking</span>
-                        </h3>
-                        <p class="text-xs text-gray-400 mt-0.5">Hier verwaltest du Gewichte, Sendungsnummern und den aktuellen Status der Kundenlieferungen.</p>
+                        <h3 class="text-base font-extrabold text-white flex items-center space-x-2"><i class="fa-solid fa-boxes-stacked text-cyan-400"></i><span>Live-Avisierungen & Sendungstracking</span></h3>
                     </div>
-                    <button onclick="simulateDelivery()" class="bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5">
-                        <i class="fa-solid fa-vial text-cyan-400"></i> <span>Test-Lieferung simulieren</span>
-                    </button>
+                    <button onclick="simulateDelivery()" class="bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 px-3 py-1.5 rounded-xl text-xs font-bold transition"><i class="fa-solid fa-vial text-cyan-400 mr-1.5"></i>Test-Lieferung simulieren</button>
                 </div>
 
                 <div class="overflow-x-auto w-full">
@@ -167,16 +152,15 @@
                             <tr class="border-b border-gray-800 text-[10px] uppercase font-bold text-gray-400 tracking-wider">
                                 <th class="pb-3 pl-2">Datum</th>
                                 <th class="pb-3">Kunde / Firma</th>
-                                <th class="pb-3">Betreuer (Agent)</th>
+                                <th class="pb-3">Zugeordneter Agent</th>
                                 <th class="pb-3">Materialsorte</th>
-                                <th class="pb-3">Gewicht</th>
-                                <th class="pb-3">Sendungsnummer (Tracking)</th>
-                                <th class="pb-3">Status-Kontrolle</th>
-                                <th class="pb-3 pr-2 text-right">Aktion</th>
+                                <th class="pb-3">Gewicht (kg)</th>
+                                <th class="pb-3">Tracking-ID</th>
+                                <th class="pb-3">Status</th>
+                                <th class="pb-3 pr-2 text-right">Auszahlung</th>
                             </tr>
                         </thead>
-                        <tbody id="logisticsTableBody" class="divide-y divide-gray-900 text-xs sm:text-sm">
-                            </tbody>
+                        <tbody id="logisticsTableBody" class="divide-y divide-gray-900 text-xs sm:text-sm"></tbody>
                     </table>
                 </div>
             </section>
@@ -185,50 +169,42 @@
     </div>
 
     <script>
-        // Start-Datenbänke, falls der Browser noch leer ist
-        const defPrices = { vhm_bohrer: 58.50, vhm_wsp: 54.00, vhm_misch: 51.20 };
-        const defAgents = ["Ahmet Yilmaz", "Sarah Müller", "Kevin Schmidt"];
+        const defPrices = { vhm_bohrer: 58.50, vhm_wsp: 54.00 };
+        // Agenten-Datenbank jetzt mit E-Mail-Adresse
+        const defAgents = [
+            { name: "Ahmet Yilmaz", email: "ahmet@starkmetall.de" },
+            { name: "Sarah Müller", email: "sarah@starkmetall.de" }
+        ];
         const defPartners = [
             { name: "CNC-Technik Müller", agent: "Ahmet Yilmaz", email: "mueller@cnc-technik.de" },
-            { name: "Starkmetall Partner", agent: "Sarah Müller", email: "info@starkmetall.de" },
-            { name: "Mandy Maschinenbau", agent: "Kevin Schmidt", email: "mandy@maschinen.de" }
+            { name: "Starkmetall Partner", agent: "Sarah Müller", email: "info@starkmetall.de" }
         ];
         const defDeliveries = [
-            { id: 1, date: "26.06.2026", partner: "CNC-Technik Müller", agent: "Ahmet Yilmaz", type: "VHM Bohrer & Fräser", weight: 45, tracking: "DHL: CY123456789DE", status: "In Zustellung" },
-            { id: 2, date: "25.06.2026", partner: "Starkmetall Partner", agent: "Sarah Müller", type: "VHM Wendeschneidplatten", weight: 120, tracking: "UPS: 1Z999AA10123456784", status: "Ware erhalten" }
+            { id: 1, date: "26.06.2026", partner: "CNC-Technik Müller", agent: "Ahmet Yilmaz", type: "VHM Bohrer & Fräser", weight: 450, tracking: "DHL: CY123456789DE", status: "In Zustellung", value: 26325 },
+            { id: 2, date: "25.06.2026", partner: "Starkmetall Partner", agent: "Sarah Müller", type: "VHM Wendeschneidplatten", weight: 820, tracking: "UPS: 1Z999AA10123", status: "Ware erhalten", value: 44280 }
         ];
 
         function checkPassword() {
             if (document.getElementById("adminPassword").value === "starkmetall2026") {
                 document.getElementById("loginScreen").classList.add("hidden");
                 document.getElementById("adminContent").classList.remove("hidden");
-                localStorage.setItem("starkmetall_v4_auth", "true");
+                localStorage.setItem("starkmetall_v5_auth", "true");
                 bootSystem();
-            } else {
-                document.getElementById("loginError").classList.remove("hidden");
             }
         }
 
-        if (localStorage.getItem("starkmetall_v4_auth") === "true") {
+        if (localStorage.getItem("starkmetall_v5_auth") === "true") {
             document.getElementById("loginScreen").classList.add("hidden");
             document.getElementById("adminContent").classList.remove("hidden");
             window.addEventListener('DOMContentLoaded', bootSystem);
         }
 
-        function logout() {
-            localStorage.removeItem("starkmetall_v4_auth");
-            location.reload();
-        }
-
-        // DYNAMISCHE TACTICAL-UHR
-        setInterval(() => {
-            const d = new Date();
-            document.getElementById("clock").innerText = d.toLocaleDateString('de-DE') + " | " + d.toLocaleTimeString('de-DE') + " Uhr";
-        }, 1000);
+        function logout() { localStorage.removeItem("starkmetall_v5_auth"); location.reload(); }
+        setInterval(() => { document.getElementById("clock").innerText = new Date().toLocaleString('de-DE') + " Uhr"; }, 1000);
 
         function bootSystem() {
             if (!localStorage.getItem("prices")) localStorage.setItem("prices", JSON.stringify(defPrices));
-            if (!localStorage.getItem("agents")) localStorage.setItem("agents", JSON.stringify(defAgents));
+            if (!localStorage.getItem("agents_v5")) localStorage.setItem("agents_v5", JSON.stringify(defAgents));
             if (!localStorage.getItem("partners")) localStorage.setItem("partners", JSON.stringify(defPartners));
             if (!localStorage.getItem("starkmetall_deliveries")) localStorage.setItem("starkmetall_deliveries", JSON.stringify(defDeliveries));
 
@@ -237,118 +213,124 @@
 
         function renderAll() {
             renderPrices();
-            renderAgents();
+            renderAgentsAndPerformance();
             renderPartners();
             renderDeliveriesTable();
             calculateStats();
         }
 
+        // RECHNET DIE PERFORMANCE JEDES AGENTEN LIVE AUS DER LINK-TABELLE AUS
+        function renderAgentsAndPerformance() {
+            const agents = JSON.parse(localStorage.getItem("agents_v5")) || [];
+            const deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
+            const list = document.getElementById("agentList");
+            const select = document.getElementById("partnerAgentSelect");
+            
+            list.innerHTML = "";
+            select.innerHTML = '<option value="">Zentrale / Kein Betreuer</option>';
+
+            agents.forEach((agent, i) => {
+                // Filtere alle Kilos, die dieser Agent reingeholt hat
+                let agentWeight = deliveries
+                    .filter(d => d.agent === agent.name)
+                    .reduce((sum, d) => sum + parseFloat(d.weight || 0), 0);
+
+                // Generiere Einladungs-Link für die Agenten-Maske (Mit ID und Zugangsdaten)
+                const subject = encodeURIComponent("Ihre Zugangsdaten zur Starkmetall Agenten-Maske");
+                const body = encodeURIComponent(`Hallo ${agent.name},\n\nHier sind Ihre persönlichen Zugangsdaten für das Starkmetall Call-Center-System:\n\nSystem-Link: https://bensen123.github.io/Starkmetall-demo/agent.html\nIhre Agenten-ID: ${agent.name}\n\nTragen Sie Ihre Neukunden über diese Maske ein, um Ihre Provisionen automatisch zu sichern.\n\nGute Jagd!\nStarkmetall Executive`);
+                const mailto = `mailto:${agent.email}?subject=${subject}&body=${body}`;
+
+                list.innerHTML += `
+                    <div class="bg-gray-950/60 border border-gray-800 p-2.5 rounded-xl space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-purple-300"><i class="fa-solid fa-user-tie mr-1.5 text-purple-400"></i>${agent.name}</span>
+                            <button onclick="deleteAgent(${i})" class="text-gray-600 hover:text-red-400 transition"><i class="fa-solid fa-xmark text-xs"></i></button>
+                        </div>
+                        <div class="flex justify-between items-center bg-gray-900/50 p-1.5 rounded-lg text-[10px]">
+                            <span class="text-gray-400">Diesen Monat: <strong class="text-cyan-400 font-mono">${agentWeight} kg</strong></span>
+                            <a href="${mailto}" class="bg-purple-500/10 border border-purple-500/30 text-purple-300 hover:bg-purple-500 hover:text-white px-2 py-0.5 rounded text-[9px] font-bold transition">
+                                <i class="fa-solid fa-key mr-1"></i> Key senden
+                            </a>
+                        </div>
+                    </div>`;
+                select.innerHTML += `<option value="${agent.name}">${agent.name}</option>`;
+            });
+        }
+
         function calculateStats() {
             const deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
-            const partners = JSON.parse(localStorage.getItem("partners")) || [];
-            const agents = JSON.parse(localStorage.getItem("agents")) || [];
-
+            const agents = JSON.parse(localStorage.getItem("agents_v5")) || [];
             let totalWeight = deliveries.reduce((acc, curr) => acc + parseFloat(curr.weight || 0), 0);
             
-            document.getElementById("statWeight").innerText = totalWeight + " kg";
+            document.getElementById("statWeight").innerText = totalWeight.toLocaleString('de-DE') + " kg";
             document.getElementById("statCount").innerText = deliveries.length;
-            document.getElementById("statPartners").innerText = partners.length;
-            document.getElementById("statAgents").innerText = agents.length;
+            document.getElementById("statPartners").innerText = (JSON.parse(localStorage.getItem("partners")) || []).length;
+
+            // Finde den besten Agenten heraus
+            let bestAgent = "-";
+            let maxWeight = 0;
+            agents.forEach(a => {
+                let w = deliveries.filter(d => d.agent === a.name).reduce((sum, d) => sum + parseFloat(d.weight || 0), 0);
+                if (w > maxWeight) { maxWeight = w; bestAgent = `${a.name} (${w} kg)`; }
+            });
+            document.getElementById("topAgentStat").innerText = bestAgent;
         }
 
         function renderPrices() {
             const p = JSON.parse(localStorage.getItem("prices"));
             document.getElementById("price1").value = p.vhm_bohrer.toFixed(2);
             document.getElementById("price2").value = p.vhm_wsp.toFixed(2);
-            document.getElementById("price3").value = p.vhm_misch.toFixed(2);
         }
 
         function savePrices() {
-            const p = {
-                vhm_bohrer: parseFloat(document.getElementById("price1").value) || 0,
-                vhm_wsp: parseFloat(document.getElementById("price2").value) || 0,
-                vhm_misch: parseFloat(document.getElementById("price3").value) || 0
-            };
+            const p = { vhm_bohrer: parseFloat(document.getElementById("price1").value) || 0, vhm_wsp: parseFloat(document.getElementById("price2").value) || 0 };
             localStorage.setItem("prices", JSON.stringify(p));
-            localStorage.setItem("starkmetall_live_prices", JSON.stringify(p)); // Brücke zum Kundenportal
+            localStorage.setItem("starkmetall_live_prices", JSON.stringify(p));
             alert("🚀 Systemkurse weltweit im Orbit aktualisiert!");
-        }
-
-        // MITARBEITER ENGINE
-        function renderAgents() {
-            const a = JSON.parse(localStorage.getItem("agents"));
-            const list = document.getElementById("agentList");
-            const select = document.getElementById("partnerAgentSelect");
-            
-            list.innerHTML = "";
-            select.innerHTML = '<option value="">Kein Betreuer</option>';
-
-            a.forEach((agent, i) => {
-                list.innerHTML += `
-                    <div class="flex justify-between items-center bg-gray-950/60 border border-gray-800 p-2.5 rounded-xl">
-                        <span class="text-xs font-medium text-purple-300"><i class="fa-solid fa-user-tie mr-2 text-purple-400"></i>${agent}</span>
-                        <button onclick="deleteAgent(${i})" class="text-gray-500 hover:text-red-400 transition"><i class="fa-solid fa-xmark"></i></button>
-                    </div>`;
-                select.innerHTML += `<option value="${agent}">${agent}</option>`;
-            });
         }
 
         function addAgent() {
             const name = document.getElementById("newAgentName").value.trim();
-            if(!name) return;
-            let a = JSON.parse(localStorage.getItem("agents"));
-            a.push(name);
-            localStorage.setItem("agents", JSON.stringify(a));
+            const email = document.getElementById("newAgentEmail").value.trim();
+            if(!name || !email) return;
+            let a = JSON.parse(localStorage.getItem("agents_v5")) || [];
+            a.push({ name: name, email: email });
+            localStorage.setItem("agents_v5", JSON.stringify(a));
             document.getElementById("newAgentName").value = "";
+            document.getElementById("newAgentEmail").value = "";
             renderAll();
         }
 
         function deleteAgent(i) {
-            let a = JSON.parse(localStorage.getItem("agents"));
+            let a = JSON.parse(localStorage.getItem("agents_v5"));
             a.splice(i, 1);
-            localStorage.setItem("agents", JSON.stringify(a));
+            localStorage.setItem("agents_v5", JSON.stringify(a));
             renderAll();
         }
 
-        // KUNDEN & ID ENGINE WITH EMAIL TRIGGER
         function renderPartners() {
             const p = JSON.parse(localStorage.getItem("partners"));
             const list = document.getElementById("partnerList");
             list.innerHTML = "";
-
             p.forEach((partner, i) => {
-                // Generiere Mailto-Link für Zugangsdaten mit 1-Klick
-                const emailSubject = encodeURIComponent("Ihre Starkmetall 24 Partner-Zugangsdaten");
-                const emailBody = encodeURIComponent(`Hallo ${partner.name},\n\nIhr exklusiver Partner-Zugang im Starkmetall-Cockpit wurde soeben aktiviert!\n\nNutzen Sie zum Login einfach folgenden Firmen-Code: ${partner.name}\n\nAb sofort erhalten Sie automatisch +2,00 € Bonus pro Kilogramm auf all Ihre VHM-Lieferungen.\n\nIhr persönlicher Betreuer: ${partner.agent || 'Zentrale'}\n\nMit freundlichen Grüßen,\nIhr Starkmetall 24 Team`);
-                const mailtoUrl = `mailto:${partner.email || 'kunde@firma.de'}?subject=${emailSubject}&body=${emailBody}`;
-
                 list.innerHTML += `
-                    <div class="bg-gray-950/60 border border-gray-800 p-2 rounded-xl flex flex-col space-y-1.5">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-gray-200"><i class="fa-solid fa-building text-amber-500 mr-2"></i>${partner.name}</span>
-                            <button onclick="deletePartner(${i})" class="text-gray-600 hover:text-red-400"><i class="fa-solid fa-trash text-[10px]"></i></button>
+                    <div class="bg-gray-950/60 border border-gray-800 p-2 rounded-xl flex justify-between items-center text-xs">
+                        <div>
+                            <p class="font-bold text-gray-200"><i class="fa-solid fa-building text-amber-500 mr-2"></i>${partner.name}</p>
+                            <p class="text-[10px] text-gray-400">Betreuer: <span class="text-purple-400 font-bold">${partner.agent || 'Zentrale'}</span></p>
                         </div>
-                        <div class="flex justify-between items-center text-[10px]">
-                            <span class="text-gray-400">Betreuer: <strong class="text-purple-400">${partner.agent || 'Keiner'}</strong></span>
-                            <a href="${mailtoUrl}" class="bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500 hover:text-white font-bold px-2 py-0.5 rounded transition text-[9px]">
-                                <i class="fa-solid fa-paper-plane mr-1"></i> Zugangsdaten senden
-                            </a>
-                        </div>
+                        <button onclick="deletePartner(${i})" class="text-gray-600 hover:text-red-400"><i class="fa-solid fa-trash"></i></button>
                     </div>`;
             });
-            
-            // Für die Brücke zum Login des Portals
-            const namesOnly = p.map(x => x.name);
-            localStorage.setItem("starkmetall_allowed_partners", JSON.stringify(namesOnly));
+            localStorage.setItem("starkmetall_allowed_partners", JSON.stringify(p.map(x => x.name)));
         }
 
         function addPartner() {
             const name = document.getElementById("newPartnerName").value.trim();
             const agent = document.getElementById("partnerAgentSelect").value;
             if(!name) return;
-
             let p = JSON.parse(localStorage.getItem("partners"));
-            p.push({ name: name, agent: agent, email: "info@test-firma.de" });
+            p.push({ name: name, agent: agent, email: "info@firma-kunde.de" });
             localStorage.setItem("partners", JSON.stringify(p));
             document.getElementById("newPartnerName").value = "";
             renderAll();
@@ -361,43 +343,29 @@
             renderAll();
         }
 
-        // LOGISTIK MASTER TABLE (Echtes Tracking & Status-Verwaltung)
         function renderDeliveriesTable() {
             const deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
             const tbody = document.getElementById("logisticsTableBody");
             tbody.innerHTML = "";
 
-            if (deliveries.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="8" class="text-center py-8 text-gray-500 text-xs">Keine aktiven Sendungen erfasst.</td></tr>`;
-                return;
-            }
-
             deliveries.forEach((del, index) => {
                 const statusOptions = ["In Zustellung", "Ware erhalten", "In Prüfung", "Ausgezahlt"];
                 let selectOptions = statusOptions.map(opt => `<option value="${opt}" ${del.status === opt ? 'selected' : ''}>${opt}</option>`).join('');
 
-                // Status Farb-Mapping
-                let statusColor = "text-blue-400 bg-blue-500/10 border-blue-500/20";
-                if (del.status === "Ware erhalten") statusColor = "text-amber-400 bg-amber-500/10 border-amber-500/20";
-                if (del.status === "In Prüfung") statusColor = "text-purple-400 bg-purple-500/10 border-purple-500/20";
-                if (del.status === "Ausgezahlt") statusColor = "text-emerald-400 bg-emerald-500/10 border-emerald-500/20";
-
                 tbody.innerHTML += `
                     <tr class="border-b border-gray-900/60 hover:bg-gray-900/20 transition">
-                        <td class="py-3.5 pl-2 font-mono text-gray-500 text-xs">${del.date}</td>
+                        <td class="py-3 pl-2 font-mono text-gray-500 text-xs">${del.date}</td>
                         <td class="font-bold text-white">${del.partner}</td>
-                        <td class="text-purple-300 font-medium">${del.agent || '<span class="text-gray-600">Zentrale</span>'}</td>
-                        <td class="text-gray-300 text-xs">${del.type}</td>
+                        <td class="text-purple-300 font-bold">${del.agent || 'Zentrale'}</td>
+                        <td class="text-gray-400 text-xs">${del.type}</td>
                         <td class="font-bold text-cyan-400 font-mono">${del.weight} kg</td>
-                        <td class="font-mono text-xs text-gray-400">${del.tracking || 'Keine ID'}</td>
+                        <td class="font-mono text-xs text-gray-500">${del.tracking}</td>
                         <td>
-                            <select onchange="updateDeliveryStatus(${index}, this.value)" class="bg-gray-950 border border-gray-800 text-xs rounded-lg px-2 py-1 focus:outline-none text-gray-200 cursor-pointer">
+                            <select onchange="updateDeliveryStatus(${index}, this.value)" class="bg-gray-950 border border-gray-800 text-xs rounded-lg px-1.5 py-1 text-gray-200">
                                 ${selectOptions}
                             </select>
                         </td>
-                        <td class="text-right pr-2">
-                            <button onclick="deleteDelivery(${index})" class="text-gray-600 hover:text-red-400 transition"><i class="fa-solid fa-trash-can text-xs"></i></button>
-                        </td>
+                        <td class="text-right pr-2 font-mono text-emerald-400 font-bold">${(del.weight * 55).toLocaleString('de-DE')} €</td>
                     </tr>`;
             });
         }
@@ -409,38 +377,23 @@
             renderAll();
         }
 
-        function deleteDelivery(index) {
-            if(confirm("Sendung unwiderruflich aus dem Logistik-Spiegel löschen?")) {
-                let deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries"));
-                deliveries.splice(index, 1);
-                localStorage.setItem("starkmetall_deliveries", JSON.stringify(deliveries));
-                renderAll();
-            }
-        }
-
-        // SIMULATIONSAUTOMATIK FÜR FAHRTESTS (Sprit & Reifen)
         function simulateDelivery() {
-            const partners = JSON.parse(localStorage.getItem("partners")) || defPartners;
-            if(partners.length === 0) { alert("Bitte lege zuerst mindestens einen Partner-Account an!"); return; }
-            
-            const randomPartner = partners[Math.floor(Math.random() * partners.length)];
-            const types = ["VHM Bohrer & Fräser", "VHM Wendeschneidplatten", "VHM Mischschrott"];
-            const weights = [15, 32, 54, 88, 145, 210];
-            
+            const partners = JSON.parse(localStorage.getItem("partners")) || [];
+            if(partners.length === 0) return alert("Lege zuerst einen Kunden an!");
+            const p = partners[Math.floor(Math.random() * partners.length)];
             const newDel = {
                 id: Date.now(),
                 date: new Date().toLocaleDateString('de-DE'),
-                partner: randomPartner.name,
-                agent: randomPartner.agent,
-                type: types[Math.floor(Math.random() * types.length)],
-                weight: weights[Math.floor(Math.random() * weights.length)],
-                tracking: "DHL: JJD0034" + Math.floor(10000000 + Math.random() * 90000000),
+                partner: p.name,
+                agent: p.agent,
+                type: "VHM Bohrer & Fräser",
+                weight: Math.floor(20 + Math.random() * 300),
+                tracking: "DHL-" + Math.floor(100000 + Math.random() * 900000),
                 status: "In Zustellung"
             };
-
-            let deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
-            deliveries.unshift(newDel);
-            localStorage.setItem("starkmetall_deliveries", JSON.stringify(deliveries));
+            let d = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
+            d.unshift(newDel);
+            localStorage.setItem("starkmetall_deliveries", JSON.stringify(d));
             renderAll();
         }
     </script>
