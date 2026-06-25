@@ -3,12 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Professionelle SEO Meta-Tags für Google -->
-    <title>VHM Schrott Ankauf | Höchstsätze für Hartmetall | Starkmetall 24</title>
-    <meta name="description" content="Spezialisierter Ankauf von VHM-Werkzeugschrott. Aktuelle Hartmetall Ankaufspreise für Bohrer, Zerspanungswerkzeuge & Wendeschneidplatten. Jetzt Sonderkonditionen sichern!">
-    <meta name="keywords" content="VHM Schrott, Hartmetall Ankauf, VHM Bohrer Preise, Wendeschneidplatten Schrott, Zerspanungsschrott, Hartmetall entsorgen, Dillingen">
-    <meta name="robots" content="index, follow">
+    <title>Kunden-Portal | Starkmetall 24</title>
     
     <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,232 +11,207 @@
     
     <style>
         body { background-color: #f8fafc; color: #0f172a; }
-        .hero-gradient { background: radial-gradient(circle at 80% 20%, #e0f2fe 0%, #f8fafc 50%); }
+        .portal-gradient { background: radial-gradient(circle at 10% 20%, #f0f9ff 0%, #f8fafc 40%); }
         .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(16px); border: 1px solid rgba(226, 232, 240, 0.9); }
-        .brand-shadow { box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.18); }
+        .brand-shadow { box-shadow: 0 20px 40px -15px rgba(14, 165, 233, 0.12); }
     </style>
 </head>
-<body class="font-sans antialiased min-h-screen hero-gradient">
+<body class="font-sans antialiased min-h-screen portal-gradient">
 
-    <!-- Header / Navigation (Vollständig Responsiv) -->
+    <!-- Header / Nav (Exakt gleicher Look für blindes Vertrauen) -->
     <header class="border-b border-slate-200/80 bg-white/80 sticky top-0 z-50 backdrop-blur-md px-4 sm:px-6 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <!-- Logo-Bereich -->
             <div class="flex items-center space-x-3">
-                <div class="bg-gradient-to-r from-sky-600 to-cyan-500 text-white px-3 py-2 rounded-xl font-black tracking-wider text-sm sm:text-base shadow-sm">
+                <div class="bg-gradient-to-r from-sky-600 to-cyan-500 text-white px-3 py-2 rounded-xl font-black tracking-wider text-xs sm:text-sm shadow-sm">
                     STARKMETALL 24
                 </div>
-                <div class="hidden md:block text-left border-l border-slate-200 pl-3">
-                    <p class="text-xs font-bold text-slate-700 tracking-wide uppercase">e.K. Werkzeugschrott</p>
-                    <p class="text-[10px] text-slate-500 font-medium">89407 Dillingen a.d. Donau</p>
-                </div>
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest border-l border-slate-200 pl-3 hidden sm:inline">Partner-Bereich</span>
             </div>
             
-            <!-- Navigation Links & Portal Button -->
-            <nav class="flex items-center space-x-4 sm:space-x-6">
-                <a href="#anfrage" class="text-xs sm:text-sm font-bold text-slate-600 hover:text-sky-600 transition">Express-Anfrage</a>
-                <a href="portal.html" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs tracking-wide transition shadow-sm flex items-center space-x-1.5">
-                    <i class="fa-solid fa-right-to-bracket text-cyan-400"></i>
-                    <span>Kunden-Portal</span>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-2 text-xs sm:text-sm font-semibold text-emerald-600 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-full">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                    <span>Konto verifiziert</span>
+                </div>
+                <a href="index.html" class="text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-800 transition">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Abmelden
                 </a>
-            </nav>
+            </div>
         </div>
     </header>
 
-    <!-- Haupt-Sektion (Perfekt symmetrisch ausbalanciert) -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 lg:py-16">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+    <!-- Hauptbereich -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        
+        <!-- Begrüßung & Motivations-Teaser (Die Verlockung für Großmengen) -->
+        <div class="bg-slate-900 text-white p-6 sm:p-8 rounded-3xl mb-8 border border-slate-800 shadow-xl relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-sky-500/10 rounded-full blur-2xl"></div>
+            <div class="relative z-10 max-w-2xl space-y-2">
+                <span class="text-[10px] uppercase font-bold tracking-widest text-cyan-400">Exklusive B2B-Konditionen aktiv</span>
+                <h1 class="text-xl sm:text-3xl font-black tracking-tight">Willkommen zurück in Ihrem Starkmetall-Cockpit!</h1>
+                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                    Hier können Sie Lieferungen in Sekunden anmelden. Durch Ihren Partner-Status erhalten Sie bei Mengen ab 50 kg automatisch den **Premium-Zuschlag** direkt auf Ihre Gutschrift gerechnet.
+                </p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            <!-- Linke Spalte: Starke SEO-Texte und direkte Calls-to-Action -->
-            <div class="lg:col-span-7 flex flex-col justify-between space-y-6 py-2">
-                <div class="space-y-6">
-                    <div class="inline-flex items-center space-x-2 bg-sky-50 border border-sky-100 px-3 py-1.5 rounded-full text-xs text-sky-700 font-bold">
-                        <i class="fa-solid fa-award text-cyan-500"></i>
-                        <span>Zerspanungs-Fachbetrieb & Partner seit über 20 Jahren</span>
+            <!-- LINKE SEITE: Das Formular zum Liefern & Fotos hochladen (Sprit & Antrieb) -->
+            <section class="lg:col-span-7 glass-card p-6 sm:p-8 rounded-3xl brand-shadow space-y-6">
+                <div class="flex items-center space-x-3 border-b border-slate-100 pb-4">
+                    <div class="p-2 bg-sky-50 text-sky-600 rounded-xl">
+                        <i class="fa-solid fa-truck-ramp-box text-lg"></i>
                     </div>
-                    
-                    <!-- Größere, extrem professionelle SEO-Überschrift -->
-                    <h1 class="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl font-black tracking-tight text-slate-900 leading-tight">
-                        Maximale Erlöse für Ihren <br class="hidden sm:inline">
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-cyan-500">VHM-Werkzeugschrott</span>
-                    </h1>
-                    
-                    <!-- Optimierter, verkaufsstarker Informationstext -->
-                    <p class="text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl">
-                        Reine Spezialisierung sichert Ihnen die besten Konditionen am Markt. <strong>Starkmetall 24</strong> konzentriert sich seit über zwei Jahrzehnten exklusiv auf das Recycling von hochwertigem Hartmetall-Werkzeugschrott. Wir garantieren Ihnen absolute Transparenz, punktgenaue Höchstsätze und eine blitzschnelle, unkomplizierte Abwicklung für Ihre ausgedienten Bohrer, Fräser und Wendeschneidplatten.
-                    </p>
+                    <div>
+                        <h2 class="font-black text-slate-900 text-base sm:text-lg">Neue Lieferung avisieren (ankündigen)</h2>
+                        <p class="text-xs text-slate-500">Ware eintragen, Fotos machen, Paket abschicken.</p>
+                    </div>
                 </div>
+
+                <!-- FormSubmit Schnittstelle an deine Mailadresse -->
+                <form id="deliveryForm" action="https://formsubmit.co/DEINE_EMAIL@WUNSCHADRESSE.de" method="POST" enctype="multipart/form-data" class="space-y-4">
+                    <input type="hidden" name="_subject" value="Avisierung: Neue Partner-Lieferung von Starkmetall24">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Ihre Firma / Kundennummer</label>
+                            <input type="text" name="Partner_Firma" required placeholder="z.B. Schmidt CNC-Technik" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Geschätztes Gewicht (in kg)</label>
+                            <input type="text" id="formWeight" name="Gewicht_kg" required placeholder="z.B. 35 kg" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Was schicken Sie uns? (Materialsorte)</label>
+                        <select id="formType" name="Material_Typ" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
+                            <option value="VHM Bohrer & Fräser">VHM Bohrer & Fräser (Premium-Kurs)</option>
+                            <option value="VHM Wendeschneidplatten">VHM Wendeschneidplatten</option>
+                            <option value="VHM Mischschrott">VHM Mischschrott</option>
+                        </select>
+                    </div>
+
+                    <!-- FOTO UPLOAD: Handy-Kamera öffnet sich auf Smartphones automatisch -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Material-Foto zur Vorabprüfung (Optional)</label>
+                        <div class="relative flex items-center justify-center w-full border-2 border-dashed border-slate-200 rounded-xl p-4 bg-slate-50 hover:bg-slate-100/50 transition cursor-pointer">
+                            <input type="file" name="Material_Foto" accept="image/*" capture="environment" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                            <div class="text-center space-y-1 pointer-events-none">
+                                <i class="fa-solid fa-camera text-slate-400 text-lg"></i>
+                                <p class="text-xs font-semibold text-slate-600">Foto aufnehmen oder auswählen</p>
+                                <p class="text-[10px] text-slate-400">Direkt mit dem Smartphone knipsen</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit" class="w-full bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 text-white font-bold py-4 rounded-xl text-sm sm:text-base transition tracking-wide shadow-md shadow-sky-600/10 flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Lieferung abschicken & reservieren</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- RECHTE SEITE: Die Historie (Das Gehirn, das sich alles live merkt) -->
+            <section class="lg:col-span-5 space-y-6">
                 
-                <!-- Symmetrischer Abschluss unten: Starke, große Klick-Flächen (Handyfreundlich) -->
-                <div class="flex flex-col sm:flex-row gap-4 pt-4 lg:pt-0">
-                    <a href="#anfrage" class="flex-1 bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 text-white font-bold py-4 px-6 rounded-xl text-sm sm:text-base text-center transition shadow-md shadow-sky-600/10 flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-file-invoice-dollar"></i>
-                        <span>Jetzt Direkt-Anfrage senden</span>
-                    </a>
-                    <a href="portal.html" class="flex-1 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold py-4 px-6 rounded-xl text-sm sm:text-base text-center transition flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-truck-ramp-box text-sky-600"></i>
-                        <span>Lieferung im Portal avisieren</span>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Rechte Spalte: Fokus-Themen und die verlockende Live-Preise Box (Am Handy perfekt positioniert) -->
-            <div class="lg:col-span-5 flex flex-col justify-between h-full order-first lg:order-last">
-                <div class="glass-card p-6 sm:p-8 rounded-3xl brand-shadow flex flex-col justify-between h-full space-y-6">
-                    
-                    <div class="space-y-4">
-                        <h2 class="text-xs font-bold uppercase tracking-wider text-sky-600 flex items-center space-x-2">
-                            <i class="fa-solid fa-bullseye text-cyan-500"></i>
-                            <span>Ankauf-Fokus für metallverarbeitende Betriebe</span>
-                        </h2>
-                        
-                        <div class="space-y-3">
-                            <!-- Sorte 1 -->
-                            <div class="p-3 bg-emerald-50/60 rounded-xl border border-emerald-100/80 flex items-start space-x-3">
-                                <i class="fa-solid fa-circle-check text-emerald-500 text-base mt-0.5"></i>
-                                <div>
-                                    <h3 class="font-bold text-slate-800 text-xs sm:text-sm">VHM Bohrer & Fräser</h3>
-                                    <p class="text-[11px] sm:text-xs text-slate-500">Alte Vollhartmetall-Werkzeuge, Schaftfräser, Bohrer aus der CNC-Fertigung.</p>
-                                </div>
-                            </div>
-                            <!-- Sorte 2 -->
-                            <div class="p-3 bg-emerald-50/60 rounded-xl border border-emerald-100/80 flex items-start space-x-3">
-                                <i class="fa-solid fa-circle-check text-emerald-500 text-base mt-0.5"></i>
-                                <div>
-                                    <h3 class="font-bold text-slate-800 text-xs sm:text-sm">VHM Wendeschneidplatten</h3>
-                                    <p class="text-[11px] sm:text-xs text-slate-500">Sämtliche HM-Inlays, Widia-Platten, beschichtet oder unbeschichtet.</p>
-                                </div>
-                            </div>
-                            <!-- Sorte 3 -->
-                            <div class="p-3 bg-emerald-50/60 rounded-xl border border-emerald-100/80 flex items-start space-x-3">
-                                <i class="fa-solid fa-circle-check text-emerald-500 text-base mt-0.5"></i>
-                                <div>
-                                    <h3 class="font-bold text-slate-800 text-xs sm:text-sm">VHM-Mischschrott</h3>
-                                    <p class="text-[11px] sm:text-xs text-slate-500">Sortenreine Mischungen sowie sonstige schwere Hartmetall-Komponenten.</p>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Box: Letzte Sendungen -->
+                <div class="glass-card p-6 rounded-3xl brand-shadow space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <h3 class="font-bold text-slate-900 text-sm sm:text-base flex items-center space-x-2">
+                            <i class="fa-solid fa-clock-rotate-left text-sky-600"></i>
+                            <span>Ihre Sendungshistorie</span>
+                        </h3>
+                        <button onclick="clearHistory()" class="text-[10px] text-slate-400 hover:text-red-500 font-medium transition">Leeren</button>
                     </div>
 
-                    <!-- Die optische Verlockung: Live-Preise mit Fokus auf exklusive Sonderkonditionen -->
-                    <div class="p-4 sm:p-5 bg-slate-900 text-white rounded-2xl border border-slate-800 shadow-inner">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-cyan-400 flex items-center space-x-1.5">
-                                <i class="fa-solid fa-chart-line"></i>
-                                <span>Aktuelle Rohstoff-Richtwerte</span>
-                            </h4>
-                            <span class="text-[9px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full font-bold tracking-wide">Tageskurs</span>
-                        </div>
-                        
-                        <div class="space-y-2 text-xs sm:text-sm">
-                            <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
-                                <span class="text-slate-400 text-xs">VHM Bohrer & Fräser</span>
-                                <span class="font-bold text-white tracking-wide">58,50 € / kg</span>
-                            </div>
-                            <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
-                                <span class="text-slate-400 text-xs">VHM Wendeschneidplatten</span>
-                                <span class="font-bold text-white tracking-wide">54,00 € / kg</span>
-                            </div>
-                            <div class="flex justify-between items-center pb-0.5">
-                                <span class="text-slate-400 text-xs">VHM-Mischschrott</span>
-                                <span class="font-bold text-white tracking-wide">51,20 € / kg</span>
-                            </div>
-                        </div>
-
-                        <!-- Clevere Verlockung ohne starre +2 Euro Regelung -->
-                        <div class="mt-3.5 pt-2.5 border-t border-slate-800 text-center">
-                            <p class="text-[11px] text-slate-400 leading-relaxed">
-                                💡 <strong class="text-cyan-400">Exklusiver B2B-Vorteil:</strong> Registrierte Partner erhalten im geschützten Bereich automatisch **attraktive Sonderkonditionen** auf Großmengen!
-                            </p>
+                    <!-- Dieser Bereich wird dynamisch vom JavaScript "Gehirn" befüllt -->
+                    <div id="historyContainer" class="space-y-3 max-h-[380px] overflow-y-auto pr-1">
+                        <!-- Standard-Platzhalter, wenn noch nichts abgeschickt wurde -->
+                        <div id="noDataPlaceholder" class="text-center py-8 text-slate-400 space-y-2">
+                            <i class="fa-solid fa-box-open text-2xl text-slate-200"></i>
+                            <p class="text-xs">Noch keine Lieferungen angemeldet.</p>
                         </div>
                     </div>
-
                 </div>
-            </div>
-            
+
+                <!-- Info-Box für maximales Vertrauen -->
+                <div class="p-4 bg-amber-50 border border-amber-100 rounded-2xl flex items-start space-x-3">
+                    <i class="fa-solid fa-circle-info text-amber-500 mt-0.5 text-sm"></i>
+                    <div class="text-xs text-amber-800 leading-relaxed">
+                        <strong>Nächster Schritt nach dem Absenden:</strong> Verpacken Sie die Ware sicher in einem Karton. Legen Sie einen Zettel mit Ihrem Firmennamen hinein. Sobald das Paket bei uns in Dillingen eintrifft, erfolgt die Live-Wägung im Portal!
+                    </div>
+                </div>
+            </section>
+
         </div>
     </main>
 
-    <!-- Vertrauens-Elemente / Drei-Schritte-Ablauf -->
-    <section class="bg-white border-y border-slate-200/60 py-16 px-4 sm:px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
-            <div class="space-y-2">
-                <div class="w-10 h-10 bg-sky-50 text-sky-600 rounded-xl flex items-center justify-center font-bold text-base border border-sky-100">1</div>
-                <h3 class="font-bold text-slate-900 text-base">Faire Wertermittlung</h3>
-                <p class="text-slate-500 text-sm leading-relaxed">Dank lückenloser Marktfokussierung kalkulieren wir tagesaktuelle Spitzenpreise basierend auf den realen Edelmetallkursen.</p>
-            </div>
-            <div class="space-y-2">
-                <div class="w-10 h-10 bg-sky-50 text-sky-600 rounded-xl flex items-center justify-center font-bold text-base border border-sky-100">2</div>
-                <h3 class="font-bold text-slate-900 text-base">Zertifizierte Analyse</h3>
-                <p class="text-slate-500 text-sm leading-relaxed">Ihre Lieferung wird direkt an unserem Standort in Dillingen gewogen, transparent begutachtet und exakt klassifiziert.</p>
-            </div>
-            <div class="space-y-2">
-                <div class="w-10 h-10 bg-sky-50 text-sky-600 rounded-xl flex items-center justify-center font-bold text-base border border-sky-100">3</div>
-                <h3 class="font-bold text-slate-900 text-base">Sofortige Vergütung</h3>
-                <p class="text-slate-500 text-sm leading-relaxed">Keine langen Wartezeiten. Nach erfolgter Materialprüfung wird Ihre Auszahlung umgehend angewiesen und gutgeschrieben.</p>
-            </div>
-        </div>
-    </section>
+    <!-- JavaScript Gehirn: Speichert Daten lokal und erzeugt den perfekten Live-Effekt -->
+    <script>
+        // Beim Laden der Seite direkt alte Sendungen aus dem Speicher laden
+        document.addEventListener("DOMContentLoaded", loadHistory);
 
-    <!-- SEO-optimiertes Express-Formular -->
-    <section id="anfrage" class="py-16 px-4 sm:px-6 max-w-3xl mx-auto">
-        <div class="bg-white border border-slate-200 p-6 sm:p-10 rounded-3xl brand-shadow space-y-6">
-            <div class="text-center space-y-2">
-                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Unverbindliche Preisanfrage stellen</h2>
-                <p class="text-xs sm:text-sm text-slate-500 max-w-md mx-auto">Teilen Sie uns Ihre geschätzten Mengen mit. Unsere Experten erstellen Ihnen kurzfristig ein passgenaues Angebot.</p>
-            </div>
+        // Das Formular abfangen, um den Eintrag live in die Liste zu schreiben
+        document.getElementById("deliveryForm").addEventListener("submit", function(e) {
+            const weight = document.getElementById("formWeight").value;
+            const type = document.getElementById("formType").value;
+            const date = new Date().toLocaleDateString('de-DE');
 
-            <!-- FormSubmit Schnittstelle an deine Mailadresse -->
-            <form action="https://formsubmit.co/DEINE_EMAIL@WUNSCHADRESSE.de" method="POST" class="space-y-4 pt-2">
-                <input type="hidden" name="_subject" value="Neue VHM-Anfrage über Starkmetall24.de">
-                <input type="hidden" name="_next" value="https://bensen123.github.io/Starkmetall-demo/">
+            // Neues Lieferungs-Objekt bauen
+            const newDelivery = {
+                date: date,
+                weight: weight,
+                type: type,
+                status: "In Zustellung"
+            };
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Unternehmen / Ansprechpartner</label>
-                        <input type="text" name="Firma_Kontakt" required placeholder="z.B. Zerspanungstechnik GmbH" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">E-Mail-Adresse</label>
-                        <input type="email" name="Email" required placeholder="ihre-firma@mail.de" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
-                    </div>
-                </div>
+            // Aus dem Speicher holen oder neues Array anlegen
+            let currentDeliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
+            currentDeliveries.unshift(newDelivery); // Ganz oben hinzufügen
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Telefon für Rückfragen</label>
-                        <input type="tel" name="Telefon" placeholder="z.B. +49..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Materialmenge (ca. in kg)</label>
-                        <input type="text" name="Menge_kg" required placeholder="z.B. 80 kg" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition">
-                    </div>
-                </div>
+            // Im Browser-Gehirn abspeichern
+            localStorage.setItem("starkmetall_deliveries", JSON.stringify(currentDeliveries));
+        });
 
-                <div>
-                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1">Materialbeschreibung / Details</label>
-                    <textarea name="Details_Ware" rows="4" placeholder="Welches Material liegt vor? (z.B. gebrauchte VHM-Fräser, Wendeplatten separat verpackt...)" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white transition"></textarea>
-                </div>
+        function loadHistory() {
+            const container = document.getElementById("historyContainer");
+            const placeholder = document.getElementById("noDataPlaceholder");
+            const deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
 
-                <div class="pt-2">
-                    <button type="submit" class="w-full bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 text-white font-bold py-4 rounded-xl text-sm sm:text-base transition tracking-wide shadow-md shadow-sky-600/10 flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-paper-plane"></i>
-                        <span>Kostenfreie Anfrage absenden</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </section>
+            if (deliveries.length > 0) {
+                placeholder.classList.add("hidden");
+                container.innerHTML = ""; // Container leeren
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-200 bg-white py-10 px-4 text-center text-xs text-slate-500 space-y-3">
-        <p class="font-bold text-slate-700">Starkmetall 24 &bull; Am Oberfeld 1 &bull; 89407 Dillingen a.d. Donau</p>
-        <p>&copy; 2026 Starkmetall 24. Alle Rechte vorbehalten. Ihr spezialisierter Fachbetrieb für Hartmetall-Recycling.</p>
-        <div class="space-x-4 pt-1">
-            <a href="#" class="hover:text-sky-600 transition underline">Impressum</a>
-            <a href="#" class="hover:text-sky-600 transition underline">Datenschutz</a>
-        </div>
-    </footer>
+                deliveries.forEach(item => {
+                    const html = `
+                        <div class="p-3 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-between">
+                            <div class="space-y-0.5">
+                                <span class="text-[10px] font-bold text-slate-400">${item.date}</span>
+                                <h4 class="font-bold text-slate-800 text-xs sm:text-sm">${item.type}</h4>
+                                <p class="text-xs text-slate-500">Gewicht: <strong>${item.weight}</strong></p>
+                            </div>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-full flex items-center space-x-1">
+                                <span class="w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
+                                <span>${item.status}</span>
+                            </span>
+                        </div>
+                    `;
+                    container.innerHTML += html;
+                });
+            }
+        }
+
+        function clearHistory() {
+            if (confirm("Möchten Sie Ihre lokale Ansicht der Sendungshistorie wirklich leeren?")) {
+                localStorage.removeItem("starkmetall_deliveries");
+                location.reload();
+            }
+        }
+    </script>
 
 </body>
 </html>
