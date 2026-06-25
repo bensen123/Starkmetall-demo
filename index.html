@@ -3,58 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lieferung erfolgreich übermittelt | Starkmetall 24</title>
+    <title>Chef-Zentrale | Starkmetall 24</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        .portal-gradient { background: radial-gradient(circle at 50% 50%, #f0f9ff 0%, #f8fafc 100%); }
-        .brand-shadow { box-shadow: 0 20px 40px -15px rgba(14, 165, 233, 0.15); }
+        body { background-color: #0f172a; color: #f8fafc; }
+        .admin-gradient { background: radial-gradient(circle at 90% 10%, #1e1b4b 0%, #0f172a 60%); }
+        .glass-panel { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(51, 65, 85, 0.5); }
     </style>
 </head>
-<body class="font-sans antialiased min-h-screen portal-gradient flex items-center justify-center p-4 sm:p-6">
+<body class="font-sans antialiased min-h-screen admin-gradient flex flex-col">
 
-    <div class="bg-white border border-cyan-100 p-8 sm:p-10 rounded-3xl max-w-xl w-full text-center brand-shadow space-y-6 relative overflow-hidden my-auto">
-        
-        <div class="absolute -right-10 -top-10 w-40 h-40 bg-cyan-300/10 rounded-full blur-3xl"></div>
-        
-        <div class="w-20 h-20 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center text-3xl mx-auto border border-emerald-100 shadow-sm">
-            <i class="fa-solid fa-circle-check animate-pulse"></i>
-        </div>
-
-        <div class="space-y-2">
-            <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">Auftragsbestätigung aktiv!</h1>
-            <p class="text-xs sm:text-sm font-bold text-cyan-600 uppercase tracking-widest">Lieferung erfolgreich avisiert</p>
-        </div>
-
-        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5 text-left text-xs sm:text-sm text-slate-600 space-y-3.5 leading-relaxed">
-            <p class="font-bold text-slate-800 text-center border-b border-slate-200 pb-2.5 uppercase tracking-wider text-[11px]">Wie geht es jetzt weiter?</p>
-            
-            <div class="flex items-start space-x-3">
-                <span class="bg-cyan-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">1</span>
-                <p>Eine **digitale Bestätigung** wurde soeben automatisch an Ihre angegebene E-Mail-Adresse gesendet.</p>
+    <div id="loginScreen" class="fixed inset-0 bg-slate-950/90 backdrop-blur-xl z-[100] flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl w-full max-w-md space-y-6 shadow-2xl text-center">
+            <div class="w-16 h-16 bg-sky-500/10 text-sky-400 rounded-2xl flex items-center justify-center text-2xl mx-auto border border-sky-500/20">
+                <i class="fa-solid fa-lock"></i>
             </div>
-            
-            <div class="flex items-start space-x-3">
-                <span class="bg-cyan-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">2</span>
-                <p>Kleben Sie den Versandschein auf Ihr Paket und übergeben Sie es dem gewählten Paketdienst.</p>
+            <div class="space-y-1">
+                <h2 class="text-xl font-black tracking-tight text-white">Starkmetall 24 Admin-Login</h2>
+                <p class="text-xs text-slate-400">Geben Sie Ihren geheimen Zugangsschlüssel ein.</p>
             </div>
-            
-            <div class="flex items-start space-x-3">
-                <span class="bg-cyan-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">3</span>
-                <p>Nach Erhalt wiegen wir Ihre Ware live und zahlen den Betrag **inklusive Ihres +2,00 €/kg Partner-Bonus** sofort aus.</p>
+            <div class="space-y-3 text-left">
+                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wide">Admin-Passwort</label>
+                <input type="password" id="adminPassword" placeholder="••••••••" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-sky-500 transition">
+                <p id="loginError" class="text-xs text-red-400 hidden font-semibold"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Passwort falsch!</p>
             </div>
-        </div>
-
-        <div class="pt-2 flex flex-col sm:flex-row gap-3">
-            <a href="portal.html" class="flex-1 bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 text-white font-bold py-3.5 rounded-xl text-xs sm:text-sm transition tracking-wide shadow-md text-center flex items-center justify-center space-x-2">
-                <i class="fa-solid fa-gauge"></i>
-                <span>Zurück zum Cockpit</span>
-            </a>
-            <a href="index.html" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3.5 rounded-xl text-xs sm:text-sm transition text-center flex items-center justify-center">
-                Zur Startseite
-            </a>
+            <button onclick="checkPassword()" class="w-full bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 text-white font-bold py-3.5 rounded-xl text-sm transition tracking-wide shadow-lg shadow-sky-500/10">
+                Zentrale freischalten
+            </button>
         </div>
     </div>
 
+    <div id="adminContent" class="hidden flex-1 flex flex-col">
+        <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md px-4 sm:px-6 py-4">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-gradient-to-r from-sky-600 to-cyan-500 text-white px-3 py-2 rounded-xl font-black tracking-wider text-xs sm:text-sm shadow-md">
+                        STARKMETALL 24
+                    </div>
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-widest border-l border-slate-800 pl-3 hidden sm:inline">Chef-Zentrale V3.0</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="logout()" class="text-xs font-bold text-slate-400 hover:text-white transition bg-slate-800 px-3 py-2 rounded-xl border border-slate-700">
+                        <i class="fa-solid fa-power-off text-red-400 mr-1"></i> Abmelden
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <div class="lg:col-span-6 space-y-8 w-full">
+                
+                <section class="glass-panel p-6 sm:p-8 rounded-3xl space-y-6">
+                    <div class="flex items-center space-x-3 border-b border-slate-800 pb-4">
+                        <div class="p-2 bg-sky-500/10 text-sky-400 rounded-xl border border-sky-500/20">
+                            <i class="fa-solidxl fa-solid fa-money-bill-trend-up text-lg"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-black text-white text-base sm:text-lg">Live-Tageskurse (€ / kg)</h2>
+                            <p class="text-xs text-slate-400">Ändere die Basis-Preise. Das Kundenportal schlägt automatisch +2,00 € drauf.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wide">1. VHM Bohrer & Fräser</label>
+                                <span id="preview1" class="text-[10px] text-cyan-400 font-bold"></span>
+                            </div>
+                            <input type="number" step="0.01" id="price1" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-sky-500 font-mono">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wide">2. VHM Wendeschneidplatten</label>
+                                <span id="preview2" class="text-[10px] text-cyan-400 font-bold"></span>
+                            </div>
+                            <input type="number" step="0.01" id="price2" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-sky-500 font-mono">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wide">3. VHM Mischschrott</label>
+                                <span id="preview3" class="text-[10px] text-cyan-400 font-bold"></span>
+                            </div>
+                            <input type="number" step="0.01" id="price3" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-sky-500 font-mono">
+                        </div>
+                    </div>
+
+                    <button onclick="savePrices()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-bold py-3.5 rounded-xl text-sm transition tracking-wide flex items-center justify-center space-x-2 shadow-lg shadow-emerald-950">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        <span>Preise live synchronisieren</span>
+                    </button>
+                </section>
+
+                <section class="glass-panel p-6 sm:p-8 rounded-3xl space-y-6">
+                    <div class="flex items-center space-x-3 border-b border-slate-800 pb-4">
+                        <div class="p-2 bg-purple-500/10 text-purple-400 rounded-xl border border-purple-500/20">
+                            <i class="fa-solid fa-users text-lg"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-black text-white text-base sm:text-lg">Partner-Zugänge steuern</h2>
+                            <p class="text-xs text-slate-400">Erstelle neue gültige Firmennamen/IDs für den Portal-Login.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <input type="text" id="newPartnerName" placeholder="z.B. CNC-Technik Müller" class="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-500">
+                        <button onclick="addPartner()" class="bg-purple-600 hover:bg-purple-500 text-white px-5 rounded-xl text-sm font-bold transition flex items-center space-x-1">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Freischalten</span>
+                        </button>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide block">Aktuell freigeschaltete Firmen/IDs</label>
+                        <div id="partnerListContainer" class="space-y-2 max-h-[200px] overflow-y-auto pr-1">
+                            </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="lg:col-span-6 w-full space-y-8">
+                
+                <section class="glass-panel p-6 sm:p-8 rounded-3xl space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="p-2 bg-amber-500/10 text-amber-400 rounded-xl border border-amber-500/20">
+                                <i class="fa-solid fa-satellite-dish text-lg"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-black text-white text-base sm:text-lg">Lokaler Avisierungs-Spiegel</h2>
+                                <p class="text-xs text-slate-400">Eingaben, die auf diesem Gerät getätigt wurden.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-slate-400 leading-relaxed bg-slate-950 p-3 rounded-xl border border-slate-800/60">
+                        <i class="fa-solid fa-info-circle text-sky-400 mr-1"></i> Echte Foto-Avisierungen werden über FormSubmit direkt an dein E-Mail-Postfach gesendet. Unten siehst du die auf diesem Gerät lokal erfassten Protokolle.
+                    </p>
+
+                    <div id="activityContainer" class="space-y-3 max-h-[480px] overflow-y-auto pr-1">
+                        </div>
+                </section>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // Standard-Werte für Preise und erlaubte Partner-Logins beim allerersten Start
+        const initialPrices = { vhm_bohrer: 58.50, vhm_wsp: 54.00, vhm_misch: 51.20 };
+        const initialPartners = ["CNC-Technik Müller", "Starkmetall Partner", "Müller GmbH", "12345"];
+
+        // Passwortschutz-Einstellung
+        function checkPassword() {
+            const passwordField = document.getElementById("adminPassword");
+            if (passwordField.value === "starkmetall2026") {
+                document.getElementById("loginScreen").classList.add("hidden");
+                document.getElementById("adminContent").classList.remove("hidden");
+                localStorage.setItem("starkmetall_admin_logged", "true");
+                startDashboardEngine();
+            } else {
+                const error = document.getElementById("loginError");
+                error.classList.remove("hidden");
+                passwordField.classList.add("border-red-500");
+            }
+        }
+
+        // Automatischer Login-Check beim Laden
+        if (localStorage.getItem("starkmetall_admin_logged") === "true") {
+            document.getElementById("loginScreen").classList.add("hidden");
+            document.getElementById("adminContent").classList.remove("hidden");
+            window.addEventListener('DOMContentLoaded', startDashboardEngine);
+        }
+
+        function logout() {
+            localStorage.removeItem("starkmetall_admin_logged");
+            location.reload();
+        }
+
+        // DAS INITIALISIERUNGS-TRIEBWERK
+        function startDashboardEngine() {
+            // 1. Preise laden oder anlegen
+            if (!localStorage.getItem("starkmetall_live_prices")) {
+                localStorage.setItem("starkmetall_live_prices", JSON.stringify(initialPrices));
+            }
+            // 2. Partner-Datenbank laden oder anlegen
+            if (!localStorage.getItem("starkmetall_allowed_partners")) {
+                localStorage.setItem("starkmetall_allowed_partners", JSON.stringify(initialPartners));
+            }
+
+            renderPrices();
+            renderPartners();
+            renderActivities();
+
+            // Echtzeit-Vorschau bei Änderungen aktivieren
+            document.getElementById("price1").addEventListener("input", updateLivePreviews);
+            document.getElementById("price2").addEventListener("input", updateLivePreviews);
+            document.getElementById("price3").addEventListener("input", updateLivePreviews);
+        }
+
+        function renderPrices() {
+            const prices = JSON.parse(localStorage.getItem("starkmetall_live_prices"));
+            document.getElementById("price1").value = prices.vhm_bohrer.toFixed(2);
+            document.getElementById("price2").value = prices.vhm_wsp.toFixed(2);
+            document.getElementById("price3").value = prices.vhm_misch.toFixed(2);
+            updateLivePreviews();
+        }
+
+        function updateLivePreviews() {
+            const p1 = parseFloat(document.getElementById("price1").value) || 0;
+            const p2 = parseFloat(document.getElementById("price2").value) || 0;
+            const p3 = parseFloat(document.getElementById("price3").value) || 0;
+
+            document.getElementById("preview1").innerText = `Portal-Vorschau: ${(p1 + 2).toFixed(2)} €`;
+            document.getElementById("preview2").innerText = `Portal-Vorschau: ${(p2 + 2).toFixed(2)} €`;
+            document.getElementById("preview3").innerText = `Portal-Vorschau: ${(p3 + 2).toFixed(2)} €`;
+        }
+
+        function savePrices() {
+            const updatedPrices = {
+                vhm_bohrer: parseFloat(document.getElementById("price1").value) || 0,
+                vhm_wsp: parseFloat(document.getElementById("price2").value) || 0,
+                vhm_misch: parseFloat(document.getElementById("price3").value) || 0
+            };
+            localStorage.setItem("starkmetall_live_prices", JSON.stringify(updatedPrices));
+            alert("🔥 System-Update durchgeführt! Die Preise wurden im Gehirn gespeichert und sind ab sofort auf allen Seiten live geschaltet!");
+        }
+
+        // PARTNER VERWALTEN (Echte Arrays bearbeiten)
+        function renderPartners() {
+            const container = document.getElementById("partnerListContainer");
+            const partners = JSON.parse(localStorage.getItem("starkmetall_allowed_partners"));
+
+            container.innerHTML = "";
+            partners.forEach((partner, index) => {
+                container.innerHTML += `
+                    <div class="flex justify-between items-center bg-slate-900 border border-slate-800 rounded-xl p-3">
+                        <span class="text-xs font-bold text-slate-200"><i class="fa-regular fa-id-card text-purple-400 mr-2"></i>${partner}</span>
+                        <button onclick="deletePartner(${index})" class="text-slate-500 hover:text-red-400 text-xs transition px-2 py-1">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>`;
+            });
+        }
+
+        function addPartner() {
+            const input = document.getElementById("newPartnerName");
+            const name = input.value.trim();
+            if (!name) return;
+
+            let partners = JSON.parse(localStorage.getItem("starkmetall_allowed_partners"));
+            if (!partners.includes(name)) {
+                partners.push(name);
+                localStorage.setItem("starkmetall_allowed_partners", JSON.stringify(partners));
+                input.value = "";
+                renderPartners();
+            } else {
+                alert("Dieses Unternehmen ist bereits freigeschaltet.");
+            }
+        }
+
+        function deletePartner(index) {
+            let partners = JSON.parse(localStorage.getItem("starkmetall_allowed_partners"));
+            partners.splice(index, 1);
+            localStorage.setItem("starkmetall_allowed_partners", JSON.stringify(partners));
+            renderPartners();
+        }
+
+        // AVIIERUNGS-SPIEGEL PROTOKOLLIEREN
+        function renderActivities() {
+            const container = document.getElementById("activityContainer");
+            const deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
+
+            if (deliveries.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-slate-600 text-xs space-y-2">
+                        <i class="fa-solid fa-cubes text-2xl text-slate-800"></i>
+                        <p>Noch keine lokalen Test-Lieferungen dokumentiert.</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = "";
+            deliveries.forEach(item => {
+                container.innerHTML += `
+                    <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl flex items-center justify-between">
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-[10px] font-mono text-slate-500">${item.date}</span>
+                                <span class="text-[9px] bg-amber-500/10 text-amber-400 font-bold px-2 py-0.5 rounded border border-amber-500/20">${item.status}</span>
+                            </div>
+                            <h4 class="font-bold text-white text-xs">${item.type}</h4>
+                            <p class="text-[11px] text-slate-400">Absender: <span class="text-purple-400 font-medium">${item.partner || 'Unbekannt'}</span> | Gewicht: <strong class="text-sky-400">${item.weight} kg</strong></p>
+                        </div>
+                        <i class="fa-solid fa-envelope-open-text text-slate-700 text-lg"></i>
+                    </div>`;
+            });
+        }
+    </script>
 </body>
 </html>
