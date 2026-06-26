@@ -3,145 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>i-CALL STM 24 | Arbeitsplatz</title>
+    <title>i-CALL STM 24 | Chef-Zentrale</title>
     
     <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Inter Font für maximale Lesbarkeit & Augenschonung -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        
-        /* Sanfter, matter Hintergrund zur Entlastung des Sehnervs */
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: #f2f5f3; 
-            color: #334155; 
-            letter-spacing: -0.01em;
-        }
-        /* Weiche Karten ohne blendendes Reinweiß */
-        .crm-card {
-            background-color: #fafbfc;
-            border: 1px solid #e2e8f0;
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f3; color: #334155; }
+        .admin-card { background-color: #fafbfc; border: 1px solid #cbd5e1; }
     </style>
 </head>
 <body class="font-sans antialiased min-h-screen p-4 sm:p-6">
 
-    <!-- LOGIN-SCREEN (Augenschonend & Modern) -->
-    <div id="agentLoginScreen" class="w-full max-w-md mx-auto my-24 crm-card p-8 rounded-2xl space-y-5 text-center shadow-md">
-        <div class="w-14 h-14 bg-emerald-600 text-white rounded-xl flex items-center justify-center text-xl mx-auto shadow-sm">
-            <i class="fa-solid fa-headset"></i>
-        </div>
-        <div>
-            <h2 class="text-xl font-bold text-slate-800 tracking-tight">i-CALL STM 24 Login</h2>
-            <p class="text-xs text-slate-500 mt-1">Bitte loggen Sie sich mit Ihrer Agenten-E-Mail ein.</p>
-        </div>
-        <div class="text-left">
-            <label class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">Agenten E-Mail-Adresse</label>
-            <input type="email" id="agentEmailInput" placeholder="ihr-name@i-call-starkmetall.de" class="w-full bg-white border border-slate-300 rounded-lg px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-emerald-600 transition">
-        </div>
-        <button onclick="loginAgent()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-lg text-xs uppercase tracking-wider transition shadow-sm">CRM Arbeitsplatz öffnen</button>
-    </div>
-
-    <!-- HAUPTINHALT / CRM DASHBOARD -->
-    <div id="agentMainDashboard" class="hidden max-w-7xl mx-auto space-y-6">
+    <div class="max-w-7xl mx-auto space-y-6">
         
-        <!-- TOP NAVIGATION -->
-        <div class="crm-card p-5 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4 shadow-sm">
+        <!-- TOP NAVIGATION (CHEF-BRANDING) -->
+        <div class="bg-slate-900 text-white p-6 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4 shadow-lg">
             <div>
-                <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-md uppercase tracking-wider border border-emerald-200">System aktiv</span>
-                <h1 class="text-lg font-bold text-slate-800 mt-1">i-CALL STM 24 <span class="text-slate-400 font-normal">|</span> <span id="activeAgentName" class="font-mono text-sm text-emerald-700 font-semibold"></span></h1>
+                <span class="text-[10px] bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">Geschäftsleitung</span>
+                <h1 class="text-xl font-black mt-1 text-white">i-CALL STM 24 <span class="text-amber-400">| Control-Panel</span></h1>
             </div>
-            
-            <!-- COCKPIT STATS -->
-            <div class="grid grid-cols-3 gap-3 w-full md:w-auto">
-                <div class="bg-slate-100/70 border border-slate-200 px-4 py-2 rounded-xl text-center">
-                    <p class="text-[10px] font-medium text-slate-500 uppercase">Kontakte</p>
-                    <p id="statCustomerCount" class="text-base font-mono font-bold text-slate-800">0</p>
-                </div>
-                <div class="bg-slate-100/70 border border-slate-200 px-4 py-2 rounded-xl text-center">
-                    <p class="text-[10px] font-medium text-slate-500 uppercase">Menge</p>
-                    <p id="statTotalWeight" class="text-base font-mono font-bold text-slate-800">0 kg</p>
-                </div>
-                <div class="border border-emerald-200 px-4 py-2 rounded-xl text-center bg-emerald-50 text-emerald-800">
-                    <p class="text-[10px] font-medium uppercase">Provision</p>
-                    <p id="statTotalCommission" class="text-base font-mono font-bold">0,00 €</p>
+            <div class="flex items-center gap-2">
+                <div class="bg-slate-800 px-4 py-2 rounded-xl border border-slate-700 text-center">
+                    <p class="text-[9px] font-bold text-slate-400 uppercase">Gesamtes Systemvolumen</p>
+                    <p id="totalSystemWeight" class="text-base font-mono font-bold text-amber-400">0 kg</p>
                 </div>
             </div>
-
-            <button onclick="logoutAgent()" class="bg-slate-200/60 hover:bg-red-50 text-slate-600 hover:text-red-600 p-2.5 rounded-lg text-xs transition">
-                <i class="fa-solid fa-power-off"></i>
-            </button>
         </div>
 
+        <!-- MITTE: ZWEI-SPALTEN-LAYOUT -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             
-            <!-- LINKS: CRM MASKE -->
-            <div class="crm-card p-6 rounded-2xl space-y-4 h-fit shadow-sm lg:col-span-4">
+            <!-- LINKS: AGENTEN ANLEGEN & PROVISION FESTLEGEN (5 SPALTEN) -->
+            <div class="admin-card p-6 rounded-2xl space-y-4 h-fit shadow-sm lg:col-span-5">
                 <div>
-                    <h2 class="text-sm font-bold text-slate-800 flex items-center"><i class="fa-solid fa-address-card text-emerald-600 mr-2"></i> Stammdaten erfassen</h2>
-                    <p class="text-xs text-slate-500 mt-0.5">Alle Kundenfelder für das System eintragen.</p>
+                    <h2 class="text-sm font-bold text-slate-800 flex items-center">
+                        <i class="fa-solid fa-user-gear text-amber-600 mr-2"></i> Agenten-Onboarding & Gagen
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Hier steuerst du, welcher Mitarbeiter wie viel Geld pro Kilo bekommt.</p>
                 </div>
                 
                 <div class="space-y-3">
                     <div>
-                        <label class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-0.5">Firmenname</label>
-                        <input type="text" id="newCustomerName" placeholder="z.B. CNC-Technik Müller GmbH" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none">
-                    </div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-0.5">Ansprechpartner</label>
-                            <input type="text" id="newCustomerContact" placeholder="Herr Müller" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-0.5">Telefonnummer</label>
-                            <input type="text" id="newCustomerPhone" placeholder="0172 / 1234567" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none">
-                        </div>
+                        <label class="text-[10px] font-semibold text-slate-600 uppercase tracking-wider block mb-0.5">Name des Agenten / Agentur</label>
+                        <input type="text" id="agentName" placeholder="z.B. Ahmet Yilmaz oder Call-Center Nord" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-slate-900 focus:outline-none">
                     </div>
                     <div>
-                        <label class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-0.5">Kunden-E-Mail (für Portal-Zugang)</label>
-                        <input type="email" id="newCustomerEmail" placeholder="info@firma.de" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none">
+                        <label class="text-[10px] font-semibold text-slate-600 uppercase tracking-wider block mb-0.5">Login-E-Mail (Wichtig für CRM-Schutz)</label>
+                        <input type="email" id="agentEmail" placeholder="ahmet@i-call-starkmetall.de" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-slate-900 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-semibold text-slate-600 uppercase tracking-wider block mb-0.5">Individuelle Provision pro Kilo (€)</label>
+                        <select id="agentCommission" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-slate-900 focus:outline-none font-medium">
+                            <option value="0.50">0,50 € / kg (Standard Einsteiger)</option>
+                            <option value="1.00">1,00 € / kg</option>
+                            <option value="2.00">2,00 € / kg</option>
+                            <option value="3.00">3,00 € / kg (Profi-Satz)</option>
+                            <option value="4.00">4,00 € / kg</option>
+                            <option value="5.00">5,00 € / kg (Premium / Agentur-Tarif)</option>
+                        </select>
                     </div>
                     
-                    <div class="border-t border-slate-200 pt-2 space-y-2">
-                        <label class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">DHL-Abholadresse</label>
-                        <input type="text" id="newCustomerStreet" placeholder="Musterstraße 1" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none">
-                        <div class="grid grid-cols-3 gap-2">
-                            <input type="text" id="newCustomerPlz" placeholder="PLZ" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none col-span-1">
-                            <input type="text" id="newCustomerCity" placeholder="Ort" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none col-span-2">
-                        </div>
-                    </div>
+                    <button onclick="saveAgent()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2.5 rounded-lg text-xs uppercase tracking-wider transition shadow-sm">
+                        Agent aktivieren & Preis festlegen
+                    </button>
+                </div>
 
-                    <div>
-                        <label class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-0.5">Gesprächsnotiz / Status</label>
-                        <textarea id="newCustomerNotes" rows="2" placeholder="Was wurde besprochen? Wie viel Schrott vorhanden?" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none resize-none"></textarea>
+                <!-- AKTUELLE AGENTEN-GEHALTS-TABELLE -->
+                <div class="border-t border-slate-200 pt-4">
+                    <h3 class="text-xs font-bold text-slate-700 mb-2">Aktive Gagen-Struktur</h3>
+                    <div class="overflow-x-auto border border-slate-200 rounded-lg bg-white">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-50 border-b border-slate-200 text-[9px] uppercase font-bold text-slate-500 tracking-wider">
+                                    <th class="p-2">Agent</th>
+                                    <th class="p-2">E-Mail</th>
+                                    <th class="p-2 text-right">Satz / kg</th>
+                                    <th class="p-2 text-center">Aktion</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminAgentTable" class="divide-y divide-slate-100 text-slate-600"></tbody>
+                        </table>
                     </div>
-                    
-                    <button onclick="registerCustomerCRM()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-lg text-xs uppercase tracking-wider transition shadow-sm">Kunde anlegen & PIN generieren</button>
                 </div>
             </div>
 
-            <!-- RECHTS: CRM KUNDENKARTEI -->
-            <div class="crm-card p-6 rounded-2xl space-y-4 lg:col-span-8 shadow-sm">
+            <!-- RECHTS: GLOBALE PARTNER-LISTE & STATUS-KONTROLLE (7 SPALTEN) -->
+            <div class="admin-card p-6 rounded-2xl space-y-4 lg:col-span-7 shadow-sm">
                 <div>
-                    <h2 class="text-sm font-bold text-slate-800 flex items-center"><i class="fa-solid fa-users text-emerald-600 mr-2"></i> Meine geschützte CRM-Kundenkartei</h2>
-                    <p class="text-xs text-slate-500 mt-0.5">Exklusive Liste Ihrer persönlichen B2B-Kontakte inklusive DHL-Sendungsverfolgung.</p>
+                    <h2 class="text-sm font-bold text-slate-800 flex items-center">
+                        <i class="fa-solid fa-boxes-stacked text-amber-600 mr-2"></i> Globale Einsendungen & Status-Freigabe
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Hier siehst du alle Kunden aller Agenten. Ändere den Status, sobald die Ware gewogen wurde.</p>
                 </div>
                 
                 <div class="overflow-x-auto border border-slate-200 rounded-xl bg-white">
-                    <table class="w-full text-left border-collapse">
+                    <table class="w-full text-left border-collapse text-xs">
                         <thead>
                             <tr class="border-b border-slate-200 bg-slate-50 text-[10px] uppercase font-bold text-slate-500 tracking-wider">
-                                <th class="p-3">Firma / Kontakt</th>
-                                <th class="p-3">Erreichbarkeit & Adresse</th>
-                                <th class="p-3">Kunden-PIN</th>
-                                <th class="p-3">Letzte Notiz</th>
-                                <th class="p-3">DHL Status</th>
+                                <th class="p-3">Firma (Agent)</th>
+                                <th class="p-3">Eingetragen am</th>
+                                <th class="p-3">Kilo (Waage)</th>
+                                <th class="p-3">Zustand / Aktion</th>
                             </tr>
                         </thead>
-                        <tbody id="agentCustomerTable" class="divide-y divide-slate-100 text-xs text-slate-600"></tbody>
+                        <tbody id="adminGlobalCustomerTable" class="divide-y divide-slate-100 text-slate-600"></tbody>
                     </table>
                 </div>
             </div>
@@ -150,153 +118,158 @@
     </div>
 
     <script>
-        let loggedInAgentEmail = "";
-
-        function loginAgent() {
-            const email = document.getElementById("agentEmailInput").value.trim();
-            if(!email || !email.includes("@")) return alert("Bitte gültige E-Mail eingeben!");
-
-            loggedInAgentEmail = email;
-            localStorage.setItem("current_logged_agent_email", email);
-
-            document.getElementById("agentLoginScreen").classList.add("hidden");
-            document.getElementById("agentMainDashboard").classList.remove("hidden");
-            document.getElementById("activeAgentName").innerText = email;
-
-            loadAgentDashboard();
+        // Standard-Agenten initialisieren, falls nichts im Speicher ist
+        if (!localStorage.getItem("crm_agents")) {
+            const defaultAgents = [
+                { name: "Ahmet Yilmaz", email: "ahmet@i-call-starkmetall.de", rate: 0.50 },
+                { name: "Canan Demir", email: "canan@i-call-starkmetall.de", rate: 2.00 }
+            ];
+            localStorage.setItem("crm_agents", JSON.stringify(defaultAgents));
         }
 
-        function loadAgentDashboard() {
-            const allPartners = JSON.parse(localStorage.getItem("partners")) || [];
+        function loadAdminPanel() {
+            const agents = JSON.parse(localStorage.getItem("crm_agents")) || [];
+            const partners = JSON.parse(localStorage.getItem("partners")) || [];
             const deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
-            
-            const myPartners = allPartners.filter(p => p.agentEmail === loggedInAgentEmail);
-            document.getElementById("statCustomerCount").innerText = myPartners.length;
 
-            let totalWeight = 0;
-            const tbody = document.getElementById("agentCustomerTable");
-            tbody.innerHTML = "";
-
-            if (myPartners.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400 italic">Noch keine Kontakte erfasst. Legen Sie links Ihren ersten Partner an.</td></tr>`;
-                document.getElementById("statTotalWeight").innerText = "0 kg";
-                document.getElementById("statTotalCommission").innerText = "0,00 €";
-                return;
-            }
-
-            myPartners.forEach(partner => {
-                const myPartnerDeliveries = deliveries.filter(d => d.partner.toLowerCase() === partner.name.toLowerCase());
-                
-                let partnerWeightSum = 0;
-                let trackingHtml = `<span class="text-slate-400 italic">Keine Sendung</span>`;
-                let statusHtml = `<span class="text-slate-400 bg-slate-100 px-2 py-0.5 rounded text-[10px]">Inaktiv</span>`;
-
-                if (myPartnerDeliveries.length > 0) {
-                    myPartnerDeliveries.forEach(del => {
-                        partnerWeightSum += parseFloat(del.weight) || 0;
-                    });
-                    
-                    const latestDel = myPartnerDeliveries[myPartnerDeliveries.length - 1];
-                    trackingHtml = `<div class="font-mono text-[11px] text-slate-600 font-semibold"><i class="fa-solid fa-truck text-slate-400 mr-1"></i>${latestDel.tracking || 'Label erstellt'}</div>`;
-                    
-                    let colorClass = "bg-blue-50 text-blue-700 border-blue-100";
-                    if(latestDel.status === 'Ausgezahlt') colorClass = "bg-emerald-50 text-emerald-700 border-emerald-200";
-                    if(latestDel.status === 'In Prüfung' || latestDel.status === 'Ware erhalten') colorClass = "bg-amber-50 text-amber-700 border-amber-200";
-                    if(latestDel.status === 'In Zustellung') colorClass = "bg-indigo-50 text-indigo-700 border-indigo-200";
-                    
-                    statusHtml = `<div class="mt-1"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${colorClass} border">${latestDel.status}</span></div>`;
-                }
-
-                totalWeight += partnerWeightSum;
-
-                tbody.innerHTML += `
-                    <tr class="hover:bg-slate-50/80 transition">
-                        <td class="p-3">
-                            <div class="font-semibold text-slate-900">${partner.name}</div>
-                            <div class="text-[11px] text-slate-500">${partner.contactPerson || '-'}</div>
-                            <div class="text-[10px] text-slate-400 font-mono mt-0.5">${partner.email}</div>
-                        </td>
-                        <td class="p-3 text-slate-600 leading-tight text-[11px]">
-                            <div class="font-medium">${partner.phone || '-'}</div>
-                            <div class="text-slate-400 text-[10px] mt-0.5">${partner.street || ''}, ${partner.plz || ''} ${partner.city || ''}</div>
-                        </td>
-                        <td class="p-3 font-mono text-emerald-700 font-bold">${partner.pin || '123456'}</td>
-                        <td class="p-3 text-slate-500 text-[11px] max-w-[160px] truncate" title="${partner.notes || ''}">
-                            ${partner.notes || '<span class="text-slate-300 italic">Keine Einträge</span>'}
-                        </td>
-                        <td class="p-3">
-                            ${trackingHtml}
-                            ${statusHtml}
+            // 1. AGENTEN-TABELLE RENDERN
+            const agentTbody = document.getElementById("adminAgentTable");
+            agentTbody.innerHTML = "";
+            agents.forEach((ag, index) => {
+                agentTbody.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-2 font-semibold text-slate-800">${ag.name}</td>
+                        <td class="p-2 font-mono text-[10px] text-slate-400">${ag.email}</td>
+                        <td class="p-2 text-right font-mono font-bold text-emerald-700">${parseFloat(ag.rate).toFixed(2)} €</td>
+                        <td class="p-2 text-center">
+                            <button onclick="deleteAgent(${index})" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>`;
             });
 
-            document.getElementById("statTotalWeight").innerText = `${totalWeight} kg`;
-            const commissionEarned = totalWeight * 0.50;
-            document.getElementById("statTotalCommission").innerText = `${commissionEarned.toLocaleString('de-DE', {minimumFractionDigits: 2})} €`;
-        }
+            // 2. GLOBALE KUNDEN-LISTE MIT GEWICHTS- & STATUS-UPDATE
+            const globalTbody = document.getElementById("adminGlobalCustomerTable");
+            globalTbody.innerHTML = "";
+            let totalWeightSum = 0;
 
-        function registerCustomerCRM() {
-            const name = document.getElementById("newCustomerName").value.trim();
-            const email = document.getElementById("newCustomerEmail").value.trim();
-            const contactPerson = document.getElementById("newCustomerContact").value.trim();
-            const phone = document.getElementById("newCustomerPhone").value.trim();
-            const street = document.getElementById("newCustomerStreet").value.trim();
-            const plz = document.getElementById("newCustomerPlz").value.trim();
-            const city = document.getElementById("newCustomerCity").value.trim();
-            const notes = document.getElementById("newCustomerNotes").value.trim();
-
-            if(!name || !email) {
-                return alert("⚠️ Bitte mindestens Firmenname und E-Mail des Kunden eintragen!");
+            if (partners.length === 0) {
+                globalTbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-400 italic">Noch keine Kunden im System registriert.</td></tr>`;
             }
 
-            const randomPin = Math.floor(100000 + Math.random() * 900000).toString();
-            let allPartners = JSON.parse(localStorage.getItem("partners")) || [];
+            partners.forEach((partner) => {
+                const myPartnerDeliveries = deliveries.filter(d => d.partner.toLowerCase() === partner.name.toLowerCase());
+                
+                let currentWeight = 0;
+                let currentStatus = "Inaktiv";
+                
+                if (myPartnerDeliveries.length > 0) {
+                    const latestDel = myPartnerDeliveries[myPartnerDeliveries.length - 1];
+                    currentWeight = parseFloat(latestDel.weight) || 0;
+                    currentStatus = latestDel.status;
+                }
+                
+                totalWeightSum += currentWeight;
+
+                // Passenden Agenten-Provisionssatz heraussuchen
+                const agentData = agents.find(a => a.email === partner.agentEmail);
+                const currentRate = agentData ? `${agentData.rate.toFixed(2)} €/kg` : "0.50 €/kg";
+
+                globalTbody.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-3">
+                            <div class="font-bold text-slate-900">${partner.name}</div>
+                            <div class="text-[10px] text-slate-400 flex items-center mt-0.5">
+                                <i class="fa-solid fa-headset mr-1"></i> ${partner.agentEmail || 'Kein Agent'} 
+                                <span class="mx-1.5">•</span> 
+                                <span class="text-emerald-700 font-medium">${currentRate}</span>
+                            </div>
+                        </td>
+                        <td class="p-3 text-slate-500 text-[11px] font-mono">${partner.dateAdded || '-'}</td>
+                        <td class="p-3">
+                            <input type="number" value="${currentWeight}" onchange="updateWeight('${partner.name}', this.value)" class="w-16 bg-white border border-slate-300 rounded px-1.5 py-1 text-xs font-mono font-bold text-slate-800 text-center focus:border-slate-900 focus:outline-none"> kg
+                        </td>
+                        <td class="p-3">
+                            <select onchange="updateStatus('${partner.name}', this.value)" class="bg-white border border-slate-300 rounded p-1 text-[11px] font-medium text-slate-700 focus:outline-none focus:border-slate-900">
+                                <option value="In Zustellung" ${currentStatus === 'In Zustellung' ? 'selected' : ''}>🚚 In Zustellung</option>
+                                <option value="Ware erhalten" ${currentStatus === 'Ware erhalten' ? 'selected' : ''}>📦 Ware erhalten</option>
+                                <option value="In Prüfung" ${currentStatus === 'In Prüfung' ? 'selected' : ''}>⚖️ In Prüfung</option>
+                                <option value="Ausgezahlt" ${currentStatus === 'Ausgezahlt' ? 'selected' : ''}>💰 Ausgezahlt</option>
+                            </select>
+                        </td>
+                    </tr>`;
+            });
+
+            document.getElementById("totalSystemWeight").innerText = `${totalWeightSum} kg`;
+        }
+
+        function saveAgent() {
+            const name = document.getElementById("agentName").value.trim();
+            const email = document.getElementById("agentEmail").value.trim();
+            const rate = parseFloat(document.getElementById("agentCommission").value);
+
+            if (!name || !email) return alert("⚠️ Bitte Name und E-Mail des Agenten ausfüllen!");
+
+            let agents = JSON.parse(localStorage.getItem("crm_agents")) || [];
             
-            if(allPartners.some(p => p.name.toLowerCase() === name.toLowerCase())) {
-                return alert("❌ Diese Firma existiert bereits im System!");
+            if (agents.some(a => a.email.toLowerCase() === email.toLowerCase())) {
+                return alert("❌ Ein Agent mit dieser E-Mail existiert bereits!");
             }
 
-            const newCustomer = {
-                name, email, contactPerson, phone, street, plz, city, notes,
-                pin: randomPin,
-                agentEmail: loggedInAgentEmail,
-                dateAdded: new Date().toLocaleDateString('de-DE')
-            };
+            agents.push({ name, email, rate });
+            localStorage.setItem("crm_agents", JSON.stringify(agents));
 
-            allPartners.push(newCustomer);
-            localStorage.setItem("partners", JSON.stringify(allPartners));
-
-            // Überwachungs-Log für dich als Chef
-            console.log(`BCC AUTOMATION -> Kopie der Registrierung an chef@starkmetall24.de gesendet.`);
-
-            alert(`✅ Partner "${name}" erfolgreich im System angelegt!\n\nPIN: ${randomPin}\nDie Willkommens-Mail inklusive Zugangsdaten wird nun automatisch verschickt.`);
+            alert(`✅ Agent "${name}" erfolgreich angelegt! Provisionssatz: ${rate.toFixed(2)} € pro Kilo.`);
             
-            // Maske leeren
-            document.getElementById("newCustomerName").value = "";
-            document.getElementById("newCustomerEmail").value = "";
-            document.getElementById("newCustomerContact").value = "";
-            document.getElementById("newCustomerPhone").value = "";
-            document.getElementById("newCustomerStreet").value = "";
-            document.getElementById("newCustomerPlz").value = "";
-            document.getElementById("newCustomerCity").value = "";
-            document.getElementById("newCustomerNotes").value = "";
-
-            loadAgentDashboard();
+            document.getElementById("agentName").value = "";
+            document.getElementById("agentEmail").value = "";
+            loadAdminPanel();
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedEmail = localStorage.getItem("current_logged_agent_email");
-            if(savedEmail) {
-                document.getElementById("agentEmailInput").value = savedEmail;
-                loginAgent();
+        function deleteAgent(index) {
+            if (!confirm("Agenten wirklich löschen?")) return;
+            let agents = JSON.parse(localStorage.getItem("crm_agents")) || [];
+            agents.splice(index, 1);
+            localStorage.setItem("crm_agents", JSON.stringify(agents));
+            loadAdminPanel();
+        }
+
+        function updateWeight(partnerName, newWeight) {
+            let deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
+            let index = deliveries.findIndex(d => d.partner.toLowerCase() === partnerName.toLowerCase());
+
+            if (index !== -1) {
+                deliveries[index].weight = parseFloat(newWeight) || 0;
+            } else {
+                deliveries.push({
+                    partner: partnerName,
+                    weight: parseFloat(newWeight) || 0,
+                    status: "In Prüfung",
+                    tracking: "DHL-" + Math.floor(100000 + Math.random() * 900000)
+                });
             }
-        });
-
-        function logoutAgent() {
-            localStorage.removeItem("current_logged_agent_email");
-            location.reload();
+            localStorage.setItem("starkmetall_deliveries", JSON.stringify(deliveries));
+            loadAdminPanel();
         }
+
+        function updateStatus(partnerName, newStatus) {
+            let deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
+            let index = deliveries.findIndex(d => d.partner.toLowerCase() === partnerName.toLowerCase());
+
+            if (index !== -1) {
+                deliveries[index].status = newStatus;
+            } else {
+                deliveries.push({
+                    partner: partnerName,
+                    weight: 0,
+                    status: newStatus,
+                    tracking: "DHL-" + Math.floor(100000 + Math.random() * 900000)
+                });
+            }
+            localStorage.setItem("starkmetall_deliveries", JSON.stringify(deliveries));
+            loadAdminPanel();
+        }
+
+        window.addEventListener('DOMContentLoaded', loadAdminPanel);
     </script>
 </body>
 </html>
