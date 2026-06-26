@@ -3,273 +3,418 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>i-CALL STM 24 | Chef-Zentrale</title>
+    <title>Starkmetall OS | Enterprise Dashboard v5.1</title>
     
-    <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #f1f5f3; color: #334155; }
-        .admin-card { background-color: #fafbfc; border: 1px solid #cbd5e1; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #f3f4f6; }
+        .cyber-gradient { background: radial-gradient(circle at 0% 0%, #1e1b4b 0%, #030712 50%), radial-gradient(circle at 100% 100%, #06283d 0%, #030712 50%); }
+        .neon-card { background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
     </style>
 </head>
-<body class="font-sans antialiased min-h-screen p-4 sm:p-6">
+<body class="font-sans antialiased min-h-screen cyber-gradient flex flex-col">
 
-    <div class="max-w-7xl mx-auto space-y-6">
-        
-        <!-- TOP NAVIGATION (CHEF-BRANDING) -->
-        <div class="bg-slate-900 text-white p-6 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4 shadow-lg">
-            <div>
-                <span class="text-[10px] bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">Geschäftsleitung</span>
-                <h1 class="text-xl font-black mt-1 text-white">i-CALL STM 24 <span class="text-amber-400">| Control-Panel</span></h1>
+    <div id="loginScreen" class="fixed inset-0 bg-gray-950/95 backdrop-blur-2xl z-[100] flex items-center justify-center p-4">
+        <div class="bg-gray-900/80 border border-gray-800 p-8 rounded-3xl w-full max-w-md space-y-6 shadow-2xl text-center">
+            <div class="w-16 h-16 bg-gradient-to-tr from-cyan-500 to-purple-500 text-white rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-lg shadow-cyan-500/10">
+                <i class="fa-solid fa-terminal"></i>
             </div>
-            <div class="flex items-center gap-2">
-                <div class="bg-slate-800 px-4 py-2 rounded-xl border border-slate-700 text-center">
-                    <p class="text-[9px] font-bold text-slate-400 uppercase">Gesamtes Systemvolumen</p>
-                    <p id="totalSystemWeight" class="text-base font-mono font-bold text-amber-400">0 kg</p>
-                </div>
+            <div class="space-y-1">
+                <h2 class="text-2xl font-extrabold tracking-tight text-white">Starkmetall <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">OS V5.1</span></h2>
+                <p class="text-xs text-gray-400">Geben Sie Ihren Command-Schlüssel ein.</p>
             </div>
-        </div>
-
-        <!-- MITTE: ZWEI-SPALTEN-LAYOUT -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            
-            <!-- LINKS: AGENTEN ANLEGEN & PROVISION FESTLEGEN (5 SPALTEN) -->
-            <div class="admin-card p-6 rounded-2xl space-y-4 h-fit shadow-sm lg:col-span-5">
-                <div>
-                    <h2 class="text-sm font-bold text-slate-800 flex items-center">
-                        <i class="fa-solid fa-user-gear text-amber-600 mr-2"></i> Agenten-Onboarding & Gagen
-                    </h2>
-                    <p class="text-xs text-slate-500 mt-0.5">Hier steuerst du, welcher Mitarbeiter wie viel Geld pro Kilo bekommt.</p>
-                </div>
-                
-                <div class="space-y-3">
-                    <div>
-                        <label class="text-[10px] font-semibold text-slate-600 uppercase tracking-wider block mb-0.5">Name des Agenten / Agentur</label>
-                        <input type="text" id="agentName" placeholder="z.B. Ahmet Yilmaz oder Call-Center Nord" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-slate-900 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="text-[10px] font-semibold text-slate-600 uppercase tracking-wider block mb-0.5">Login-E-Mail (Wichtig für CRM-Schutz)</label>
-                        <input type="email" id="agentEmail" placeholder="ahmet@i-call-starkmetall.de" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-slate-900 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="text-[10px] font-semibold text-slate-600 uppercase tracking-wider block mb-0.5">Individuelle Provision pro Kilo (€)</label>
-                        <select id="agentCommission" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-slate-900 focus:outline-none font-medium">
-                            <option value="0.50">0,50 € / kg (Standard Einsteiger)</option>
-                            <option value="1.00">1,00 € / kg</option>
-                            <option value="2.00">2,00 € / kg</option>
-                            <option value="3.00">3,00 € / kg (Profi-Satz)</option>
-                            <option value="4.00">4,00 € / kg</option>
-                            <option value="5.00">5,00 € / kg (Premium / Agentur-Tarif)</option>
-                        </select>
-                    </div>
-                    
-                    <button onclick="saveAgent()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2.5 rounded-lg text-xs uppercase tracking-wider transition shadow-sm">
-                        Agent aktivieren & Preis festlegen
-                    </button>
-                </div>
-
-                <!-- AKTUELLE AGENTEN-GEHALTS-TABELLE -->
-                <div class="border-t border-slate-200 pt-4">
-                    <h3 class="text-xs font-bold text-slate-700 mb-2">Aktive Gagen-Struktur</h3>
-                    <div class="overflow-x-auto border border-slate-200 rounded-lg bg-white">
-                        <table class="w-full text-left border-collapse text-xs">
-                            <thead>
-                                <tr class="bg-slate-50 border-b border-slate-200 text-[9px] uppercase font-bold text-slate-500 tracking-wider">
-                                    <th class="p-2">Agent</th>
-                                    <th class="p-2">E-Mail</th>
-                                    <th class="p-2 text-right">Satz / kg</th>
-                                    <th class="p-2 text-center">Aktion</th>
-                                </tr>
-                            </thead>
-                            <tbody id="adminAgentTable" class="divide-y divide-slate-100 text-slate-600"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- RECHTS: GLOBALE PARTNER-LISTE & STATUS-KONTROLLE (7 SPALTEN) -->
-            <div class="admin-card p-6 rounded-2xl space-y-4 lg:col-span-7 shadow-sm">
-                <div>
-                    <h2 class="text-sm font-bold text-slate-800 flex items-center">
-                        <i class="fa-solid fa-boxes-stacked text-amber-600 mr-2"></i> Globale Einsendungen & Status-Freigabe
-                    </h2>
-                    <p class="text-xs text-slate-500 mt-0.5">Hier siehst du alle Kunden aller Agenten. Ändere den Status, sobald die Ware gewogen wurde.</p>
-                </div>
-                
-                <div class="overflow-x-auto border border-slate-200 rounded-xl bg-white">
-                    <table class="w-full text-left border-collapse text-xs">
-                        <thead>
-                            <tr class="border-b border-slate-200 bg-slate-50 text-[10px] uppercase font-bold text-slate-500 tracking-wider">
-                                <th class="p-3">Firma (Agent)</th>
-                                <th class="p-3">Eingetragen am</th>
-                                <th class="p-3">Kilo (Waage)</th>
-                                <th class="p-3">Zustand / Aktion</th>
-                            </tr>
-                        </thead>
-                        <tbody id="adminGlobalCustomerTable" class="divide-y divide-slate-100 text-slate-600"></tbody>
-                    </table>
-                </div>
-            </div>
-
+            <input type="password" id="adminPassword" placeholder="••••••••" class="w-full bg-gray-950/80 border border-gray-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-cyan-500 transition font-mono tracking-widest text-center">
+            <button onclick="checkPassword()" class="w-full bg-gradient-to-r from-cyan-500 via-sky-500 to-purple-600 text-white font-bold py-3.5 rounded-xl text-sm transition tracking-wider uppercase text-[11px]">System hochfahren</button>
         </div>
     </div>
 
+    <div id="adminContent" class="hidden flex-1 flex flex-col">
+        
+        <header class="border-b border-gray-800/60 bg-gray-950/40 backdrop-blur-md px-6 py-4 sticky top-0 z-50">
+            <div class="max-w-[1600px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="flex items-center space-x-3">
+                    <span class="bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-black px-3 py-1.5 rounded-lg text-xs tracking-wider">STARKMETALL EXECUTIVE HQ</span>
+                    <p class="text-xs font-semibold text-gray-400 hidden sm:block"><i class="fa-solid fa-circle text-emerald-500 text-[8px] animate-pulse mr-1.5"></i>Live-Kopplung Aktiv</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div id="clock" class="text-xs font-mono text-gray-400 bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-lg"></div>
+                    <button onclick="logout()" class="text-xs font-bold text-gray-400 hover:text-red-400 transition bg-gray-900/80 px-3 py-1.5 rounded-lg border border-gray-800"><i class="fa-solid fa-power-off"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-8 flex-1 w-full space-y-8">
+            
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="neon-card p-4 rounded-2xl flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Gesamtgewicht VHM</p>
+                        <h3 id="statWeight" class="text-xl sm:text-2xl font-black text-white font-mono mt-1">0 kg</h3>
+                    </div>
+                    <div class="text-cyan-400 bg-cyan-500/10 p-3 rounded-xl"><i class="fa-solid fa-weight-hanging text-lg"></i></div>
+                </div>
+                <div class="neon-card p-4 rounded-2xl flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Laufende Deals</p>
+                        <h3 id="statCount" class="text-xl sm:text-2xl font-black text-white font-mono mt-1">0</h3>
+                    </div>
+                    <div class="text-purple-400 bg-purple-500/10 p-3 rounded-xl"><i class="fa-solid fa-truck-fast text-lg"></i></div>
+                </div>
+                <div class="neon-card p-4 rounded-2xl flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Erfasste Partner</p>
+                        <h3 id="statPartners" class="text-xl sm:text-2xl font-black text-white font-mono mt-1">0</h3>
+                    </div>
+                    <div class="text-amber-400 bg-amber-500/10 p-3 rounded-xl"><i class="fa-solid fa-address-book text-lg"></i></div>
+                </div>
+                <div class="neon-card p-4 rounded-2xl flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Umsatzstärkster Agent</p>
+                        <h3 id="topAgentStat" class="text-sm font-bold text-emerald-400 mt-2 truncate">-</h3>
+                    </div>
+                    <div class="text-emerald-400 bg-emerald-500/10 p-3 rounded-xl"><i class="fa-solid fa-trophy text-lg"></i></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                
+                <section class="lg:col-span-4 neon-card p-5 rounded-2xl space-y-4">
+                    <h3 class="text-sm font-bold tracking-wider uppercase text-cyan-400 flex items-center space-x-2"><i class="fa-solid fa-bolt"></i> <span>Tageskurse (€ / kg)</span></h3>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="text-[10px] font-bold text-gray-400 block mb-1">VHM Bohrer / Fräser</label>
+                            <input type="number" step="0.01" id="price1" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm font-mono text-white focus:outline-none focus:border-cyan-500">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold text-gray-400 block mb-1">VHM Wendeschneidplatten</label>
+                            <input type="number" step="0.01" id="price2" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm font-mono text-white focus:outline-none focus:border-cyan-500">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold text-gray-400 block mb-1">VHM gemischter Schrott 🔥</label>
+                            <input type="number" step="0.01" id="price3" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm font-mono text-white focus:outline-none focus:border-cyan-500">
+                        </div>
+                    </div>
+                    <button onclick="savePrices()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 rounded-xl text-xs uppercase tracking-wider transition">Kurse Live Schalten</button>
+                </section>
+
+                <section class="lg:col-span-4 neon-card p-5 rounded-2xl space-y-4">
+                    <h3 class="text-sm font-bold tracking-wider uppercase text-purple-400 flex items-center space-x-2"><i class="fa-solid fa-headset"></i> <span>Agenten & Gehaltsstufe</span></h3>
+                    <div class="space-y-2">
+                        <input type="text" id="newAgentName" placeholder="Name des Agenten" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
+                        <input type="email" id="newAgentEmail" placeholder="agent@starkmetall.de" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
+                        
+                        <div class="flex gap-2">
+                            <select id="newAgentRate" class="flex-1 bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-purple-500 font-medium">
+                                <option value="0.50">0,50 € / kg (Standard Einsteiger)</option>
+                                <option value="1.00">1,00 € / kg</option>
+                                <option value="2.00">2,00 € / kg</option>
+                                <option value="3.00">3,00 € / kg (Profi-Satz)</option>
+                                <option value="4.00">4,00 € / kg</option>
+                                <option value="5.00">5,00 € / kg (Premium Tarif)</option>
+                            </select>
+                            <button onclick="addAgent()" class="bg-purple-600 hover:bg-purple-500 text-white px-4 rounded-xl text-xs font-bold transition">Anlegen</button>
+                        </div>
+                    </div>
+                    <div id="agentList" class="space-y-2 max-h-[220px] overflow-y-auto pr-1">
+                        </div>
+                </section>
+
+                <section class="lg:col-span-4 neon-card p-5 rounded-2xl space-y-4">
+                    <h3 class="text-sm font-bold tracking-wider uppercase text-amber-400 flex items-center space-x-2"><i class="fa-solid fa-users-gear"></i> <span>B2B Kunden-Zuweisung</span></h3>
+                    <div class="space-y-2">
+                        <input type="text" id="newPartnerName" placeholder="Firma / Kundennummer" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none">
+                        <div class="flex gap-2">
+                            <select id="partnerAgentSelect" class="flex-1 bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm text-gray-300 focus:outline-none"></select>
+                            <button onclick="addPartner()" class="bg-amber-600 hover:bg-amber-500 text-white px-4 rounded-xl text-xs font-bold transition whitespace-nowrap">Kunde aktivieren</button>
+                        </div>
+                    </div>
+                    <div id="partnerList" class="space-y-2 max-h-[180px] overflow-y-auto pr-1"></div>
+                </section>
+
+            </div>
+
+            <section class="neon-card p-5 rounded-2xl space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-gray-800 pb-4">
+                    <div>
+                        <h3 class="text-base font-extrabold text-white flex items-center space-x-2"><i class="fa-solid fa-boxes-stacked text-cyan-400"></i><span>Live-Avisierungen & Sendungstracking</span></h3>
+                    </div>
+                    <button onclick="simulateDelivery()" class="bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 px-3 py-1.5 rounded-xl text-xs font-bold transition"><i class="fa-solid fa-vial text-cyan-400 mr-1.5"></i>Test-Lieferung simulieren</button>
+                </div>
+
+                <div class="overflow-x-auto w-full">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-gray-800 text-[10px] uppercase font-bold text-gray-400 tracking-wider">
+                                <th class="pb-3 pl-2">Datum</th>
+                                <th class="pb-3">Kunde / Firma</th>
+                                <th class="pb-3">Zugeordneter Agent</th>
+                                <th class="pb-3">Materialsorte</th>
+                                <th class="pb-3">Gewicht (kg)</th>
+                                <th class="pb-3">Tracking-ID</th>
+                                <th class="pb-3">Status</th>
+                                <th class="pb-3 pr-2 text-right">Verdienst Agent</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logisticsTableBody" class="divide-y divide-gray-900 text-xs sm:text-sm"></tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
     <script>
-        // Standard-Agenten initialisieren, falls nichts im Speicher ist
-        if (!localStorage.getItem("crm_agents")) {
-            const defaultAgents = [
-                { name: "Ahmet Yilmaz", email: "ahmet@i-call-starkmetall.de", rate: 0.50 },
-                { name: "Canan Demir", email: "canan@i-call-starkmetall.de", rate: 2.00 }
-            ];
-            localStorage.setItem("crm_agents", JSON.stringify(defaultAgents));
+        const defPrices = { vhm_bohrer: 58.50, vhm_wsp: 54.00, vhm_misch: 48.00 };
+        
+        // 💰 Agenten-Default erweitert um die 'rate'-Eigenschaft
+        const defAgents = [
+            { name: "Ahmet Yilmaz", email: "ahmet@starkmetall.de", rate: 0.50 },
+            { name: "Sarah Müller", email: "sarah@starkmetall.de", rate: 2.00 }
+        ];
+        const defPartners = [
+            { name: "CNC-Technik Müller", agent: "Ahmet Yilmaz", email: "mueller@cnc-technik.de" },
+            { name: "Starkmetall Partner", agent: "Sarah Müller", email: "info@starkmetall.de" }
+        ];
+        const defDeliveries = [
+            { id: 1, date: "26.06.2026", partner: "CNC-Technik Müller", agent: "Ahmet Yilmaz", type: "VHM Bohrer & Fräser", weight: 450, tracking: "DHL: CY123456789DE", status: "In Zustellung" },
+            { id: 2, date: "25.06.2026", partner: "Starkmetall Partner", agent: "Sarah Müller", type: "VHM gemischter Schrott", weight: 820, tracking: "UPS: 1Z999AA10123", status: "Ware erhalten" }
+        ];
+
+        function checkPassword() {
+            if (document.getElementById("adminPassword").value === "starkmetall2026") {
+                document.getElementById("loginScreen").classList.add("hidden");
+                document.getElementById("adminContent").classList.remove("hidden");
+                localStorage.setItem("starkmetall_v5_auth", "true");
+                bootSystem();
+            }
         }
 
-        function loadAdminPanel() {
-            const agents = JSON.parse(localStorage.getItem("crm_agents")) || [];
-            const partners = JSON.parse(localStorage.getItem("partners")) || [];
+        if (localStorage.getItem("starkmetall_v5_auth") === "true") {
+            document.getElementById("loginScreen").classList.add("hidden");
+            document.getElementById("adminContent").classList.remove("hidden");
+            window.addEventListener('DOMContentLoaded', bootSystem);
+        }
+
+        function logout() { localStorage.removeItem("starkmetall_v5_auth"); location.reload(); }
+        setInterval(() => { document.getElementById("clock").innerText = new Date().toLocaleString('de-DE') + " Uhr"; }, 1000);
+
+        function bootSystem() {
+            if (!localStorage.getItem("prices")) localStorage.setItem("prices", JSON.stringify(defPrices));
+            if (!localStorage.getItem("agents_v5")) localStorage.setItem("agents_v5", JSON.stringify(defAgents));
+            if (!localStorage.getItem("partners")) localStorage.setItem("partners", JSON.stringify(defPartners));
+            if (!localStorage.getItem("starkmetall_deliveries")) localStorage.setItem("starkmetall_deliveries", JSON.stringify(defDeliveries));
+
+            renderAll();
+        }
+
+        function renderAll() {
+            renderPrices();
+            renderAgentsAndPerformance();
+            renderPartners();
+            renderDeliveriesTable();
+            calculateStats();
+        }
+
+        function renderPrices() {
+            const p = JSON.parse(localStorage.getItem("prices")) || defPrices;
+            document.getElementById("price1").value = p.vhm_bohrer.toFixed(2);
+            document.getElementById("price2").value = p.vhm_wsp.toFixed(2);
+            document.getElementById("price3").value = (p.vhm_misch || 48.00).toFixed(2);
+        }
+
+        function savePrices() {
+            const p = { 
+                vhm_bohrer: parseFloat(document.getElementById("price1").value) || 0, 
+                vhm_wsp: parseFloat(document.getElementById("price2").value) || 0,
+                vhm_misch: parseFloat(document.getElementById("price3").value) || 0
+            };
+            localStorage.setItem("prices", JSON.stringify(p));
+            alert("🚀 Systemkurse (inkl. Mischschrott) live geschaltet!");
+        }
+
+        function renderAgentsAndPerformance() {
+            const agents = JSON.parse(localStorage.getItem("agents_v5")) || [];
             const deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
+            const list = document.getElementById("agentList");
+            const select = document.getElementById("partnerAgentSelect");
+            
+            list.innerHTML = "";
+            select.innerHTML = '<option value="">Zentrale / Kein Betreuer</option>';
 
-            // 1. AGENTEN-TABELLE RENDERN
-            const agentTbody = document.getElementById("adminAgentTable");
-            agentTbody.innerHTML = "";
-            agents.forEach((ag, index) => {
-                agentTbody.innerHTML += `
-                    <tr class="hover:bg-slate-50">
-                        <td class="p-2 font-semibold text-slate-800">${ag.name}</td>
-                        <td class="p-2 font-mono text-[10px] text-slate-400">${ag.email}</td>
-                        <td class="p-2 text-right font-mono font-bold text-emerald-700">${parseFloat(ag.rate).toFixed(2)} €</td>
-                        <td class="p-2 text-center">
-                            <button onclick="deleteAgent(${index})" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash"></i></button>
-                        </td>
-                    </tr>`;
+            agents.forEach((agent, i) => {
+                let agentWeight = deliveries
+                    .filter(d => d.agent === agent.name)
+                    .reduce((sum, d) => sum + parseFloat(d.weight || 0), 0);
+
+                // Tarifsatz auslesen (Fallback auf 0.50 €)
+                const currentRate = agent.rate ? parseFloat(agent.rate).toFixed(2) : "0.50";
+
+                const subject = encodeURIComponent("Ihre Zugangsdaten zur Starkmetall Agenten-Maske");
+                const body = encodeURIComponent(`Hallo ${agent.name},\n\nHier sind Ihre Zugangsdaten:\n\nSystem-Link: https://bensen123.github.io/Starkmetall-demo/agent.html\nAgenten-ID: ${agent.name}\n\nGute Jagd!`);
+                const mailto = `mailto:${agent.email}?subject=${subject}&body=${body}`;
+
+                list.innerHTML += `
+                    <div class="bg-gray-950/60 border border-gray-800 p-3 rounded-xl space-y-2 flex flex-col justify-between">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-purple-300"><i class="fa-solid fa-user-tie mr-1.5 text-purple-400"></i>${agent.name}</span>
+                            <button onclick="deleteAgent(${i})" class="text-red-500/70 hover:text-red-400 p-1 transition" title="Agent löschen">
+                                <i class="fa-solid fa-trash-can text-sm"></i>
+                            </button>
+                        </div>
+                        <div class="flex justify-between items-center bg-gray-900/50 p-1.5 rounded-lg text-[10px]">
+                            <span class="text-gray-400">Umsatz: <strong class="text-cyan-400 font-mono">${agentWeight} kg</strong> <span class="mx-1 text-slate-600">|</span> <strong class="text-emerald-400">${currentRate} €/kg</strong></span>
+                            <a href="${mailto}" class="bg-purple-500/10 border border-purple-500/30 text-purple-300 hover:bg-purple-500 hover:text-white px-2 py-0.5 rounded text-[9px] font-bold transition">
+                                <i class="fa-solid fa-key mr-1"></i> Key senden
+                            </a>
+                        </div>
+                    </div>`;
+                select.innerHTML += `<option value="${agent.name}">${agent.name}</option>`;
             });
+        }
 
-            // 2. GLOBALE KUNDEN-LISTE MIT GEWICHTS- & STATUS-UPDATE
-            const globalTbody = document.getElementById("adminGlobalCustomerTable");
-            globalTbody.innerHTML = "";
-            let totalWeightSum = 0;
+        function addAgent() {
+            const name = document.getElementById("newAgentName").value.trim();
+            const email = document.getElementById("newAgentEmail").value.trim();
+            const rate = parseFloat(document.getElementById("newAgentRate").value) || 0.50;
+            
+            if(!name || !email) return alert("Bitte Name und E-Mail eingeben!");
+            
+            let a = JSON.parse(localStorage.getItem("agents_v5")) || [];
+            a.push({ name: name, email: email, rate: rate });
+            localStorage.setItem("agents_v5", JSON.stringify(a));
+            
+            document.getElementById("newAgentName").value = "";
+            document.getElementById("newAgentEmail").value = "";
+            renderAll();
+        }
 
-            if (partners.length === 0) {
-                globalTbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-400 italic">Noch keine Kunden im System registriert.</td></tr>`;
+        function deleteAgent(i) {
+            if(confirm("Möchten Sie diesen Agenten wirklich aus dem System löschen?")) {
+                let a = JSON.parse(localStorage.getItem("agents_v5"));
+                a.splice(i, 1);
+                localStorage.setItem("agents_v5", JSON.stringify(a));
+                renderAll();
             }
+        }
 
-            partners.forEach((partner) => {
-                const myPartnerDeliveries = deliveries.filter(d => d.partner.toLowerCase() === partner.name.toLowerCase());
-                
-                let currentWeight = 0;
-                let currentStatus = "Inaktiv";
-                
-                if (myPartnerDeliveries.length > 0) {
-                    const latestDel = myPartnerDeliveries[myPartnerDeliveries.length - 1];
-                    currentWeight = parseFloat(latestDel.weight) || 0;
-                    currentStatus = latestDel.status;
-                }
-                
-                totalWeightSum += currentWeight;
+        function calculateStats() {
+            const deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
+            const agents = JSON.parse(localStorage.getItem("agents_v5")) || [];
+            let totalWeight = deliveries.reduce((acc, curr) => acc + parseFloat(curr.weight || 0), 0);
+            
+            document.getElementById("statWeight").innerText = totalWeight.toLocaleString('de-DE') + " kg";
+            document.getElementById("statCount").innerText = deliveries.length;
+            document.getElementById("statPartners").innerText = (JSON.parse(localStorage.getItem("partners")) || []).length;
 
-                // Passenden Agenten-Provisionssatz heraussuchen
-                const agentData = agents.find(a => a.email === partner.agentEmail);
-                const currentRate = agentData ? `${agentData.rate.toFixed(2)} €/kg` : "0.50 €/kg";
+            let bestAgent = "-";
+            let maxWeight = 0;
+            agents.forEach(a => {
+                let w = deliveries.filter(d => d.agent === a.name).reduce((sum, d) => sum + parseFloat(d.weight || 0), 0);
+                if (w > maxWeight) { maxWeight = w; bestAgent = `${a.name} (${w} kg)`; }
+            });
+            document.getElementById("topAgentStat").innerText = bestAgent;
+        }
 
-                globalTbody.innerHTML += `
-                    <tr class="hover:bg-slate-50">
-                        <td class="p-3">
-                            <div class="font-bold text-slate-900">${partner.name}</div>
-                            <div class="text-[10px] text-slate-400 flex items-center mt-0.5">
-                                <i class="fa-solid fa-headset mr-1"></i> ${partner.agentEmail || 'Kein Agent'} 
-                                <span class="mx-1.5">•</span> 
-                                <span class="text-emerald-700 font-medium">${currentRate}</span>
-                            </div>
-                        </td>
-                        <td class="p-3 text-slate-500 text-[11px] font-mono">${partner.dateAdded || '-'}</td>
-                        <td class="p-3">
-                            <input type="number" value="${currentWeight}" onchange="updateWeight('${partner.name}', this.value)" class="w-16 bg-white border border-slate-300 rounded px-1.5 py-1 text-xs font-mono font-bold text-slate-800 text-center focus:border-slate-900 focus:outline-none"> kg
-                        </td>
-                        <td class="p-3">
-                            <select onchange="updateStatus('${partner.name}', this.value)" class="bg-white border border-slate-300 rounded p-1 text-[11px] font-medium text-slate-700 focus:outline-none focus:border-slate-900">
-                                <option value="In Zustellung" ${currentStatus === 'In Zustellung' ? 'selected' : ''}>🚚 In Zustellung</option>
-                                <option value="Ware erhalten" ${currentStatus === 'Ware erhalten' ? 'selected' : ''}>📦 Ware erhalten</option>
-                                <option value="In Prüfung" ${currentStatus === 'In Prüfung' ? 'selected' : ''}>⚖️ In Prüfung</option>
-                                <option value="Ausgezahlt" ${currentStatus === 'Ausgezahlt' ? 'selected' : ''}>💰 Ausgezahlt</option>
+        function renderPartners() {
+            const p = JSON.parse(localStorage.getItem("partners")) || [];
+            const list = document.getElementById("partnerList");
+            list.innerHTML = "";
+            p.forEach((partner, i) => {
+                list.innerHTML += `
+                    <div class="bg-gray-950/60 border border-gray-800 p-2 rounded-xl flex justify-between items-center text-xs">
+                        <div>
+                            <p class="font-bold text-gray-200"><i class="fa-solid fa-building text-amber-500 mr-2"></i>${partner.name}</p>
+                            <p class="text-[10px] text-gray-400">Betreuer: <span class="text-purple-400 font-bold">${partner.agent || 'Zentrale'}</span></p>
+                        </div>
+                        <button onclick="deletePartner(${i})" class="text-gray-600 hover:text-red-400"><i class="fa-solid fa-trash"></i></button>
+                    </div>`;
+            });
+        }
+
+        function addPartner() {
+            const name = document.getElementById("newPartnerName").value.trim();
+            const agent = document.getElementById("partnerAgentSelect").value;
+            if(!name) return;
+            let p = JSON.parse(localStorage.getItem("partners")) || [];
+            p.push({ name: name, agent: agent, email: "info@firma-kunde.de" });
+            localStorage.setItem("partners", JSON.stringify(p));
+            document.getElementById("newPartnerName").value = "";
+            renderAll();
+        }
+
+        function deletePartner(i) {
+            let p = JSON.parse(localStorage.getItem("partners"));
+            p.splice(i, 1);
+            localStorage.setItem("partners", JSON.stringify(p));
+            renderAll();
+        }
+
+        function renderDeliveriesTable() {
+            const deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
+            const agents = JSON.parse(localStorage.getItem("agents_v5")) || [];
+            const tbody = document.getElementById("logisticsTableBody");
+            tbody.innerHTML = "";
+
+            deliveries.forEach((del, index) => {
+                const statusOptions = ["In Zustellung", "Ware erhalten", "In Prüfung", "Ausgezahlt"];
+                let selectOptions = statusOptions.map(opt => `<option value="${opt}" ${del.status === opt ? 'selected' : ''}>${opt}</option>`).join('');
+
+                // Dynamic calculation based on assigned agent rate
+                const targetAgent = agents.find(a => a.name === del.agent);
+                const rate = targetAgent ? parseFloat(targetAgent.rate) : 0.50; 
+                const totalCommission = parseFloat(del.weight || 0) * rate;
+
+                tbody.innerHTML += `
+                    <tr class="border-b border-gray-900/60 hover:bg-gray-900/20 transition">
+                        <td class="py-3 pl-2 font-mono text-gray-500 text-xs">${del.date}</td>
+                        <td class="font-bold text-white">${del.partner}</td>
+                        <td class="text-purple-300 font-bold">${del.agent || 'Zentrale'} <span class="text-[10px] font-normal text-slate-500">(${rate.toFixed(2)}€)</span></td>
+                        <td class="text-gray-400 text-xs">${del.type}</td>
+                        <td class="font-bold text-cyan-400 font-mono">${del.weight} kg</td>
+                        <td class="font-mono text-xs text-gray-500">${del.tracking}</td>
+                        <td>
+                            <select onchange="updateDeliveryStatus(${index}, this.value)" class="bg-gray-950 border border-gray-800 text-xs rounded-lg px-1.5 py-1 text-gray-200">
+                                ${selectOptions}
                             </select>
                         </td>
+                        <td class="text-right pr-2 font-mono text-emerald-400 font-bold">${totalCommission.toLocaleString('de-DE', {minimumFractionDigits: 2})} €</td>
                     </tr>`;
             });
-
-            document.getElementById("totalSystemWeight").innerText = `${totalWeightSum} kg`;
         }
 
-        function saveAgent() {
-            const name = document.getElementById("agentName").value.trim();
-            const email = document.getElementById("agentEmail").value.trim();
-            const rate = parseFloat(document.getElementById("agentCommission").value);
-
-            if (!name || !email) return alert("⚠️ Bitte Name und E-Mail des Agenten ausfüllen!");
-
-            let agents = JSON.parse(localStorage.getItem("crm_agents")) || [];
-            
-            if (agents.some(a => a.email.toLowerCase() === email.toLowerCase())) {
-                return alert("❌ Ein Agent mit dieser E-Mail existiert bereits!");
-            }
-
-            agents.push({ name, email, rate });
-            localStorage.setItem("crm_agents", JSON.stringify(agents));
-
-            alert(`✅ Agent "${name}" erfolgreich angelegt! Provisionssatz: ${rate.toFixed(2)} € pro Kilo.`);
-            
-            document.getElementById("agentName").value = "";
-            document.getElementById("agentEmail").value = "";
-            loadAdminPanel();
-        }
-
-        function deleteAgent(index) {
-            if (!confirm("Agenten wirklich löschen?")) return;
-            let agents = JSON.parse(localStorage.getItem("crm_agents")) || [];
-            agents.splice(index, 1);
-            localStorage.setItem("crm_agents", JSON.stringify(agents));
-            loadAdminPanel();
-        }
-
-        function updateWeight(partnerName, newWeight) {
-            let deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
-            let index = deliveries.findIndex(d => d.partner.toLowerCase() === partnerName.toLowerCase());
-
-            if (index !== -1) {
-                deliveries[index].weight = parseFloat(newWeight) || 0;
-            } else {
-                deliveries.push({
-                    partner: partnerName,
-                    weight: parseFloat(newWeight) || 0,
-                    status: "In Prüfung",
-                    tracking: "DHL-" + Math.floor(100000 + Math.random() * 900000)
-                });
-            }
+        function updateDeliveryStatus(index, newStatus) {
+            let deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries"));
+            deliveries[index].status = newStatus;
             localStorage.setItem("starkmetall_deliveries", JSON.stringify(deliveries));
-            loadAdminPanel();
+            renderAll();
         }
 
-        function updateStatus(partnerName, newStatus) {
-            let deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
-            let index = deliveries.findIndex(d => d.partner.toLowerCase() === partnerName.toLowerCase());
-
-            if (index !== -1) {
-                deliveries[index].status = newStatus;
-            } else {
-                deliveries.push({
-                    partner: partnerName,
-                    weight: 0,
-                    status: newStatus,
-                    tracking: "DHL-" + Math.floor(100000 + Math.random() * 900000)
-                });
-            }
-            localStorage.setItem("starkmetall_deliveries", JSON.stringify(deliveries));
-            loadAdminPanel();
+        function simulateDelivery() {
+            const partners = JSON.parse(localStorage.getItem("partners")) || [];
+            if(partners.length === 0) return alert("Lege zuerst einen Kunden an!");
+            const p = partners[Math.floor(Math.random() * partners.length)];
+            const types = ["VHM Bohrer & Fräser", "VHM Wendeschneidplatten", "VHM gemischter Schrott"];
+            const newDel = {
+                id: Date.now(),
+                date: new Date().toLocaleDateString('de-DE'),
+                partner: p.name,
+                agent: p.agent,
+                type: types[Math.floor(Math.random() * types.length)],
+                weight: Math.floor(20 + Math.random() * 300),
+                tracking: "DHL-" + Math.floor(100000 + Math.random() * 900000),
+                status: "In Zustellung"
+            };
+            let d = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
+            d.unshift(newDel);
+            localStorage.setItem("starkmetall_deliveries", JSON.stringify(d));
+            renderAll();
         }
-
-        window.addEventListener('DOMContentLoaded', loadAdminPanel);
     </script>
 </body>
 </html>
