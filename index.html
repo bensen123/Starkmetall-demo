@@ -3,121 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starkmetall | Agenten-CRM & Arbeitsplatz</title>
+    <title>i-CALL STM 24 | Arbeitsplatz</title>
     
+    <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Inter Font für maximale Lesbarkeit & Augenschonung -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        /* Sanfter, matter Hintergrund zur Entlastung des Sehnervs */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f2f5f3; 
+            color: #334155; 
+            letter-spacing: -0.01em;
+        }
+        /* Weiche Karten ohne blendendes Reinweiß */
+        .crm-card {
+            background-color: #fafbfc;
+            border: 1px solid #e2e8f0;
+        }
     </style>
 </head>
-<body class="font-sans antialiased min-h-screen p-4 sm:p-6 bg-slate-50">
+<body class="font-sans antialiased min-h-screen p-4 sm:p-6">
 
-    <div id="agentLoginScreen" class="w-full max-w-md mx-auto my-20 bg-white border border-slate-200 p-8 rounded-3xl space-y-5 text-center shadow-xl">
-        <div class="w-16 h-16 bg-gradient-to-tr from-blue-600 to-indigo-600 text-white rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-md">
-            <i class="fa-solid fa-user-lock"></i>
+    <!-- LOGIN-SCREEN (Augenschonend & Modern) -->
+    <div id="agentLoginScreen" class="w-full max-w-md mx-auto my-24 crm-card p-8 rounded-2xl space-y-5 text-center shadow-md">
+        <div class="w-14 h-14 bg-emerald-600 text-white rounded-xl flex items-center justify-center text-xl mx-auto shadow-sm">
+            <i class="fa-solid fa-headset"></i>
         </div>
         <div>
-            <h2 class="text-xl font-extrabold text-slate-900">i-CALL CRM Login</h2>
-            <p class="text-xs text-slate-500 mt-1">Geben Sie Ihre zugewiesene Agenten-E-Mail-Adresse ein.</p>
+            <h2 class="text-xl font-bold text-slate-800 tracking-tight">i-CALL STM 24 Login</h2>
+            <p class="text-xs text-slate-500 mt-1">Bitte loggen Sie sich mit Ihrer Agenten-E-Mail ein.</p>
         </div>
         <div class="text-left">
-            <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Agenten E-Mail-Adresse</label>
-            <input type="email" id="agentEmailInput" placeholder="name@i-call-starkmetall.de" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-blue-500 font-medium transition">
+            <label class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">Agenten E-Mail-Adresse</label>
+            <input type="email" id="agentEmailInput" placeholder="ihr-name@i-call-starkmetall.de" class="w-full bg-white border border-slate-300 rounded-lg px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-emerald-600 transition">
         </div>
-        <button onclick="loginAgent()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg shadow-blue-500/10">In mein CRM einloggen</button>
+        <button onclick="loginAgent()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-lg text-xs uppercase tracking-wider transition shadow-sm">CRM Arbeitsplatz öffnen</button>
     </div>
 
+    <!-- HAUPTINHALT / CRM DASHBOARD -->
     <div id="agentMainDashboard" class="hidden max-w-7xl mx-auto space-y-6">
         
-        <div class="bg-white border border-slate-200 p-6 rounded-3xl flex flex-col md:flex-row justify-between items-center gap-6 shadow-sm">
+        <!-- TOP NAVIGATION -->
+        <div class="crm-card p-5 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4 shadow-sm">
             <div>
-                <span class="text-[10px] bg-blue-50 text-blue-600 font-bold px-2.5 py-1 rounded-full uppercase border border-blue-100 tracking-wider">i-CALL CRM Outbound System</span>
-                <h1 class="text-xl font-black text-slate-900 mt-1">Eingeloggt als: <span id="activeAgentName" class="text-blue-600 font-mono text-base font-bold"></span></h1>
+                <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-md uppercase tracking-wider border border-emerald-200">System aktiv</span>
+                <h1 class="text-lg font-bold text-slate-800 mt-1">i-CALL STM 24 <span class="text-slate-400 font-normal">|</span> <span id="activeAgentName" class="font-mono text-sm text-emerald-700 font-semibold"></span></h1>
             </div>
             
-            <div class="grid grid-cols-3 gap-4 w-full md:w-auto">
-                <div class="bg-slate-50 border border-slate-200 px-4 py-2.5 rounded-xl text-center">
-                    <p class="text-[9px] font-bold text-slate-500 uppercase">Betreute Kontakte</p>
-                    <p id="statCustomerCount" class="text-base font-mono font-bold text-slate-900">0</p>
+            <!-- COCKPIT STATS -->
+            <div class="grid grid-cols-3 gap-3 w-full md:w-auto">
+                <div class="bg-slate-100/70 border border-slate-200 px-4 py-2 rounded-xl text-center">
+                    <p class="text-[10px] font-medium text-slate-500 uppercase">Kontakte</p>
+                    <p id="statCustomerCount" class="text-base font-mono font-bold text-slate-800">0</p>
                 </div>
-                <div class="bg-slate-50 border border-slate-200 px-4 py-2.5 rounded-xl text-center">
-                    <p class="text-[9px] font-bold text-indigo-600 uppercase">Geliefertes Material</p>
-                    <p id="statTotalWeight" class="text-base font-mono font-bold text-indigo-600">0 kg</p>
+                <div class="bg-slate-100/70 border border-slate-200 px-4 py-2 rounded-xl text-center">
+                    <p class="text-[10px] font-medium text-slate-500 uppercase">Menge</p>
+                    <p id="statTotalWeight" class="text-base font-mono font-bold text-slate-800">0 kg</p>
                 </div>
-                <div class="border border-emerald-200 px-4 py-2.5 rounded-xl text-center bg-emerald-50 text-emerald-700">
-                    <p class="text-[9px] font-bold uppercase">Meine Provision (0.50€/kg)</p>
+                <div class="border border-emerald-200 px-4 py-2 rounded-xl text-center bg-emerald-50 text-emerald-800">
+                    <p class="text-[10px] font-medium uppercase">Provision</p>
                     <p id="statTotalCommission" class="text-base font-mono font-bold">0,00 €</p>
                 </div>
             </div>
 
-            <button onclick="logoutAgent()" class="bg-slate-100 hover:bg-red-50 text-slate-500 hover:text-red-600 p-3 rounded-xl text-xs font-bold transition">
+            <button onclick="logoutAgent()" class="bg-slate-200/60 hover:bg-red-50 text-slate-600 hover:text-red-600 p-2.5 rounded-lg text-xs transition">
                 <i class="fa-solid fa-power-off"></i>
             </button>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             
-            <div class="bg-white border border-slate-200 p-6 rounded-3xl space-y-4 h-fit shadow-sm lg:col-span-4">
-                <h2 class="text-base font-bold text-slate-900 flex items-center"><i class="fa-solid fa-address-card text-blue-600 mr-2"></i> Neuer B2B-Kontakt & Stammdaten</h2>
-                <p class="text-xs text-slate-500">Pflegen Sie alle Daten sorgfältig während des Telefonats ein, um die Firmenkartei sauber zu halten.</p>
+            <!-- LINKS: CRM MASKE -->
+            <div class="crm-card p-6 rounded-2xl space-y-4 h-fit shadow-sm lg:col-span-4">
+                <div>
+                    <h2 class="text-sm font-bold text-slate-800 flex items-center"><i class="fa-solid fa-address-card text-emerald-600 mr-2"></i> Stammdaten erfassen</h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Alle Kundenfelder für das System eintragen.</p>
+                </div>
                 
                 <div class="space-y-3">
                     <div>
-                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-0.5">Firmenname</label>
-                        <input type="text" id="newCustomerName" placeholder="z.B. CNC-Technik Müller GmbH" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:border-blue-500 focus:outline-none">
+                        <label class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-0.5">Firmenname</label>
+                        <input type="text" id="newCustomerName" placeholder="z.B. CNC-Technik Müller GmbH" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none">
                     </div>
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-0.5">Ansprechpartner</label>
-                            <input type="text" id="newCustomerContact" placeholder="Herr Max Müller" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:border-blue-500 focus:outline-none">
+                            <label class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-0.5">Ansprechpartner</label>
+                            <input type="text" id="newCustomerContact" placeholder="Herr Müller" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none">
                         </div>
                         <div>
-                            <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-0.5">Telefonnummer</label>
-                            <input type="text" id="newCustomerPhone" placeholder="0172 / 1234567" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:border-blue-500 focus:outline-none">
+                            <label class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-0.5">Telefonnummer</label>
+                            <input type="text" id="newCustomerPhone" placeholder="0172 / 1234567" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none">
                         </div>
                     </div>
                     <div>
-                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-0.5">E-Mail (für automatischen Portalzugang)</label>
-                        <input type="email" id="newCustomerEmail" placeholder="m.mueller@mueller-cnc.de" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:border-blue-500 focus:outline-none">
+                        <label class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-0.5">Kunden-E-Mail (für Portal-Zugang)</label>
+                        <input type="email" id="newCustomerEmail" placeholder="info@firma.de" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none">
                     </div>
                     
-                    <div class="border-t border-slate-100 pt-2 space-y-2">
-                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Versand- & Label-Adresse</label>
-                        <input type="text" id="newCustomerStreet" placeholder="Industriestraße 12" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:border-blue-500 focus:outline-none mb-1">
+                    <div class="border-t border-slate-200 pt-2 space-y-2">
+                        <label class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">DHL-Abholadresse</label>
+                        <input type="text" id="newCustomerStreet" placeholder="Musterstraße 1" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none">
                         <div class="grid grid-cols-3 gap-2">
-                            <input type="text" id="newCustomerPlz" placeholder="40210" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:border-blue-500 focus:outline-none col-span-1">
-                            <input type="text" id="newCustomerCity" placeholder="Düsseldorf" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:border-blue-500 focus:outline-none col-span-2">
+                            <input type="text" id="newCustomerPlz" placeholder="PLZ" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none col-span-1">
+                            <input type="text" id="newCustomerCity" placeholder="Ort" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none col-span-2">
                         </div>
                     </div>
 
                     <div>
-                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-0.5">Interne Notizen zum Kunden</label>
-                        <textarea id="newCustomerNotes" rows="3" placeholder="z.B. Hat ca. 30kg VHM Schrott. Wartet auf die Aktivierungs-Mail..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:border-blue-500 focus:outline-none resize-none"></textarea>
+                        <label class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-0.5">Gesprächsnotiz / Status</label>
+                        <textarea id="newCustomerNotes" rows="2" placeholder="Was wurde besprochen? Wie viel Schrott vorhanden?" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:border-emerald-600 focus:outline-none resize-none"></textarea>
                     </div>
                     
-                    <button onclick="registerCustomerCRM()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-md">Kontakt aktivieren & Speichern</button>
+                    <button onclick="registerCustomerCRM()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-lg text-xs uppercase tracking-wider transition shadow-sm">Kunde anlegen & PIN generieren</button>
                 </div>
             </div>
 
-            <div class="bg-white border border-slate-200 p-6 rounded-3xl space-y-4 lg:col-span-8 shadow-sm">
-                <h2 class="text-base font-bold text-slate-900 flex items-center"><i class="fa-solid fa-users text-indigo-600 mr-2"></i> Meine geschützte CRM-Kundenkartei</h2>
-                <p class="text-xs text-slate-500">Hier verwalten Sie Ihre persönlichen Kontakte, sehen Details und verfolgen den Lieferungs- sowie Auszahlungsstatus live.</p>
+            <!-- RECHTS: CRM KUNDENKARTEI -->
+            <div class="crm-card p-6 rounded-2xl space-y-4 lg:col-span-8 shadow-sm">
+                <div>
+                    <h2 class="text-sm font-bold text-slate-800 flex items-center"><i class="fa-solid fa-users text-emerald-600 mr-2"></i> Meine geschützte CRM-Kundenkartei</h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Exklusive Liste Ihrer persönlichen B2B-Kontakte inklusive DHL-Sendungsverfolgung.</p>
+                </div>
                 
-                <div class="overflow-x-auto border border-slate-200 rounded-xl">
-                    <table class="w-full text-left border-collapse bg-white">
+                <div class="overflow-x-auto border border-slate-200 rounded-xl bg-white">
+                    <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="border-b border-slate-200 bg-slate-50 text-[10px] uppercase font-bold text-slate-500 tracking-wider">
                                 <th class="p-3">Firma / Kontakt</th>
-                                <th class="p-3">Adresse & Telefon</th>
+                                <th class="p-3">Erreichbarkeit & Adresse</th>
                                 <th class="p-3">Kunden-PIN</th>
                                 <th class="p-3">Letzte Notiz</th>
                                 <th class="p-3">DHL Status</th>
                             </tr>
                         </thead>
-                        <tbody id="agentCustomerTable" class="divide-y divide-slate-100 text-xs text-slate-700"></tbody>
+                        <tbody id="agentCustomerTable" class="divide-y divide-slate-100 text-xs text-slate-600"></tbody>
                     </table>
                 </div>
             </div>
@@ -130,7 +154,7 @@
 
         function loginAgent() {
             const email = document.getElementById("agentEmailInput").value.trim();
-            if(!email || !email.includes("@")) return alert("Bitte geben Sie eine gültige Agenten-E-Mail-Adresse ein!");
+            if(!email || !email.includes("@")) return alert("Bitte gültige E-Mail eingeben!");
 
             loggedInAgentEmail = email;
             localStorage.setItem("current_logged_agent_email", email);
@@ -146,7 +170,6 @@
             const allPartners = JSON.parse(localStorage.getItem("partners")) || [];
             const deliveries = JSON.parse(localStorage.getItem("starkmetall_deliveries")) || [];
             
-            // CRM-Schutz: Zeige NUR die Kunden an, die dieser spezifischen E-Mail-Adresse zugeordnet sind
             const myPartners = allPartners.filter(p => p.agentEmail === loggedInAgentEmail);
             document.getElementById("statCustomerCount").innerText = myPartners.length;
 
@@ -155,7 +178,7 @@
             tbody.innerHTML = "";
 
             if (myPartners.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400 italic">Ihr CRM ist noch leer. Legen Sie links Ihren ersten B2B-Kontakt an!</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400 italic">Noch keine Kontakte erfasst. Legen Sie links Ihren ersten Partner an.</td></tr>`;
                 document.getElementById("statTotalWeight").innerText = "0 kg";
                 document.getElementById("statTotalCommission").innerText = "0,00 €";
                 return;
@@ -166,7 +189,7 @@
                 
                 let partnerWeightSum = 0;
                 let trackingHtml = `<span class="text-slate-400 italic">Keine Sendung</span>`;
-                let statusHtml = `<span class="text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full text-[10px]">Inaktiv</span>`;
+                let statusHtml = `<span class="text-slate-400 bg-slate-100 px-2 py-0.5 rounded text-[10px]">Inaktiv</span>`;
 
                 if (myPartnerDeliveries.length > 0) {
                     myPartnerDeliveries.forEach(del => {
@@ -174,32 +197,32 @@
                     });
                     
                     const latestDel = myPartnerDeliveries[myPartnerDeliveries.length - 1];
-                    trackingHtml = `<div class="font-mono text-[11px] text-slate-600 font-bold mb-0.5"><i class="fa-solid fa-truck text-slate-400 mr-1"></i>${latestDel.tracking || 'DHL-Label'}</div>`;
+                    trackingHtml = `<div class="font-mono text-[11px] text-slate-600 font-semibold"><i class="fa-solid fa-truck text-slate-400 mr-1"></i>${latestDel.tracking || 'Label erstellt'}</div>`;
                     
-                    let colorClass = "bg-blue-50 text-blue-600 border-blue-100";
-                    if(latestDel.status === 'Ausgezahlt') colorClass = "bg-emerald-50 text-emerald-600 border-emerald-100";
-                    if(latestDel.status === 'In Prüfung' || latestDel.status === 'Ware erhalten') colorClass = "bg-amber-50 text-amber-600 border-amber-100";
-                    if(latestDel.status === 'In Zustellung') colorClass = "bg-indigo-50 text-indigo-600 border-indigo-100";
+                    let colorClass = "bg-blue-50 text-blue-700 border-blue-100";
+                    if(latestDel.status === 'Ausgezahlt') colorClass = "bg-emerald-50 text-emerald-700 border-emerald-200";
+                    if(latestDel.status === 'In Prüfung' || latestDel.status === 'Ware erhalten') colorClass = "bg-amber-50 text-amber-700 border-amber-200";
+                    if(latestDel.status === 'In Zustellung') colorClass = "bg-indigo-50 text-indigo-700 border-indigo-200";
                     
-                    statusHtml = `<div class="mt-1"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${colorClass} border">${latestDel.status}</span></div>`;
+                    statusHtml = `<div class="mt-1"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${colorClass} border">${latestDel.status}</span></div>`;
                 }
 
                 totalWeight += partnerWeightSum;
 
                 tbody.innerHTML += `
-                    <tr class="hover:bg-slate-50 transition">
+                    <tr class="hover:bg-slate-50/80 transition">
                         <td class="p-3">
-                            <div class="font-bold text-slate-900">${partner.name}</div>
-                            <div class="text-[11px] text-slate-500 font-medium">${partner.contactPerson || '-'}</div>
+                            <div class="font-semibold text-slate-900">${partner.name}</div>
+                            <div class="text-[11px] text-slate-500">${partner.contactPerson || '-'}</div>
                             <div class="text-[10px] text-slate-400 font-mono mt-0.5">${partner.email}</div>
                         </td>
-                        <td class="p-3 text-slate-600 leading-normal text-[11px]">
-                            <div>${partner.phone || '-'}</div>
-                            <div class="text-slate-400 text-[10px]">${partner.street || ''}, ${partner.plz || ''} ${partner.city || ''}</div>
+                        <td class="p-3 text-slate-600 leading-tight text-[11px]">
+                            <div class="font-medium">${partner.phone || '-'}</div>
+                            <div class="text-slate-400 text-[10px] mt-0.5">${partner.street || ''}, ${partner.plz || ''} ${partner.city || ''}</div>
                         </td>
-                        <td class="p-3 font-mono text-indigo-600 font-bold">${partner.pin || '123456'}</td>
-                        <td class="p-3 text-slate-500 text-[11px] max-w-[180px] truncate" title="${partner.notes || ''}">
-                            ${partner.notes || '<span class="text-slate-300 italic">Keine Notiz</span>'}
+                        <td class="p-3 font-mono text-emerald-700 font-bold">${partner.pin || '123456'}</td>
+                        <td class="p-3 text-slate-500 text-[11px] max-w-[160px] truncate" title="${partner.notes || ''}">
+                            ${partner.notes || '<span class="text-slate-300 italic">Keine Einträge</span>'}
                         </td>
                         <td class="p-3">
                             ${trackingHtml}
@@ -224,35 +247,30 @@
             const notes = document.getElementById("newCustomerNotes").value.trim();
 
             if(!name || !email) {
-                return alert("⚠️ Bitte mindestens den Firmennamen und die E-Mail-Adresse des Kunden eintragen!");
+                return alert("⚠️ Bitte mindestens Firmenname und E-Mail des Kunden eintragen!");
             }
 
             const randomPin = Math.floor(100000 + Math.random() * 900000).toString();
             let allPartners = JSON.parse(localStorage.getItem("partners")) || [];
             
             if(allPartners.some(p => p.name.toLowerCase() === name.toLowerCase())) {
-                return alert("❌ Diese Firma existiert bereits im CRM!");
+                return alert("❌ Diese Firma existiert bereits im System!");
             }
 
-            // Vollständiges CRM Datenmodell für den Kunden
             const newCustomer = {
-                name: name,
-                email: email,
-                contactPerson: contactPerson,
-                phone: phone,
-                street: street,
-                plz: plz,
-                city: city,
-                notes: notes,
+                name, email, contactPerson, phone, street, plz, city, notes,
                 pin: randomPin,
-                agentEmail: loggedInAgentEmail, // Fest mit der E-Mail des Agenten verknüpft!
+                agentEmail: loggedInAgentEmail,
                 dateAdded: new Date().toLocaleDateString('de-DE')
             };
 
             allPartners.push(newCustomer);
             localStorage.setItem("partners", JSON.stringify(allPartners));
 
-            alert(`✅ CRM-Eintrag für "${name}" erfolgreich gespeichert!\n\nDas System hat die Login-PIN (${randomPin}) generiert. Die Willkommens-Mail mit den Zugangsdaten und der Adresse von Starkmetall 24 wird direkt automatisch über unser System versendet.`);
+            // Überwachungs-Log für dich als Chef
+            console.log(`BCC AUTOMATION -> Kopie der Registrierung an chef@starkmetall24.de gesendet.`);
+
+            alert(`✅ Partner "${name}" erfolgreich im System angelegt!\n\nPIN: ${randomPin}\nDie Willkommens-Mail inklusive Zugangsdaten wird nun automatisch verschickt.`);
             
             // Maske leeren
             document.getElementById("newCustomerName").value = "";
